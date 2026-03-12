@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <h2>Welcome to MovReview</h2>
+        <form method="post" action="/home">
+            <label>
+                Username:
+                <input type="text" name="user">
+            </label><br>
+            <label>
+                Password:&nbsp
+                <input type="password" name="pass">
+            </label><br><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <% if (e) { %>
+            <p style="color: red"><%=e%></p>
+        <% }%>
+    </body>
+</html>

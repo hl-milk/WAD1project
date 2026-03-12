@@ -4,8 +4,8 @@ const server = express();
 server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 
-const blogRoutes = require("./routes/blog-routes");
-server.use("/", blogRoutes);
+const homeRoutes = require("./routes/home-routes");
+server.use("/", homeRoutes);
 
 const hostname = "localhost";
 const port = 8000;
