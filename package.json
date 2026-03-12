@@ -1,0 +1,25 @@
+{
+  "name": "wad1project",
+  "version": "1.0.0",
+  "description": "WAD1 Movie Watchlist Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hl-milk/WAD1project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hl-milk/WAD1project/issues"
+  },
+  "homepage": "https://github.com/hl-milk/WAD1project#readme",
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  }
+}
