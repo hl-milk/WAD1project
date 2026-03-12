@@ -5,7 +5,10 @@ server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 
 const homeRoutes = require("./routes/home-routes");
+const movieDetailRoutes = require("./routes/movie-detail-routes")
+
 server.use("/", homeRoutes);
+server.use("/", movieDetailRoutes)
 
 const hostname = "localhost";
 const port = 8000;
