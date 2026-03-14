@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <%const genres = [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Drama",
+        "Horror",
+        "Science Fiction",
+        "Fantasy",
+        "Romance",
+        "Thriller",
+        "Western",
+        "Sports",
+        "Musical",
+        "Documentary",
+        "Animation",
+        "Family",
+        "Independent",
+        "Foreign",
+        "Holiday"
+    ];%>
+
+    <h3>Filter by Movie Genres:</h3>
+    <form action="/display-movies" method="post">
+      <select name="selectedGenres">
+        <option value="">See All Movies</option>
+        <%genres.forEach(genreName=>{%>
+            <option value="<%=genreName%>" <%= selectedGenres === genreName ? "selected" : ""%>><%=genreName%></option>
+        <%});%>
+      </select>
+      <button type="submit">See Movies</button>
+    </form>
+
+    <% if (filteredItems && Object.keys(filteredItems).length > 0) { %>
+      <h3>Items in "<%= selectedGenres %>":</h3>
+      <table border="1">
+        <tr>
+          <th>Movie Name</th>
+          <th>Genre</th>
+        </tr>
+        <% for (const key in filteredItems) { %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= filteredItems[key] %></td>
+          </tr>
+        <% } %>
+      </table>
+    <% } else if (selectedGenres) { %>
+      <p>No items found in "<%= selectedGenres %>" genre.</p>
+    <% } %>
+  </body>
+</html>
