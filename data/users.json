@@ -1,0 +1,20 @@
+[
+{
+    "email": "user1@gmail.com",
+    "password": "1234567890",
+    "watchlist": ["movie3"],
+    "reviews": {"movie1": 1}
+},
+{
+    "email": "user2@gmail.com",
+    "password": "1234567890",
+    "watchlist": [],
+    "reviews": {"movie1": 2, "movie2": 5}
+},
+{
+    "email": "admin@gmail.com",
+    "password": "!@#$%^&*()",
+    "watchlist": [],
+    "reviews": {}
+}
+]
