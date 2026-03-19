@@ -1,0 +1,20 @@
+[
+{
+    "moviename": "Titanic",
+    "movieid": "movie1",
+    "description": "Some movie",
+    "ratings": {"user1@gmail.com": 1, "user2@gmail.com": 2}
+},
+{
+    "moviename": "Spiderman",
+    "movieid": "movie2",
+    "description": "Another movie",
+    "ratings": {"user2@gmail.com": 5}
+},
+{
+    "moviename": "The Greatest Showman",
+    "movieid": "movie3",
+    "description": "Yet another movie",
+    "ratings": {}
+}
+]
