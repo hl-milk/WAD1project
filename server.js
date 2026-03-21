@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require("path");
+const session = require('express-session');
 
 server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
@@ -12,8 +13,14 @@ server.use(express.json());
 
 dotenv.config({ path: './config.env' });
 
-const loginRoutes = require("./routes/login-routes");
-server.use("/", loginRoutes);
+server.use(session({
+    secret: process.env.SECRET, 
+    resave: false,
+    saveUninitialized: false
+}));
+
+const userRoutes = require("./routes/user-routes");
+server.use("/", userRoutes);
 
 async function connectDB() {
   try {

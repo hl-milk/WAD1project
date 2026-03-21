@@ -8,9 +8,6 @@
             <% if (typeof(e) === typeof("a")) { %>
                 <p style="color: red"><%=e%></p>
             <% } %>
-            <% if (e === 1) { %>
-                <p style="color: green">Account successfully created! Return to Login Page.</p>
-            <% } %>
         <form method="post" action="/register">
             <label>
                 Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -18,15 +15,15 @@
             </label><br>
             <label>
                 Password:
-                <input type="password" name="pass">
+                <input type="password" name="password">
             </label><br>
             <label>
                 Confirm Password:
-                <input type="password" name="cpass"
+                <input type="password" name="cpassword">
             </label><br><br>
             <button type="submit">Create account</button>
         </form>
-
-        <a href="/"><button type="submit">Return to Login Page</button></a>
+        <a href="/"><button type="button">Return to Login Page</button></a>
+        
     </body>
 </html>

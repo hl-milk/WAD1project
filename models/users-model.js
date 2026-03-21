@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
         type: Map,
         of: Number,
         default: {}
+    },
+    role: {
+        type: String,
+        required: [true, 'A user is either an admin or user'],
+        default: 'user'
     }
 })
 
@@ -31,4 +36,12 @@ exports.findUser = function(email) {
 
 exports.addUser = function(newUser) {
     return User.insertOne(newUser);
+}
+
+exports.updateUserPass = function(_id, password) {
+    return User.updateOne({_id: _id}, {$set: {password: password}})
+}
+
+exports.deleteUser = function(_id) {
+    return User.deleteOne({_id: _id })
 }
