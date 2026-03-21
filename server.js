@@ -22,6 +22,8 @@ server.use(session({
 const userRoutes = require("./routes/user-routes");
 server.use("/", userRoutes);
 
+const movieRoutes= require("./routes/movie-routes")
+
 async function connectDB() {
   try {
     await mongoose.connect(process.env.DB);
