@@ -44,4 +44,34 @@ exports.updateUserPass = function(_id, password) {
 
 exports.deleteUser = function(_id) {
     return User.deleteOne({_id: _id })
-}
+};
+
+
+//-----------------
+exports.removeFromWatchlist = async function (_id,movieid){
+    return await User.updateOne(
+        { _id: _id }, 
+        { $pull: { watchlist: movieid } } 
+    );
+};
+
+exports.addToWatchlist = async function (_id,movieid){
+    return await User.updateOne(
+        { _id: _id }, 
+        { $addToSet: { watchlist: movieid } } 
+    );
+};
+
+exports.removeFromWatched = async function (_id,movieid){
+    return await User.updateOne(
+        { _id: _id }, 
+        { $pull: { watched: movieid } } 
+    );
+};
+
+exports.addToWatched = async function (_id,movieid){
+    return await User.updateOne(
+        { _id: _id }, 
+        { $addToSet: { watched: movieid } } 
+    );
+};

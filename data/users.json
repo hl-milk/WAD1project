@@ -1,20 +1,22 @@
-[
-{
-    "email": "user1@gmail.com",
-    "password": "1234567890",
-    "watchlist": ["movie3"],
-    "reviews": {"movie1": 1}
+[{
+  "_id": {
+    "$oid": "69bf9d02aaeb0a837c986eaf"
+  },
+  "email": "admin@gmail.com",
+  "password": "$2b$10$iubnjfp/cCiaLe5n3gTUqeUHy9YMFmZ4NwMAgcd6FiKYp5Z2XVDni",
+  "watchlist": [],
+  "watched": [],
+  "role": "admin",
+  "__v": 0
 },
 {
-    "email": "user2@gmail.com",
-    "password": "1234567890",
-    "watchlist": [],
-    "reviews": {"movie1": 2, "movie2": 5}
-},
-{
-    "email": "admin@gmail.com",
-    "password": "!@#$%^&*()",
-    "watchlist": [],
-    "reviews": {}
-}
-]
+  "_id": {
+    "$oid": "69bf9d19aaeb0a837c986eb1"
+  },
+  "email": "user1@gmail.com",
+  "password": "$2b$10$ST1PA5WY929KJNZo1PndB.RMjbviu9CzhGVyIMz1VkTiMuzAbvQRG",
+  "watchlist": [],
+  "watched": [],
+  "role": "user",
+  "__v": 0
+}]
