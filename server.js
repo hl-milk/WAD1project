@@ -16,11 +16,6 @@ server.use(express.json());
 
 dotenv.config({ path: './config.env' });
 
-server.use(session({
-    secret: "wadprojectsecret", 
-    resave: false,
-    saveUninitialized: false
-}));
 
 const userRoutes = require("./routes/user-routes");
 server.use("/", userRoutes);
