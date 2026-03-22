@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Movie List</h1>
+
+    <form method="get" action="/home">
+        <label>
+            Search:
+            <input type="text" name="search" value="<%= search || '' %>">
+        </label>
+
+        <label>
+            Genre:
+            <select name="genre">
+                <option value="all">All</option>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= (selectedGenre === g) ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select>
+        </label>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <br>
+
+    <% if (user && user.role === "admin") { %>
+        <a href="/movies/add">
+            <button>Add New Movie</button>
+        </a>
+        <br><br>
+    <% } %>
+
+    <% if (movies.length === 0) { %>
+        <p>No movies found.</p>
+    <% } else { %>
+        <% movies.forEach(movie => { %>
+            <div>
+                <h3><%= movie.moviename %></h3>
+                <p><strong>ID:</strong> <%= movie.movieid %></p>
+                <p><strong>Description:</strong> <%= movie.description %></p>
+                <p><strong>Genre:</strong> <%= movie.genre %></p>
+
+                <% if (user && user.role === "admin") { %>
+                    <a href="/movies/edit?movieid=<%= movie.movieid %>">
+                        <button>Edit</button>
+                    </a>
+                <% } %>
+            </div>
+        <% }) %>
+    <% } %>
+
+</body>
+</html>

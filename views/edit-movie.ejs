@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Movie</title>
+</head>
+<body>
+    <h2>Edit Movie</h2>
+
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <form method="post" action="/movies/edit">
+        
+        <input type="hidden" name="movieid" value="<%= movie.movieid %>">
+
+        <label>
+            Movie Name:
+            <input type="text" name="moviename" value="<%= movie.moviename %>" required>
+        </label>
+        <br><br>
+
+        <label>
+            Movie ID:
+            <input type="text" value="<%= movie.movieid %>" disabled>
+        </label>
+        <br><br>
+
+        <label>
+            Description:
+            <textarea name="description" required><%= movie.description %></textarea>
+        </label>
+        <br><br>
+
+        <label>
+            Genre:
+            <input type="text" name="genre" value="<%= movie.genre %>" required>
+        </label>
+        <br><br>
+
+        <button type="submit">Update Movie</button>
+    </form>
+
+    <br>
+
+    <!-- DELETE BUTTON -->
+    <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
+        <button type="submit" style="color:red;">Delete Movie</button>
+    </form>
+
+    <br>
+    <a href="/home"><button type="button">Back to Home</button></a>
+</body>
+</html>

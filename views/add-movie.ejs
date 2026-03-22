@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+    <h2>Add New Movie</h2>
+
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <form method="post" action="/movies/add">
+        <label>
+            Movie Name:
+            <input type="text" name="moviename" value="<%= moviename || '' %>" required>
+        </label>
+        <br><br>
+
+        <label>
+            Description:
+            <textarea name="description" required><%= description || '' %></textarea>
+        </label>
+        <br><br>
+
+        <label>
+            Genre:
+            <input type="text" name="genre" value="<%= genre || '' %>" required>
+        </label>
+        <br><br>
+
+        <button type="submit">Add Movie</button>
+    </form>
+
+    <br>
+    <a href="/home"><button type="button">Back to Home</button></a>
+</body>
+</html>
