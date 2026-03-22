@@ -4,14 +4,9 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 
 const server = express();
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require("path");
-const session = require('express-session');
 
-// Load environment variables
-dotenv.config({ path: "./config.env" });
 
 // Middleware
 server.use(express.urlencoded({ extended: true }));
@@ -22,7 +17,7 @@ server.use(express.json());
 dotenv.config({ path: './config.env' });
 
 server.use(session({
-    secret: process.env.SECRET, 
+    secret: "wadprojectsecret", 
     resave: false,
     saveUninitialized: false
 }));

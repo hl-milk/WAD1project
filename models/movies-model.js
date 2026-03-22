@@ -37,6 +37,7 @@ exports.getMovieById = function (movieid) {
 
 exports.searchAndFilterMovies = async function (search, genre) {
     let movies = await Movie.find();
+    console.log("All movies:", movies);
 
     if (search) {
         const lowerSearch = search.toLowerCase();
@@ -51,6 +52,7 @@ exports.searchAndFilterMovies = async function (search, genre) {
         );
     }
 
+    console.log("Filtered movies:", movies);
     return movies;
 };
 

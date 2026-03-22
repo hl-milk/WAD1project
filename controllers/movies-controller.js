@@ -7,9 +7,14 @@ exports.renderHome = async (req, res) => {
         const search = req.query.search ? req.query.search.trim() : "";
         const genre = req.query.genre ? req.query.genre.trim() : "all";
 
-        const movies = await Movie.searchAndFilterMovies(search, genre);
+        // const movies = await Movie.searchAndFilterMovies(search, genre);
+        
         const genres = genreOptions;
-
+        const movies = await Movie.searchAndFilterMovies(search, genre);
+        console.log("Search:", search);
+        console.log("Genre:", genre);
+        console.log("Movies returned:", movies);
+        
         res.render("home", {
             movies: movies,
             genres: genres,
