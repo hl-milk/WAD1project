@@ -54,9 +54,6 @@ exports.searchAndFilterMovies = async function (search, genre) {
     return movies;
 };
 
-exports.getDistinctGenres = function () {
-    return Movie.distinct("genre");
-};
 
 exports.addMovie = function (newMovie) {
     return Movie.create(newMovie);

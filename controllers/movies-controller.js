@@ -1,12 +1,14 @@
 const Movie = require("../models/movies-model");
 
+const genreOptions = ["Action", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi"];
+
 exports.renderHome = async (req, res) => {
     try {
         const search = req.query.search ? req.query.search.trim() : "";
         const genre = req.query.genre ? req.query.genre.trim() : "all";
 
         const movies = await Movie.searchAndFilterMovies(search, genre);
-        const genres = await Movie.getDistinctGenres();
+        const genres = genreOptions;
 
         res.render("home", {
             movies: movies,
@@ -28,44 +30,42 @@ exports.renderAddMovie = (req, res) => {
         moviename: "",
         description: "",
         genre: "",
+        genres: genreOptions,
         user: req.session.user
     });
 };
 
 exports.addMovie = async (req, res) => {
     const moviename = req.body.moviename ? req.body.moviename.trim() : "";
+    const movieid = req.body.movieid ? req.body.movieid.trim() : "";
     const description = req.body.description ? req.body.description.trim() : "";
     const genre = req.body.genre ? req.body.genre.trim() : "";
 
-    if (!moviename || !description || !genre) {
+    if (!moviename || !movieid || !description || !genre) {
         return res.render("add-movie", {
             error: "All fields are required!",
             moviename: moviename,
+            movieid: movieid,
             description: description,
             genre: genre,
+            genres: genreOptions,
             user: req.session.user
         });
     }
 
     try {
-        const allMovies = await Movie.getAllMovies();
+        const existingMovie = await Movie.getMovieById(movieid);
 
-        let newIdNumber = 1;
-        let idExists = true;
-
-        while (idExists) {
-            idExists = false;
-
-            for (let i = 0; i < allMovies.length; i++) {
-                if (allMovies[i].movieid === "movie" + newIdNumber) {
-                    idExists = true;
-                    newIdNumber++;
-                    break;
-                }
-            }
+        if (existingMovie) {
+            return res.render("add-movie", {
+                error: "Movie ID already exists!",
+                moviename: moviename,
+                movieid: movieid,
+                description: description,
+                genre: genre,
+                user: req.session.user
+            });
         }
-
-        const movieid = "movie" + newIdNumber;
 
         await Movie.addMovie({
             moviename: moviename,
@@ -97,6 +97,7 @@ exports.renderEditMovie = async (req, res) => {
 
         res.render("edit-movie", {
             movie: movie,
+            genres: genreOptions,
             error: null,
             user: req.session.user
         });
@@ -122,6 +123,7 @@ exports.updateMovie = async (req, res) => {
 
             return res.render("edit-movie", {
                 movie: movie,
+                genres: genreOptions,
                 error: "All fields are required!",
                 user: req.session.user
             });

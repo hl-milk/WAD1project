@@ -18,16 +18,25 @@
         <br><br>
 
         <label>
+            Movie ID:
+        <input type="text" name="movieid" value="<%= movieid || '' %>">
+        </label>
+        <br><br>
+
+        <label>
             Description:
             <textarea name="description" required><%= description || '' %></textarea>
         </label>
         <br><br>
 
-        <label>
-            Genre:
-            <input type="text" name="genre" value="<%= genre || '' %>" required>
-        </label>
-        <br><br>
+        <select name="genre" required>
+            <option value="">Select Genre</option>
+            <% genres.forEach(g => { %>
+                <option value="<%= g %>" <%= genre === g ? "selected" : "" %>>
+                    <%= g %>
+                </option>
+            <% }) %>
+        </select>
 
         <button type="submit">Add Movie</button>
     </form>

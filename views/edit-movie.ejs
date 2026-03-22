@@ -32,11 +32,13 @@
         </label>
         <br><br>
 
-        <label>
-            Genre:
-            <input type="text" name="genre" value="<%= movie.genre %>" required>
-        </label>
-        <br><br>
+        <select name="genre" required>
+            <% genres.forEach(g => { %>
+                <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                    <%= g %>
+                </option>
+            <% }) %>
+        </select>
 
         <button type="submit">Update Movie</button>
     </form>
