@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Watchlist</title>
+  </head>
+  <body>
+    <h2><%= user.email %>'s Watchlist</h2>
+
+    <a href="/home"><button type="button">Back to Home</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+
+    <% if (!movies || movies.length === 0) { %>
+      <p>Your watchlist is empty.</p>
+    <% } else { %>
+      <% movies.forEach(movie => { %>
+        <div>
+          <h3><%= movie.moviename %></h3>
+          <p><strong>Movie ID:</strong> <%= movie.movieid %></p>
+          <p><strong>Description:</strong> <%= movie.description %></p>
+          <p><strong>Genre:</strong> <%= movie.genre %></p>
+
+          <form method="post" action="/watchlist/remove?movieid=<%= movie.movieid %>">
+            <button type="submit">Remove from Watchlist</button>
+          </form>
+        </div>
+        <hr>
+      <% }) %>
+    <% } %>
+  </body>
+</html>
