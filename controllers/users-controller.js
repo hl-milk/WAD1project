@@ -26,9 +26,9 @@ exports.loginCheck = async (req, res) => {
             req.session.user = {
                 _id: userLogin._id,
                 email: userLogin.email,
+                role: userLogin.role,
                 watchlist: userLogin.watchlist,
-                reviews: userLogin.reviews,
-                role: userLogin.role
+                watched: userLogin.watched
             }
             
             return res.redirect("/home");

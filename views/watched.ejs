@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Watched Movies</title>
+</head>
+<body>
+    <h2>My Watched Movies</h2>
+
+    <% if (moviesList.length === 0) { %>
+        <p>You haven't watched any movies yet.</p>
+    <% } else { %>
+        <ul>
+            <% moviesList.forEach(function(movie) { %>
+                <li>
+                    <h3>Movie: <%= movie.movieName %></h3>
+                    
+                    <% if (movie.rating === 0) { %>
+                        <p><strong>Your Rating:</strong> Unrated</p>
+                    <% } else { %>
+                        <p><strong>Your Rating:</strong> <%= movie.rating %> / 5 Stars</p>
+                    <% } %>
+                    
+                    <form action="/watched/delete" method="POST">
+                        <input type="hidden" name="movieId" value="<%= movie.movieId %>">
+                        <button type="submit">Remove from watched list</button>
+                    </form>
+                    <hr>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'deleted') {
+            alert("Successfully removed movie from your watched list!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
+</body>
+</html>
