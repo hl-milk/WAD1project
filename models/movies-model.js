@@ -31,6 +31,10 @@ exports.getAllMovies = function () {
     return Movie.find().sort({ moviename: 1 });
 };
 
+exports.getMoviesByIds = function (movieIds) {
+    return Movie.find({ movieid: { $in: movieIds } }).sort({ moviename: 1 });
+};
+
 exports.getMovieById = function (movieid) {
     return Movie.findOne({ movieid: movieid });
 };
