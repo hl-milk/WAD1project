@@ -3,18 +3,21 @@
     "moviename": "Titanic",
     "movieid": "movie1",
     "description": "Some movie",
-    "ratings": {"user1@gmail.com": 1, "user2@gmail.com": 2}
+    "ratings": {"user1@gmail.com": 1, "user2@gmail.com": 2},
+    "reviews": {"user2@gmail.com": "I liked this!","user1@gmail.com": "Amazing!"}
 },
 {
     "moviename": "Spiderman",
     "movieid": "movie2",
     "description": "Another movie",
-    "ratings": {"user2@gmail.com": 5}
+    "ratings": {"user2@gmail.com": 5},
+    "reviews": {"user1@gmail.com": "Good movie!"}
 },
 {
     "moviename": "The Greatest Showman",
     "movieid": "movie3",
     "description": "Yet another movie",
-    "ratings": {}
+    "ratings": {},
+    "reviews": {}
 }
 ]

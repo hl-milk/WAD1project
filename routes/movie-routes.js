@@ -18,4 +18,8 @@ router.post("/movies/edit", authMiddleware.isLoggedIn, moviesController.updateMo
 // Delete movie
 router.post("/movies/delete", authMiddleware.isLoggedIn, moviesController.deleteMovie);
 
+//View Movie Info
+router.get("/movies/view", authMiddleware.isLoggedIn, moviesController.viewMovieInfo);
+router.post("/movies/view", authMiddleware.isLoggedIn, moviesController.updateMovieInfo);
+
 module.exports = router;
