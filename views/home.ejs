@@ -11,6 +11,10 @@
         <a href="/account-settings"><button type="button">Account Settings</button></a>
         <a href="/logout"><button type="button">Logout</button></a>
 
+        <% if (user && user.role === "user") { %>
+            <a href="/watchlist"><button type="button">My Watchlist</button></a>
+        <% } %>
+
         <hr>
 
         <form method="get" action="/home">
@@ -59,6 +63,10 @@
 
                     <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
                         <button type="submit">Delete</button>
+                    </form>
+                <% } else { %>
+                    <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
+                        <button type="submit">Add to Watchlist</button>
                     </form>
                 <% } %>
             </div>
