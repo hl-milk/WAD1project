@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Account Settings</title>
+    </head>
+    <body>
+        <h2><%= user.email %>'s setting</h2>
+            <% if (typeof(e) === typeof("a")) { %>
+                <p style="color: red"><%=e%></p>
+            <% } %>
+            <% if (e === 1) { %>
+                <p style="color: green">Successfully updated password!</p>
+            <% } %>
+        <form method="post" action="/account-settings">
+            <table>
+                <tr>
+                <label>
+                    <td>New Password:</td>
+                    <td><input type="password" name="password"></td>
+                </label>
+                </tr>
+                <tr>
+                <label>
+                    <td>Confirm Password:</td>
+                    <td><input type="password" name="cpassword"></td>
+                </label>
+                </tr>
+                <tr>
+                    <td><button type="submit">Change password</button></td>
+                </tr>
+            </table>
+        </form><br>
+        <% if (user.role != 'admin') { %>
+            <a href="/delete-account"><button type="button">Delete account</button></a><br>
+        <% } %>
+        <a href="/logout"><button type="button">Logout</button></a>
+    </body>
+</html>

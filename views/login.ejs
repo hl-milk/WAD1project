@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <h2>Welcome to MovReview</h2>
+            <% if (typeof(e) === typeof("a")) { %>
+                <p style="color: red"><%=e%></p>
+            <% } %>
+            <% if (e === 1) { %>
+                <p style="color: green">Successfully registered! Please login.</p>
+            <% } %>
+            <% if (e === 2) {%>
+                <p style="color: red">Please login with an account!</p>
+            <% } %>
+            <% if (e === 3) {%>
+                <p style="color: green">Account successfully deleted!</p>
+            <% } %>
+        <form method="post" action="/login">
+            <label>
+                Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="text" name="user">
+            </label><br>
+            <label>
+                Password:
+                <input type="password" name="password">
+            </label><br><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <a href="/register"><button type="button">Register for a new account</button></a>
+    </body>
+</html>

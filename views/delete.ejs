@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Account Deletion</title>
+    </head>
+    <body>
+        <form method="post" action="/delete-account">
+            Hi <%=user.email%>! Click the Confirm button if you wish to delete your account.
+            <p style="color:red">NOTE: This action is irreversible!</p>
+            <button type="submit">Confirm</button>
+        </form>
+    </body>
+</html>
