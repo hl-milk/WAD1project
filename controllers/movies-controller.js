@@ -170,6 +170,7 @@ exports.viewMovieInfo = async (req, res) => {
     //packaging movie details for render
     let selectedMovie = 
     {
+        selectedMovieid : selectedMovieid,
         title : movie.title,
         description: movie.description,
         avgRating: avgRating||0,
