@@ -80,9 +80,10 @@ exports.deleteMovie = function (movieid) {
 
 
 exports.updateRating = function(movieid,email,rating) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
     return Movie.updateOne(
         { movieid: movieid }, 
-        { $set: { [`ratings.${email}`]: rating } } 
+        { $set: { [`ratings.${safeEmail}`]: rating } }
     );
     /*
     Think of $set as the "Update or Add" operator in MongoDB.
@@ -99,8 +100,9 @@ exports.updateRating = function(movieid,email,rating) {
 //++need to do an "update review" function
 
 exports.deleteRating = function (movieid,email) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
     return Movie.updateOne(
         { movieid: movieid }, 
-        { $unset: { [`ratings.${email}`] : ""} } 
+        { $unset: { [`ratings.${safeEmail}`] : ""} } 
     );
 };

@@ -155,35 +155,43 @@ exports.viewMovieInfo = async (req, res) => {
     const selectedMovieid = req.query.movieid
     const movie = await Movie.getMovieById(selectedMovieid);
     const user = await User.findUser(email)
+    
 
     //ratings retrieval and calculation
     const ratings = movie.ratings;
     let ratingSum = 0;
     let ratingCount = 0;
-    for(let value of ratings.values()){
+    let myRating = null
+    if(movie.ratings){
+        for(let value of ratings.values()){
         ratingCount+=1
         ratingSum += value;
+        }
+        const safeEmail = email.replace(/\./g, '_dot_');
+        myRating = ratings.get(safeEmail);
     }
-    let myRating = ratings.get(email);
+    
+    
     let avgRating = ratingCount>0? (ratingSum/ratingCount).toFixed(2):0
 
     //packaging movie details for render
     let selectedMovie = 
     {
-        title : movie.title,
+        title : movie.moviename,
         description: movie.description,
         avgRating: avgRating||0,
         ratingCount: ratingCount||0,
-        reviews: movie.reviews
+        reviews: movie.reviews,
+        selectedMovieid: selectedMovieid
     }
 
     //packaging user info and user-specific movie details for render
     let currentUser = 
     {
         email: email,
-        isAdmin: user.role=="admin"?true:false,
-        inWatchlist :  user.watchlist.includes(selectedMovieid),
-        isWatched : user.watched.includes(selectedMovieid),
+        isAdmin: (user && user.role == "admin") ? true : false,
+        inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid): false,
+        isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid):false,
         rating : myRating||null,
         review : 'xxx xxxx xxx x xxx xxxx xxx.'||null //NEED TO FILL IN PROPERLY!!
     }
@@ -191,11 +199,13 @@ exports.viewMovieInfo = async (req, res) => {
 };
 
 
-
-
-
 exports.updateMovieInfo = async (req, res) => {
     const email = req.session.user;
+    if (!email) {
+        // If not logged in, send them to login or show an error
+        return res.redirect("/login"); 
+    }
+
     const movieid = req.body.movieid;
     const watched = req.body.watched;
     const watchlist = req.body.watchlist;
@@ -211,9 +221,11 @@ exports.updateMovieInfo = async (req, res) => {
     
     //++for reviews
 
-
-    //UserDB:
     const user = await User.findUser(email)
+    if (!user) {
+        return res.redirect("/login"); 
+    }
+    //UserDB:
     const userId = user._id
     if(watchlist == "on"){
         await User.addToWatchlist(userId,movieid)
@@ -230,4 +242,6 @@ exports.updateMovieInfo = async (req, res) => {
 
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
+
+
 };
