@@ -182,9 +182,9 @@ exports.viewMovieInfo = async (req, res) => {
     let currentUser = 
     {
         email: email,
-        isAdmin: user.role=="admin"?true:false,
-        inWatchlist :  user.watchlist.includes(selectedMovieid),
-        isWatched : user.watched.includes(selectedMovieid),
+        isAdmin: (user && user.role == "admin") ? true : false,
+        inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid): false,
+        isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid):false,
         rating : myRating||null,
         review : movie.reviews ? movie.reviews.get(email) || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
     }
