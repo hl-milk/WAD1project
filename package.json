@@ -2,7 +2,7 @@
   "name": "wad1project",
   "version": "1.0.0",
   "description": "WAD1 Movie Watchlist Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

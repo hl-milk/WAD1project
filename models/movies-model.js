@@ -22,6 +22,11 @@ const movieSchema = new mongoose.Schema({
         type: Map,
         of: Number,
         default: {}
+    },
+    reviews: {
+        type: Map,
+        of: String,
+        default: {},
     }
 });
 
@@ -36,7 +41,7 @@ exports.getMoviesByIds = function (movieIds) {
 };
 
 exports.getMovieById = function (movieid) {
-    return Movie.findOne({ movieid: movieid });
+    return Movie.findOne({ movieid: movieid }).lean();
 };
 
 exports.searchAndFilterMovies = async function (search, genre) {
@@ -80,4 +85,37 @@ exports.updateMovie = async function (movieid, updatedMovie) {
 
 exports.deleteMovie = function (movieid) {
     return Movie.deleteOne({ movieid: movieid });
+};
+
+exports.updateRating = function(movieid,email,rating) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
+    return Movie.updateOne(
+        { movieid: movieid }, 
+        { $set: { [`ratings.${safeEmail}`]: rating } }
+    );
+};
+
+exports.deleteRating = function (movieid,email) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
+    return Movie.updateOne(
+        { movieid: movieid }, 
+        { $unset: { [`ratings.${safeEmail}`] : ""} } 
+    );
+};
+
+
+exports.updateReview = function(movieid, email, review){
+    const safeEmail = email.replace(/\./g, '_dot_')
+    return Movie.updateOne(
+        { movieid: movieid },
+        { $set: {[`reviews.${safeEmail}`]: review } }
+    )
+};
+
+exports.deleteReview = function(movieid, email) {
+    const safeEmail = email.replace(/\./g, '_dot_')
+    return Movie.updateOne(
+        { movieid: movieid },
+        { $unset: { [  `reviews.${safeEmail}`]: "" } }
+    )
 };

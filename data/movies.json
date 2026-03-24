@@ -1,20 +1,43 @@
-[
-{
-    "moviename": "Titanic",
-    "movieid": "movie1",
-    "description": "Some movie",
-    "ratings": {"user1@gmail.com": 1, "user2@gmail.com": 2}
+[{
+  "_id": {
+    "$oid": "69bfbbe2bc224e33bd18ddce"
+  },
+  "moviename": "Titanic",
+  "movieid": "movie1",
+  "description": "Some movie",
+  "genre": "Drama",
+  "ratings": {
+    "user1@gmail_dot_com": 3,
+    "user2@gmail_dot_com": 2
+  },
+  "reviews": {
+    "user2@gmail_dot_com": "I liked this!",
+    "user1@gmail_dot_com": "yay"
+  }
 },
 {
-    "moviename": "Spiderman",
-    "movieid": "movie2",
-    "description": "Another movie",
-    "ratings": {"user2@gmail.com": 5}
+  "_id": {
+    "$oid": "69bfbbe2bc224e33bd18ddcf"
+  },
+  "moviename": "Spiderman",
+  "movieid": "movie2",
+  "description": "Another movie",
+  "genre": "Action",
+  "ratings": {
+    "user1@gmail_dot_com": 5
+  },
+  "reviews": {
+    "user1@gmail_dot_com": "Good movie!"
+  }
 },
 {
-    "moviename": "The Greatest Showman",
-    "movieid": "movie3",
-    "description": "Yet another movie",
-    "ratings": {}
-}
-]
+  "_id": {
+    "$oid": "69bfbbe2bc224e33bd18ddd0"
+  },
+  "moviename": "The Greatest Showman",
+  "movieid": "movie3",
+  "description": "Yet another movie",
+  "genre": "Drama",
+  "ratings": {},
+  "reviews": {}
+}]
