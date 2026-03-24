@@ -30,5 +30,13 @@
             <% }); %>
         </ul>
     <% } %>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'deleted') {
+            alert("Successfully removed movie from your watched list!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
 </body>
 </html>

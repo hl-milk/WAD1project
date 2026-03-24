@@ -34,7 +34,7 @@ exports.removeFromWatched = async (req, res) => {
 
         console.log(await User.removeMovieFromWatched(req.session.user.email, idToRemove));
 
-        res.redirect("/watched")
+        res.redirect("/watched?status=deleted")
 
     } catch (error) {
         console.log(error);
