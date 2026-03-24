@@ -5,7 +5,7 @@
   "email": "admin@gmail.com",
   "password": "$2b$10$iubnjfp/cCiaLe5n3gTUqeUHy9YMFmZ4NwMAgcd6FiKYp5Z2XVDni",
   "watchlist": [],
-  "watched": [],
+  "reviews": {},
   "role": "admin",
   "__v": 0
 },
@@ -16,7 +16,7 @@
   "email": "user1@gmail.com",
   "password": "$2b$10$ST1PA5WY929KJNZo1PndB.RMjbviu9CzhGVyIMz1VkTiMuzAbvQRG",
   "watchlist": [],
-  "watched": [],
+  "reviews": {},
   "role": "user",
   "__v": 0
 }]
