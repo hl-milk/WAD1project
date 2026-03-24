@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const moviesController = require("../controllers/movies-controller");
-const authMiddleware = require("../middleware/authentication");
+const moviesController = require("./../controllers/movies-controller");
+const authMiddleware = require("./../middleware/authentication");
 
 // Home page (list + search + filter)
 router.get("/home", authMiddleware.isLoggedIn, moviesController.renderHome);
