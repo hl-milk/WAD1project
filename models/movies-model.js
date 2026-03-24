@@ -28,7 +28,7 @@ const movieSchema = new mongoose.Schema({
         of: String,
         default: {},
     }
-});
+}, {strict: true});
 
 const Movie = mongoose.model("Movie", movieSchema, "movies");
 
@@ -37,7 +37,7 @@ exports.getAllMovies = function () {
 };
 
 exports.getMovieById = function (movieid) {
-    return Movie.findOne({ movieid: movieid });
+    return Movie.findOne({ movieid: movieid }).lean();
 };
 
 exports.searchAndFilterMovies = async function (search, genre) {
@@ -83,11 +83,20 @@ exports.deleteMovie = function (movieid) {
     return Movie.deleteOne({ movieid: movieid });
 };
 
-exports.updateRating = function(movieid,email,rating) {
+exports.updateRating = async function(movieid,email,rating) {
     return Movie.updateOne(
-        { movieid: movieid }, 
-        { $set: { [`ratings.${email}`]: rating } } 
-    );
+        {movieid: movieid},
+        [{
+            $set: {
+                ratings: {
+                    $setField: {
+                        field: email,
+                        input: "$ratings",
+                        value: rating
+                    }
+                }
+            }
+        }])
     /*
     Think of $set as the "Update or Add" operator in MongoDB.
     Normally, if you tried to update a document without $set, you might accidentally overwrite the entire movie with just a single rating! $set prevents that by targeting only the specific field you care about.

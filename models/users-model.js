@@ -31,7 +31,7 @@ const User = mongoose.model('User', userSchema, 'users');
 // Data handling methods for User
 
 exports.findUser = function(email) {
-    return User.findOne({email: email});
+    return User.findOne({email: email}).lean();
 }
 
 exports.addUser = function(newUser) {

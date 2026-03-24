@@ -160,11 +160,11 @@ exports.viewMovieInfo = async (req, res) => {
     const ratings = movie.ratings;
     let ratingSum = 0;
     let ratingCount = 0;
-    for(let value of ratings.values()){
+    for(let value of Object.values(ratings)){
         ratingCount+=1
         ratingSum += value;
     }
-    let myRating = ratings.get(email);
+    let myRating = ratings.email;
     let avgRating = ratingCount>0? (ratingSum/ratingCount).toFixed(2):0
 
     //packaging movie details for render
@@ -183,55 +183,53 @@ exports.viewMovieInfo = async (req, res) => {
     {
         email: email,
         isAdmin: (user && user.role == "admin") ? true : false,
-        inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid): false,
-        isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid):false,
-        rating : myRating||null,
-        review : movie.reviews ? movie.reviews.get(email) || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
+        inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid) : false,
+        isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid) : false,
+        rating : myRating|| null,
+        review : movie.reviews ? movie.reviews[email] || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
     }
     res.render("movie",{movie:selectedMovie, user:currentUser})
     };
 
-    exports.updateMovieInfo = async (req, res) => {
-        const email = req.session.user.email;
-        const movieid = req.body.movieid;
-        const watched = req.body.watched;
-        const watchlist = req.body.watchlist;
-        const myRating = req.body.rating;
-        const myReview = req.body.review;
+exports.updateMovieInfo = async (req, res) => {
+    const email = req.session.user.email;
+    const movieid = req.body.movieid;
+    const watched = req.body.watched;
+    const watchlist = req.body.watchlist;
+    const myRating = req.body.rating;
+    const myReview = req.body.review;
         
-        //MovieDB:
-        if (!myRating|| myRating == ""){
-            await Movie.deleteRating(movieid,email) 
-        } else{
-            await Movie.updateRating(movieid,email,parseInt(myRating))
-        }
+    //MovieDB:
+    if (!myRating|| myRating == ""){
+        await Movie.deleteRating(movieid,email) 
+    } else {
+        await Movie.updateRating(movieid,email,parseInt(myRating))
+    }
         
-        //ReviewDB:
-        if (!myReview || myReview.trim() === ""){
-            await Movie.deleteReview(movieid, email);
-        }
-        else{
-            await Movie.updateReview(movieid, email, myReview.trim());
-        }
+    //ReviewDB:
+    if (!myReview || myReview.trim() === ""){
+        await Movie.deleteReview(movieid, email);
+    } else {
+        await Movie.updateReview(movieid, email, myReview.trim());
+    }
         // to catch blank submissions and keep stored data clean
     
     
-        //UserDB:
-        const user = await User.findUser(email)
-        const userId = user._id
-        if(watchlist == "on"){
-            await User.addToWatchlist(userId,movieid)
-        } else{
-            await User.removeFromWatchlist(userId,movieid)
-        }
+    //UserDB:
+    const user = await User.findUser(email)
+    const userId = user._id
+    if(watchlist == "on"){
+        await User.addToWatchlist(userId,movieid)
+    } else {
+        await User.removeFromWatchlist(userId,movieid)
+    }
+    if(watched == "on"){
+        await User.addToWatched(userId,movieid)
+    } else {
+        await User.removeFromWatched(userId,movieid)
+    }
     
-        if(watched == "on"){
-            await User.addToWatched(userId,movieid)
-        } else{
-            await User.removeFromWatched(userId,movieid)
-        }
     
-    
-        //after updating the database, refresh the page
-        res.redirect(`/movies/view?movieid=${movieid}`);
+    //after updating the database, refresh the page
+    res.redirect(`/movies/view?movieid=${movieid}`);
     };
