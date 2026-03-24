@@ -68,10 +68,11 @@ user =
     <% } else { %>
       <ul>
         <% for (let reviewer in reviews) { %>
-          <% if (reviewer === user.email) { %>
+          <% reviewer1 = reviewer.replace(/_dot_/g, '.') %>
+          <% if (reviewer1 === user.email) { %>
             <li><strong>You</strong> (Your review): <%= reviews[reviewer] %></li>
           <% } else { %>
-            <li><strong><%= reviewer %></strong>: <%= reviews[reviewer] %></li>
+            <li><strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %></li>
           <% } %>
         <% } %>
       </ul>
