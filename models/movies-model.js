@@ -37,42 +37,43 @@ exports.getMovieById = function (movieid) {
 
 exports.searchAndFilterMovies = async function (search, genre) {
     let movies = await Movie.find();
-    console.log("All movies:", movies);
 
     if (search) {
         const lowerSearch = search.toLowerCase();
         movies = movies.filter(movie =>
+            movie.moviename &&
             movie.moviename.toLowerCase().includes(lowerSearch)
         );
     }
 
     if (genre && genre !== "all") {
+        const lowerGenre = genre.toLowerCase();
         movies = movies.filter(movie =>
-            movie.genre === genre
+            movie.genre &&
+            movie.genre.toLowerCase() === lowerGenre
         );
     }
 
-    console.log("Filtered movies:", movies);
     return movies;
 };
 
-
-exports.addMovie = function (newMovie) {
+exports.addMovieData = function (newMovie) {
     return Movie.create(newMovie);
 };
 
-exports.updateMovie = async function (movieid, updatedMovie) {
-    const movie = await Movie.findOne({ movieid: movieid });
-
-    if (!movie) return null;
-
-    movie.moviename = updatedMovie.moviename;
-    movie.description = updatedMovie.description;
-    movie.genre = updatedMovie.genre;
-
-    return movie.save();
+exports.updateMovieData = function (movieObject) {
+    return Movie.updateOne(
+        { movieid: movieObject.movieid },
+        {
+            $set: {
+                moviename: movieObject.moviename,
+                description: movieObject.description,
+                genre: movieObject.genre
+            }
+        }
+    );
 };
 
-exports.deleteMovie = function (movieid) {
+exports.deleteMovieData = function (movieid) {
     return Movie.deleteOne({ movieid: movieid });
 };

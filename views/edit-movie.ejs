@@ -10,8 +10,11 @@
         <p style="color:red;"><%= error %></p>
     <% } %>
 
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
     <form method="post" action="/movies/edit">
-        
         <input type="hidden" name="movieid" value="<%= movie.movieid %>">
 
         <label>
@@ -32,20 +35,23 @@
         </label>
         <br><br>
 
-        <select name="genre" required>
-            <% genres.forEach(g => { %>
-                <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
-                    <%= g %>
-                </option>
-            <% }) %>
-        </select>
+        <label>
+            Genre:
+            <select name="genre" required>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select>
+        </label>
+        <br><br>
 
         <button type="submit">Update Movie</button>
     </form>
 
     <br>
 
-    <!-- DELETE BUTTON -->
     <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
         <button type="submit" style="color:red;">Delete Movie</button>
     </form>
