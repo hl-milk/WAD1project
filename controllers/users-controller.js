@@ -26,8 +26,6 @@ exports.loginCheck = async (req, res) => {
             req.session.user = {
                 _id: userLogin._id,
                 email: userLogin.email,
-                watchlist: userLogin.watchlist,
-                reviews: userLogin.reviews,
                 role: userLogin.role
             }
             

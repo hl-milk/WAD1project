@@ -164,7 +164,8 @@ exports.viewMovieInfo = async (req, res) => {
         ratingCount+=1
         ratingSum += value;
     }
-    let myRating = ratings.email;
+    const safeEmail = email.replace(/\./g, '_dot_');
+    let myRating = ratings[safeEmail];
     let avgRating = ratingCount>0? (ratingSum/ratingCount).toFixed(2):0
 
     //packaging movie details for render
@@ -186,7 +187,7 @@ exports.viewMovieInfo = async (req, res) => {
         inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid) : false,
         isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid) : false,
         rating : myRating|| null,
-        review : movie.reviews ? movie.reviews[email] || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
+        review : movie.reviews ? movie.reviews[safeEmail] || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
     }
     res.render("movie",{movie:selectedMovie, user:currentUser})
     };

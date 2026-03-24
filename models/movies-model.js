@@ -28,7 +28,7 @@ const movieSchema = new mongoose.Schema({
         of: String,
         default: {},
     }
-}, {strict: true});
+});
 
 const Movie = mongoose.model("Movie", movieSchema, "movies");
 
@@ -83,49 +83,35 @@ exports.deleteMovie = function (movieid) {
     return Movie.deleteOne({ movieid: movieid });
 };
 
-exports.updateRating = async function(movieid,email,rating) {
-    return Movie.updateOne(
-        {movieid: movieid},
-        [{
-            $set: {
-                ratings: {
-                    $setField: {
-                        field: email,
-                        input: "$ratings",
-                        value: rating
-                    }
-                }
-            }
-        }])
-    /*
-    Think of $set as the "Update or Add" operator in MongoDB.
-    Normally, if you tried to update a document without $set, you might accidentally overwrite the entire movie with just a single rating! $set prevents that by targeting only the specific field you care about.
-
-    Here is exactly what it does:
-    1. It Updates Existing Info
-    If the user alex@gmail.com already has a rating of 3 in your database, and you run $set with a 5, MongoDB will simply overwrite the 3 with a 5.
-    2. It Adds New Info (The "Upsert" Behavior)
-    If newuser@gmail.com has never rated the movie before, $set notices that the key doesn't exist yet. Instead of failing, it automatically creates that new entry inside your ratings Map.
-    */
-};
-
-exports.deleteRating = function (movieid,email) {
+exports.updateRating = function(movieid,email,rating) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
     return Movie.updateOne(
         { movieid: movieid }, 
-        { $unset: { [`ratings.${email}`] : ""} } 
+        { $set: { [`ratings.${safeEmail}`]: rating } }
     );
 };
 
+exports.deleteRating = function (movieid,email) {
+    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
+    return Movie.updateOne(
+        { movieid: movieid }, 
+        { $unset: { [`ratings.${safeEmail}`] : ""} } 
+    );
+};
+
+
 exports.updateReview = function(movieid, email, review){
+    const safeEmail = email.replace(/\./g, '_dot_')
     return Movie.updateOne(
         { movieid: movieid },
-        { $set: {[`reviews.${email}`]: review } }
+        { $set: {[`reviews.${safeEmail}`]: review } }
     )
-}
+};
 
 exports.deleteReview = function(movieid, email) {
+    const safeEmail = email.replace(/\./g, '_dot_')
     return Movie.updateOne(
         { movieid: movieid },
-        { $unset: { [  `reviews.${email}`]: "" } }
+        { $unset: { [  `reviews.${safeEmail}`]: "" } }
     )
-}
+};
