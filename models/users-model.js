@@ -14,10 +14,9 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    reviews: {
-        type: Map,
-        of: Number,
-        default: {}
+    watched: {
+        type: Array,
+        default: []
     },
     role: {
         type: String,
@@ -44,4 +43,12 @@ exports.updateUserPass = function(_id, password) {
 
 exports.deleteUser = function(_id) {
     return User.deleteOne({_id: _id })
+}
+
+exports.addMovieToWatched = function(email, movieId) {
+    return User.updateOne({ email: email }, { $push: { watched: movieId } });
+}
+
+exports.removeMovieFromWatched = function(email, movieId) {
+    return User.updateOne({ email: email }, { $pull: { watched: movieId } });
 }
