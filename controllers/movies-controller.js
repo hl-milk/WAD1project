@@ -7,19 +7,15 @@ exports.renderHome = async (req, res) => {
         const search = req.query.search ? req.query.search.trim() : "";
         const genre = req.query.genre ? req.query.genre.trim() : "all";
 
-        // const movies = await Movie.searchAndFilterMovies(search, genre);
-        
-        const genres = genreOptions;
         const movies = await Movie.searchAndFilterMovies(search, genre);
-        
+
         res.render("home", {
             movies: movies,
-            genres: genres,
+            genres: genreOptions,
             search: search,
             selectedGenre: genre,
             user: req.session.user
         });
-
     } catch (error) {
         console.error(error);
         res.send("Error loading home page");
@@ -29,6 +25,7 @@ exports.renderHome = async (req, res) => {
 exports.renderAddMovie = (req, res) => {
     res.render("add-movie", {
         error: null,
+        success: null,
         moviename: "",
         movieid: "",
         description: "",
@@ -47,6 +44,7 @@ exports.addMovie = async (req, res) => {
     if (!moviename || !movieid || !description || !genre) {
         return res.render("add-movie", {
             error: "All fields are required!",
+            success: null,
             moviename: moviename,
             movieid: movieid,
             description: description,
@@ -62,6 +60,7 @@ exports.addMovie = async (req, res) => {
         if (existingMovie) {
             return res.render("add-movie", {
                 error: "Movie ID already exists!",
+                success: null,
                 moviename: moviename,
                 movieid: movieid,
                 description: description,
@@ -71,14 +70,23 @@ exports.addMovie = async (req, res) => {
             }); // To keep
         }
 
-        await Movie.addMovie({
+        await Movie.addMovieData({
             moviename: moviename,
             movieid: movieid,
             description: description,
             genre: genre
         });
 
-        res.redirect("/home"); // should render /movies/add instead of redirect
+        return res.render("add-movie", {
+            error: null,
+            success: "Movie added successfully!",
+            moviename: "",
+            movieid: "",
+            description: "",
+            genre: "",
+            genres: genreOptions,
+            user: req.session.user
+        });
     } catch (error) {
         console.error(error);
         res.send("Error adding movie");
@@ -103,6 +111,7 @@ exports.renderEditMovie = async (req, res) => {
             movie: movie,
             genres: genreOptions,
             error: null,
+            success: null,
             user: req.session.user
         });
     } catch (error) {
@@ -129,6 +138,7 @@ exports.updateMovie = async (req, res) => {
                 movie: movie,
                 genres: genreOptions,
                 error: "All fields are required!",
+                success: null,
                 user: req.session.user
             });
         } catch (error) {
@@ -138,17 +148,32 @@ exports.updateMovie = async (req, res) => {
     }
 
     try {
-        const updatedMovie = await Movie.updateMovie(movieid, {
+        const existingMovie = await Movie.getMovieById(movieid);
+
+        if (!existingMovie) {
+            return res.send("Movie not found");
+        }
+
+        const result = await Movie.updateMovieData({
+            movieid: movieid,
             moviename: moviename,
             description: description,
             genre: genre
         });
 
-        if (!updatedMovie) {
+        if (!result || result.matchedCount === 0) {
             return res.send("Movie not found");
         }
 
-        res.redirect("/home");
+        const updatedMovie = await Movie.getMovieById(movieid);
+
+        return res.render("edit-movie", {
+            movie: updatedMovie,
+            genres: genreOptions,
+            error: null,
+            success: "Movie updated successfully!",
+            user: req.session.user
+        });
     } catch (error) {
         console.error(error);
         res.send("Error updating movie");
@@ -169,8 +194,16 @@ exports.deleteMovie = async (req, res) => {
             return res.send("Movie not found");
         }
 
-        await Movie.deleteMovie(movieid);
-        res.redirect("/home");
+        const deletedMovieName = movie.moviename;
+        const deletedMovieId = movie.movieid;
+
+        await Movie.deleteMovieData(movieid);
+
+        res.render("delete-movie", {
+            moviename: deletedMovieName,
+            movieid: deletedMovieId,
+            user: req.session.user
+        });
     } catch (error) {
         console.error(error);
         res.send("Error deleting movie");

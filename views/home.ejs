@@ -16,6 +16,10 @@
     
     <h1>Movie List</h1>
 
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
     <form method="get" action="/home">
         <label>
             Search:
@@ -49,8 +53,9 @@
         <p>No movies found.</p>
     <% } else { %>
         <% movies.forEach(movie => { %>
-            <hr>
+            <hr style="margin-bottom: 20px;">
                 <h3><%= movie.moviename %></h3>
+
                 <p><strong>Description:</strong> <%= movie.description %></p>
                 <p><strong>Genre:</strong> <%= movie.genre %></p>
 

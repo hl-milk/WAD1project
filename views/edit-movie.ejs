@@ -20,8 +20,11 @@
         <p style="color:red"><%= error %></p>
     <% } %>
 
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
     <form method="post" action="/movies/edit">
-        
         <input type="hidden" name="movieid" value="<%= movie.movieid %>">
 
         <label>
@@ -43,20 +46,23 @@
         <br><br>
         
         Genre:
-        <select name="genre" required>
-            <% genres.forEach(g => { %>
-                <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
-                    <%= g %>
-                </option>
-            <% }) %>
-        </select><br><br>
+        <label>
+            Genre:
+            <select name="genre" required>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select><br><br>
+        </label>
+        <br><br>
 
         <button type="submit">Update Movie</button>
     </form>
     <br>
     <a href="/home"><button type="button">Back to Home</button></a><br><br>
 
-    <!-- DELETE BUTTON -->
     <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
         Click if you wish to delete this movie.
         <p style="color:red">NOTE: This action is irreversible!</p>
