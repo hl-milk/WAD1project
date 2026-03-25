@@ -1,3 +1,5 @@
+// Hong Liang
+
 const User = require('./../models/users-model');
 const bcrypt = require('bcrypt');
 

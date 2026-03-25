@@ -16,33 +16,35 @@
 
     <hr>
     <h1>My Watched Movies</h1>
-    <br>
+    
     <a href="/home">
         <button type="button">Back to Home</button>
     </a>
-    <br><br>
+    
     <% if (moviesList.length === 0) { %>
+        <hr>
         <p>You haven't watched any movies yet.</p>
     <% } else { %>
-        <ul>
-            <% moviesList.forEach(function(movie) { %>
-                <li>
-                    <h3>Movie: <%= movie.movieName %></h3>
+        <% moviesList.forEach(function(movie) { %>
+            <hr>
+            <a href="/movies/view?movieid=<%=movie.movieId%>"><h3><%= movie.movieName %></h3></a>
                     
-                    <% if (movie.rating === 0) { %>
-                        <p><strong>Your Rating:</strong> Unrated</p>
-                    <% } else { %>
-                        <p><strong>Your Rating:</strong> <%= movie.rating %> / 5 Stars</p>
-                    <% } %>
+            <% if (movie.rating === 0) { %>
+                <p><strong>Your Rating:</strong> Not yet rated</p>
+            <% } else { %>
+                <p><strong>Your Rating:</strong> <%= movie.rating %> / 5 Stars</p>
+            <% } %>
+            <% if (movie.review) { %>
+                <p><strong>Your Review:</strong> <%= movie.review %></p>
+            <% } else { %>
+                <p><strong>Your Review:</strong> Not yet reviewed </p>
+            <% } %> 
                     
-                    <form action="/watched/delete" method="POST">
-                        <input type="hidden" name="movieId" value="<%= movie.movieId %>">
-                        <button type="submit">Remove from watched list</button>
-                    </form>
-                    <hr>
-                </li>
+            <form action="/watched/delete" method="POST">
+                <input type="hidden" name="movieId" value="<%= movie.movieId %>">
+                <button type="submit">Remove From Watched</button>
+            </form>
             <% }); %>
-        </ul>
     <% } %>
 
     <script>

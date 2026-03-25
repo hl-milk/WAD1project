@@ -77,7 +77,7 @@ exports.addToWatched = function (_id, movieid){
     );
 };
 
-exports.massRemoveFromWatched = function (movieid){
+exports.massRemove = function (movieid){
     return User.updateMany(
         {},
         { $pull: { watched: movieid, watchlist: movieid }}

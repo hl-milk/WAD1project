@@ -4,29 +4,45 @@
     <title>My Watchlist</title>
   </head>
   <body>
-    <h2><%= user.email %>'s Watchlist</h2>
 
-    <a href="/home"><button type="button">Back to Home</button></a>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
     <a href="/logout"><button type="button">Logout</button></a>
 
     <hr>
 
+    <h1>My Watchlist</h1>
+
+    <a href="/home">
+        <button type="button">Back to Home</button>
+    </a>
+
     <% if (!movies || movies.length === 0) { %>
+      <hr>
       <p>Your watchlist is empty.</p>
     <% } else { %>
       <% movies.forEach(movie => { %>
-        <div>
-          <h3><%= movie.moviename %></h3>
-          <p><strong>Movie ID:</strong> <%= movie.movieid %></p>
+        <hr>
+          <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
           <p><strong>Description:</strong> <%= movie.description %></p>
           <p><strong>Genre:</strong> <%= movie.genre %></p>
 
           <form method="post" action="/watchlist/remove?movieid=<%= movie.movieid %>">
             <button type="submit">Remove from Watchlist</button>
           </form>
-        </div>
-        <hr>
       <% }) %>
     <% } %>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'removed') {
+            alert("Successfully removed movie from your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
   </body>
 </html>

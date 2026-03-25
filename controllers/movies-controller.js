@@ -1,3 +1,5 @@
+// Dikshaa
+
 const Movie = require("./../models/movies-model");
 const User = require("./../models/users-model");
 
@@ -53,7 +55,7 @@ exports.addMovie = async (req, res) => {
             genre: genre,
             genres: genreOptions,
             user: req.session.user
-        }); // REDUNDANT, ALL FIELDS ARE SET TO REQUIRED
+        });
     }
 
     try {
@@ -69,7 +71,7 @@ exports.addMovie = async (req, res) => {
                 genre: genre,
                 genres: genreOptions,
                 user: req.session.user
-            }); // To keep
+            });
         }
 
         await Movie.addMovieData({
@@ -200,7 +202,7 @@ exports.deleteMovie = async (req, res) => {
         const deletedMovieId = movie.movieid;
 
         await Movie.deleteMovieData(movieid);
-        await User.massRemoveFromWatched(movieid);
+        await User.massRemove(movieid);
 
         res.render("delete-movie", {
             moviename: deletedMovieName,
@@ -210,132 +212,5 @@ exports.deleteMovie = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.send("Error deleting movie");
-    }
-};
-
-exports.viewMovieInfo = async (req, res) => {
-    const email = req.session.user.email
-    const selectedMovieid = req.query.movieid
-    const movie = await Movie.getMovieById(selectedMovieid);
-    const user = await User.findUser(email)
-
-    //ratings retrieval and calculation
-    const ratings = movie.ratings;
-    let ratingSum = 0;
-    let ratingCount = 0;
-    for(let value of Object.values(ratings)){
-        ratingCount+=1
-        ratingSum += value;
-    }
-    const safeEmail = email.replace(/\./g, '_dot_');
-    let myRating = ratings[safeEmail];
-    let avgRating = ratingCount>0? (ratingSum/ratingCount).toFixed(2):0
-
-    //packaging movie details for render
-    let selectedMovie = 
-    {
-        selectedMovieid : selectedMovieid,
-        title : movie.moviename,
-        description: movie.description,
-        avgRating: avgRating||0,
-        ratingCount: ratingCount||0,
-        reviews: movie.reviews
-    }
-
-    //packaging user info and user-specific movie details for render
-    let currentUser = 
-    {
-        email: email,
-        role: req.session.user.role,
-        isAdmin: (user && user.role == "admin") ? true : false,
-        inWatchlist : (user && user.watchlist) ? user.watchlist.includes(selectedMovieid) : false,
-        isWatched : (user && user.watched) ? user.watched.includes(selectedMovieid) : false,
-        rating : myRating|| null,
-        review : movie.reviews ? movie.reviews[safeEmail] || null : null // gets a user's review for a movie, or returns null if the movie has no reviews / the user hasn't reviewed it
-    }
-    res.render("movie", {movie:selectedMovie, user:currentUser})
-    };
-
-exports.updateMovieInfo = async (req, res) => {
-    const email = req.session.user.email;
-    const movieid = req.body.movieid;
-    const watched = req.body.watched;
-    const watchlist = req.body.watchlist;
-    const myRating = req.body.rating;
-    const myReview = req.body.review;
-        
-    //MovieDB:
-    if (!myRating|| myRating == ""){
-        await Movie.deleteRating(movieid,email) 
-    } else {
-        await Movie.updateRating(movieid,email,parseInt(myRating))
-    }
-        
-    //ReviewDB:
-    if (!myReview || myReview.trim() === ""){
-        await Movie.deleteReview(movieid, email);
-    } else {
-        await Movie.updateReview(movieid, email, myReview.trim());
-    }
-        // to catch blank submissions and keep stored data clean
-    
-    
-    //UserDB:
-    const user = await User.findUser(email)
-    const userId = user._id
-    if(watchlist == "on"){
-        await User.addToWatchlist(userId,movieid)
-    } else {
-        await User.removeFromWatchlist(userId,movieid)
-    }
-    if(watched == "on"){
-        await User.addToWatched(userId,movieid)
-    } else {
-        await User.removeFromWatched(userId,movieid)
-    }
-    
-    
-    //after updating the database, refresh the page
-    res.redirect(`/movies/view?movieid=${movieid}`);
-    };
-
-exports.getWatchedList = async (req, res) => {
-    try {
-        const moviesList = [];
-        
-        if ((await User.findUser(req.session.user.email)).watched) {
-            const moviesData = await Movie.getFilteredMovies(req.session.user.watched);
-            moviesData.forEach(movie => {
-                let userRating = 0;
-                if (movie.ratings && movie.ratings[req.session.user.email]) {
-                    userRating = movie.ratings[req.session.user.email];
-                }
-
-                moviesList.push({
-                    movieId: movie.movieid,       
-                    movieName: movie.moviename, 
-                    rating: userRating 
-                });
-            });
-        }
-        res.render('watched', { moviesList: moviesList, user: req.session.user });
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Server Error");
-    }
-};
-
-exports.removeFromWatched = async (req, res) => {
-    try {
-        const idToRemove = req.body.movieId; 
-
-        console.log(await User.removeMovieFromWatched(req.session.user.email, idToRemove));
-
-        res.redirect("/watched?status=deleted")
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Error deleting movie");
     }
 };

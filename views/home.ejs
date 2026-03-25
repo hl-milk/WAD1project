@@ -54,7 +54,7 @@
         <p>No movies found.</p>
     <% } else { %>
         <% movies.forEach(movie => { %>
-            <hr style="margin-bottom: 20px;">
+            <hr>
                 <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
 
                 <p><strong>Description:</strong> <%= movie.description %></p>
@@ -71,5 +71,12 @@
         <% }) %>
     <% } %>
 
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'added') {
+            alert("Successfully added movie to your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
 </body>
 </html>
