@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title><%=movie["title"]%></title>
+  </head>
+  <body>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    
+    <%#Movie info (general):-------------------------------------%>
+    <h1><%=movie.title%></h1>
+    <strong>Rating:</strong> <%=movie.avgRating%>/5 (<%=movie.ratingCount%> ratings)<br>
+    <strong>Description:</strong> <%=movie.description%><br><br>
+  
+    <%#Movie info (for the specific user):-------------------------------------%>
+    <form action="/movies/view" method="post">
+      <label>Watched <input type="checkbox" name="watched" <%=user.isWatched ? 'checked' : ''%>></label> <br>
+      <label>In My Watchlist <input type="checkbox" name="watchlist" <%=user.inWatchlist ? 'checked' : ''%>></label> <br><br>
+      <label>My Rating (1-5): <input type="number" name="rating" min="1" max="5" value="<%= user.rating || ''%>"></label> <br>
+      <label>My Review:<br>
+        <textarea name="review" rows="5" cols="30" placeholder="What did you think?"><%=user.review||''%></textarea>
+      </label><br><br>
+      <button type="submit">Update</button>
+      <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
+    </form>
+
+    <%#Movie reviews by other users?:-------------------------------------%>
+
+    <%
+      const reviews = movie.reviews || {};
+      const reviewKeys = Object.keys(reviews);
+      const reviewCount = reviewKeys.length;
+      const userHasReviewed = reviews.hasOwnProperty(user.email);%>
+
+    <a href="/home"><button type="button">Back to Home</button></a>
+
+    <h4>What people are saying</h4>
+    <% if (reviewCount === 0) { %>
+      <p><em>No reviews yet.</em></p>
+    <% } else if (reviewCount === 1 && userHasReviewed) { %>
+      <p><em>Only you have left a review.</em></p>
+    <% } else { %>
+      <ul>
+        <% for (let reviewer in reviews) { %>
+          <% reviewer1 = reviewer.replace(/_dot_/g, '.') %>
+          <% if (reviewer1 === user.email) { %>
+            <li><strong>You</strong> (Your review): <%= reviews[reviewer] %></li>
+          <% } else { %>
+            <li><strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %></li>
+          <% } %>
+        <% } %>
+      </ul>
+    <% } %>
+
+
+  </body>
+</html>

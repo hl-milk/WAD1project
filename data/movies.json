@@ -1,4 +1,4 @@
-[ {
+[{
   "_id": {
     "$oid": "69bfbbe2bc224e33bd18ddce"
   },
@@ -7,15 +7,14 @@
   "description": "Some movie",
   "genre": "Drama",
   "ratings": {
-    "user1@gmail.com": 1,
-    "user2@gmail.com": 2
+    "user1@gmail_dot_com": 3,
+    "user2@gmail_dot_com": 2
   },
   "reviews": {
-    "user2@gmail.com": "I liked this!",
-    "user1@gmail.com": "Amazing!"
+    "user2@gmail_dot_com": "I liked this!",
+    "user1@gmail_dot_com": "yay"
   }
-}, 
-
+},
 {
   "_id": {
     "$oid": "69bfbbe2bc224e33bd18ddcf"
@@ -25,13 +24,12 @@
   "description": "Another movie",
   "genre": "Action",
   "ratings": {
-    "user2@gmail.com": 5
+    "user1@gmail_dot_com": 5
   },
   "reviews": {
-    "user1@gmail.com": "Good movie!"
+    "user1@gmail_dot_com": "Good movie!"
   }
 },
-
 {
   "_id": {
     "$oid": "69bfbbe2bc224e33bd18ddd0"
@@ -42,6 +40,4 @@
   "genre": "Drama",
   "ratings": {},
   "reviews": {}
-}
-
-]
+}]

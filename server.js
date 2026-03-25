@@ -25,8 +25,11 @@ server.use(session({
 const userRoutes = require("./routes/user-routes");
 server.use("/", userRoutes);
 
-const movieRoutes = require("./routes/movie-routes")
+const movieRoutes = require("./routes/movie-routes");
 server.use("/", movieRoutes)
+
+//const watchlistRoutes = require("./routes/watchlist-routes");
+//server.use("/", watchlistRoutes);
 
 async function connectDB() {
   try {

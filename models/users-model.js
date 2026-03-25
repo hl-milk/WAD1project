@@ -14,10 +14,9 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    reviews: {
-        type: Map,
-        of: Number,
-        default: {}
+    watched: {
+        type: Array,
+        default: []
     },
     role: {
         type: String,
@@ -31,7 +30,7 @@ const User = mongoose.model('User', userSchema, 'users');
 // Data handling methods for User
 
 exports.findUser = function(email) {
-    return User.findOne({email: email});
+    return User.findOne({email: email}).lean();
 }
 
 exports.addUser = function(newUser) {
@@ -44,4 +43,43 @@ exports.updateUserPass = function(_id, password) {
 
 exports.deleteUser = function(_id) {
     return User.deleteOne({_id: _id })
+}
+
+
+// Watchlist
+exports.removeFromWatchlist = function (_id, movieid){
+    return User.updateOne(
+        { _id: _id }, 
+        { $pull: { watchlist: movieid } } 
+    );
+};
+
+exports.addToWatchlist = function (_id, movieid){
+    return User.updateOne(
+        { _id: _id }, 
+        { $addToSet: { watchlist: movieid } } 
+    );
+};
+
+
+// Watched
+exports.removeFromWatched = function (_id, movieid){
+    return User.updateOne(
+        { _id: _id }, 
+        { $pull: { watched: movieid } } 
+    );
+};
+
+exports.addToWatched = function (_id, movieid){
+    return User.updateOne(
+        { _id: _id }, 
+        { $addToSet: { watched: movieid } } 
+    );
+};
+
+exports.massRemoveFromWatched = function (movieid){
+    return User.updateMany(
+        {},
+        { $pull: { watched: movieid}}
+    )
 }

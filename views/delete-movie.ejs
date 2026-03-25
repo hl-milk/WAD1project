@@ -4,7 +4,18 @@
     <title>Movie Deleted</title>
 </head>
 <body>
-    <h2>Movie Deleted Successfully</h2>
+
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    
+    <h1>Movie Deleted Successfully</h1>
 
     <p><strong>Movie Name:</strong> <%= moviename %></p>
     <p><strong>Movie ID:</strong> <%= movieid %></p>
