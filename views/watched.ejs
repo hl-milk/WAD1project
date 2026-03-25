@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Watched Movies</title>
+</head>
+<body>
+
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    <h1>My Watched Movies</h1>
+    <br>
+    <a href="/home">
+        <button type="button">Back to Home</button>
+    </a>
+    <br><br>
+    <% if (moviesList.length === 0) { %>
+        <p>You haven't watched any movies yet.</p>
+    <% } else { %>
+        <ul>
+            <% moviesList.forEach(function(movie) { %>
+                <li>
+                    <h3>Movie: <%= movie.movieName %></h3>
+                    
+                    <% if (movie.rating === 0) { %>
+                        <p><strong>Your Rating:</strong> Unrated</p>
+                    <% } else { %>
+                        <p><strong>Your Rating:</strong> <%= movie.rating %> / 5 Stars</p>
+                    <% } %>
+                    
+                    <form action="/watched/delete" method="POST">
+                        <input type="hidden" name="movieId" value="<%= movie.movieId %>">
+                        <button type="submit">Remove from watched list</button>
+                    </form>
+                    <hr>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'deleted') {
+            alert("Successfully removed movie from your watched list!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
+</body>
+</html>

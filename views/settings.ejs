@@ -5,7 +5,7 @@
     </head>
     <body>
 
-            <h2>MovReview</h2>
+        <h2>MovReview</h2>
         <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
 
         <a href="/watchlist"><button type="button">My Watchlist</button></a>
@@ -14,6 +14,7 @@
         <a href="/logout"><button type="button">Logout</button></a>
 
         <hr>
+        
         <h1>Settings</h1>
             <% if (typeof(e) === typeof("a")) { %>
                 <p style="color: red"><%=e%></p>

@@ -119,3 +119,7 @@ exports.deleteReview = function(movieid, email) {
         { $unset: { [  `reviews.${safeEmail}`]: "" } }
     )
 };
+
+exports.getFilteredMovies = function(movieArr) {
+    return Movie.find({movieid: {$in: movieArr}}).lean()
+}

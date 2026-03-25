@@ -19,4 +19,7 @@ router.post("/movies/delete", authMiddleware.isLoggedIn,authMiddleware.isAdminUs
 router.get("/movies/view", authMiddleware.isLoggedIn, moviesController.viewMovieInfo);
 router.post("/movies/view", authMiddleware.isLoggedIn, moviesController.updateMovieInfo);
 
+router.get('/watched', authMiddleware.isLoggedIn, moviesController.getWatchedList);
+router.post('/watched/delete', authMiddleware.isLoggedIn, moviesController.removeFromWatched);
+
 module.exports = router;

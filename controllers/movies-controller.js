@@ -298,3 +298,44 @@ exports.updateMovieInfo = async (req, res) => {
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
     };
+
+exports.getWatchedList = async (req, res) => {
+    try {
+        const moviesList = [];
+        
+        if ((await User.findUser(req.session.user.email)).watched) {
+            const moviesData = await Movie.getFilteredMovies(req.session.user.watched);
+            moviesData.forEach(movie => {
+                let userRating = 0;
+                if (movie.ratings && movie.ratings[req.session.user.email]) {
+                    userRating = movie.ratings[req.session.user.email];
+                }
+
+                moviesList.push({
+                    movieId: movie.movieid,       
+                    movieName: movie.moviename, 
+                    rating: userRating 
+                });
+            });
+        }
+        res.render('watched', { moviesList: moviesList, user: req.session.user });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+};
+
+exports.removeFromWatched = async (req, res) => {
+    try {
+        const idToRemove = req.body.movieId; 
+
+        console.log(await User.removeMovieFromWatched(req.session.user.email, idToRemove));
+
+        res.redirect("/watched?status=deleted")
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error deleting movie");
+    }
+};
