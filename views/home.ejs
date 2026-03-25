@@ -1,77 +1,75 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-        <h2>Welcome to MovieReview</h2>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
 
-        <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
 
-        <a href="/account-settings"><button type="button">Account Settings</button></a>
-        <a href="/logout"><button type="button">Logout</button></a>
+    <hr>
+    
+    <h1>Movie List</h1>
 
-        <% if (user && user.role === "user") { %>
-            <a href="/watchlist"><button type="button">My Watchlist</button></a>
-        <% } %>
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
 
-        <hr>
+    <form method="get" action="/home">
+        <label>
+            Search:
+            <input type="text" name="search" value="<%= search || '' %>">
+        </label>
 
-        <form method="get" action="/home">
-            <label>
-                Search Movie:
-                <input type="text" name="search" value="<%= search %>">
-            </label>
+        <label>
+            Genre:
+            <select name="genre">
+                <option value="all">All</option>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= (selectedGenre === g) ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select>
+        </label>
 
-            <label>
-                Genre:
-                <select name="genre">
-                    <option value="all" <%= genre === "all" ? "selected" : "" %>>All Genres</option>
-                    <% genres.forEach(g => { %>
-                        <option value="<%= g %>" <%= genre === g ? "selected" : "" %>>
-                            <%= g %>
-                        </option>
-                    <% }) %>
-                </select>
-            </label>
-
-            <button type="submit">Apply</button>
-        </form>
-
-        <br>
+        <button type="submit">Filter</button>
 
         <% if (user && user.role === "admin") { %>
-            <a href="/movies/add"><button type="button">Add New Movie</button></a>
-            <br><br>
+        <a href="/movies/add">
+            <button type="button">Add New Movie</button>
+        </a>
         <% } %>
+    </form>
 
-        <% if (movies.length === 0) { %>
-            <p>No movies found.</p>
-        <% } %>
 
+    <% if (movies.length === 0) { %>
+        <hr>
+        <p>No movies found.</p>
+    <% } else { %>
         <% movies.forEach(movie => { %>
-            <div>
+            <hr style="margin-bottom: 20px;">
                 <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
-                <p><strong>Movie ID:</strong> <%= movie.movieid %></p>
+
                 <p><strong>Description:</strong> <%= movie.description %></p>
                 <p><strong>Genre:</strong> <%= movie.genre %></p>
 
-                <% if (user.role === "admin") { %>
+                <% if (user && user.role === "admin") { %>
                     <a href="/movies/edit?movieid=<%= movie.movieid %>">
-                        <button type="button">Edit</button>
+                        <button>Edit</button>
                     </a>
-
-                    <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
-                        <button type="submit">Delete</button>
-                    </form>
-                <% } else { %>
-                    <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
-                        <button type="submit">Add to Watchlist</button>
-                    </form>
                 <% } %>
-            </div>
+                <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
+                    <button type="submit">Add to Watchlist</button>
+                </form>
         <% }) %>
-    </body>
+    <% } %>
 
+</body>
 </html>

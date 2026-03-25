@@ -45,31 +45,41 @@ exports.deleteUser = function(_id) {
     return User.deleteOne({_id: _id })
 }
 
-//-----------------
-exports.removeFromWatchlist = async function (_id,movieid){
-    return await User.updateOne(
+
+// Watchlist
+exports.removeFromWatchlist = function (_id, movieid){
+    return User.updateOne(
         { _id: _id }, 
         { $pull: { watchlist: movieid } } 
     );
 };
 
-exports.addToWatchlist = async function (_id,movieid){
-    return await User.updateOne(
+exports.addToWatchlist = function (_id, movieid){
+    return User.updateOne(
         { _id: _id }, 
         { $addToSet: { watchlist: movieid } } 
     );
 };
 
-exports.removeFromWatched = async function (_id,movieid){
-    return await User.updateOne(
+
+// Watched
+exports.removeFromWatched = function (_id, movieid){
+    return User.updateOne(
         { _id: _id }, 
         { $pull: { watched: movieid } } 
     );
 };
 
-exports.addToWatched = async function (_id,movieid){
-    return await User.updateOne(
+exports.addToWatched = function (_id, movieid){
+    return User.updateOne(
         { _id: _id }, 
         { $addToSet: { watched: movieid } } 
     );
 };
+
+exports.massRemoveFromWatched = function (movieid){
+    return User.updateMany(
+        {},
+        { $pull: { watched: movieid}}
+    )
+}

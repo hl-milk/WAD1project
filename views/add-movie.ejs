@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    
+    <h1>Add New Movie</h1>
+
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
+    <form method="post" action="/movies/add">
+        <label>
+            Movie Name:
+            <input type="text" name="moviename" value="<%= moviename || '' %>" required>
+        </label>
+        <br><br>
+
+        <label>
+            Movie ID:
+            <input type="text" name="movieid" value="<%= movieid || '' %>" required>
+        </label>
+        <br><br>
+
+        <label>
+            Description:
+            <textarea name="description" required><%= description || '' %></textarea>
+        </label>
+        <br><br>
+
+        <label>
+            Genre:
+            <select name="genre" required>
+                <option value="">Select Genre</option>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= genre === g ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select>
+        </label>
+        <br><br>
+
+        <button type="submit">Add Movie</button>
+    </form>
+
+    <br>
+    <a href="/home"><button type="button">Back to Home</button></a>
+</body>
+</html>

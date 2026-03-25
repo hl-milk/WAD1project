@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Movie</title>
+</head>
+<body>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+
+    <h2>Edit Movie</h2>
+
+    <% if (error) { %>
+        <p style="color:red"><%= error %></p>
+    <% } %>
+
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
+    <form method="post" action="/movies/edit">
+        <input type="hidden" name="movieid" value="<%= movie.movieid %>">
+
+        <label>
+            Movie Name:
+            <input type="text" name="moviename" value="<%= movie.moviename %>" required>
+        </label>
+        <br><br>
+
+        <label>
+            Movie ID:
+            <input type="text" value="<%= movie.movieid %>" disabled>
+        </label>
+        <br><br>
+
+        <label>
+            Description:<br>
+            <textarea name="description" cols='50' rows='5' required><%= movie.description %></textarea>
+        </label>
+        <br><br>
+        
+        Genre:
+        <label>
+            Genre:
+            <select name="genre" required>
+                <% genres.forEach(g => { %>
+                    <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                        <%= g %>
+                    </option>
+                <% }) %>
+            </select><br><br>
+        </label>
+
+        <button type="submit">Update Movie</button>
+    </form>
+    <br>
+    <a href="/home"><button type="button">Back to Home</button></a><br><br>
+
+    <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
+        Click if you wish to delete this movie.
+        <p style="color:red">NOTE: This action is irreversible!</p>
+        <button type="submit" style="color:red">Delete Movie</button>
+    </form>
+</body>
+</html>

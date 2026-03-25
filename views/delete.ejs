@@ -4,10 +4,23 @@
         <title>Account Deletion</title>
     </head>
     <body>
+
+        <h2>MovReview</h2>
+        <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+        <a href="/watchlist"><button type="button">My Watchlist</button></a>
+        <a href="/watched"><button type="button">Movies I watched</button></a>
+        <a href="/account-settings"><button type="button">Account Settings</button></a>
+        <a href="/logout"><button type="button">Logout</button></a>
+
+        <hr>
+
+        <h1>Account Deletion</h1>
+
         <form method="post" action="/delete-account">
             Hi <%=user.email%>! Click the Confirm button if you wish to delete your account.
             <p style="color:red">NOTE: This action is irreversible!</p>
-            <button type="submit">Confirm</button>
+            <button type="submit" style="color:red">Confirm</button>
         </form>
     </body>
 </html>

@@ -1,53 +1,31 @@
-<%#
-movie = 
-{
-  selectedMovieid : 'movie1'
-  title : 'xxx'
-  description: 'xxx xxxx xxx x xxx xxxx xxx.'
-  avgRating: 00
-  ratingCount: 00
-  reviews: {user1: 'xxx xxxx xxx x xxx xxxx xxx.', user2:'xxx xxxx xxx x xxx xxxx xxx.'}
-}
-
-user = 
-{
-  email: xxx@gmail.com
-  isAdmin: False
-  inWatchlist : False
-  isWatched : False
-  rating : 00
-  review : 'xxx xxxx xxx x xxx xxxx xxx.'
-}
-%>
-
 <html>
   <head>
-    <title><%=movie.title%></title>
+    <title><%=movie["title"]%></title>
   </head>
   <body>
-    <%#Display user info + isAdmin?-------------------------------------%>
-    <a href="/account-settings"><%=user.email%></a>'s account
-    <% if(user.isAdmin==true){%>
-      <strong>(Admin)</strong>
-    <%}%>
-    <br><br>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
 
-    <%#Back to home:-------------------------------------%>
-    <form action="/home" method="get">
-      <button type="submit">Back to Home</button>
-    </form>
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
     
     <%#Movie info (general):-------------------------------------%>
-    <h3><%=movie.title%></h3>
+    <h1><%=movie.title%></h1>
     <strong>Rating:</strong> <%=movie.avgRating%>/5 (<%=movie.ratingCount%> ratings)<br>
-    <strong>Description:</strong> &nbsp;&nbsp; <%=movie.description%><br>
+    <strong>Description:</strong> <%=movie.description%><br><br>
   
     <%#Movie info (for the specific user):-------------------------------------%>
     <form action="/movies/view" method="post">
       <label>Watched <input type="checkbox" name="watched" <%=user.isWatched ? 'checked' : ''%>></label> <br>
-      <label>In My Watchlist <input type="checkbox" name="watchlist" <%=user.inWatchlist ? 'checked' : ''%>></label> <br>
+      <label>In My Watchlist <input type="checkbox" name="watchlist" <%=user.inWatchlist ? 'checked' : ''%>></label> <br><br>
       <label>My Rating (1-5): <input type="number" name="rating" min="1" max="5" value="<%= user.rating || ''%>"></label> <br>
-      <label>My review: <textarea name="review" rows="5" cols="30" placeholder="What did you think?"><%=user.review||''%></textarea></label>
+      <label>My Review:<br>
+        <textarea name="review" rows="5" cols="30" placeholder="What did you think?"><%=user.review||''%></textarea>
+      </label><br><br>
       <button type="submit">Update</button>
       <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
     </form>
@@ -59,6 +37,8 @@ user =
       const reviewKeys = Object.keys(reviews);
       const reviewCount = reviewKeys.length;
       const userHasReviewed = reviews.hasOwnProperty(user.email);%>
+
+    <a href="/home"><button type="button">Back to Home</button></a>
 
     <h4>What people are saying</h4>
     <% if (reviewCount === 0) { %>
@@ -77,7 +57,7 @@ user =
         <% } %>
       </ul>
     <% } %>
-    <%# skips the logged-in user's own review%>
+
 
   </body>
 </html>

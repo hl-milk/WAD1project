@@ -1,11 +1,14 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const session = require("express-session");
+
 const server = express();
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require("path");
-const session = require('express-session');
 
+
+// Middleware
 server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 server.use("/", express.static(path.join(__dirname, "public")));
@@ -22,10 +25,11 @@ server.use(session({
 const userRoutes = require("./routes/user-routes");
 server.use("/", userRoutes);
 
-const movieRoutes= require("./routes/movie-routes")
+const movieRoutes = require("./routes/movie-routes");
+server.use("/", movieRoutes)
 
-const watchlistRoutes = require("./routes/watchlist-routes");
-server.use("/", watchlistRoutes);
+//const watchlistRoutes = require("./routes/watchlist-routes");
+//server.use("/", watchlistRoutes);
 
 async function connectDB() {
   try {
