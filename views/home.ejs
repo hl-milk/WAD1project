@@ -4,6 +4,16 @@
     <title>Home</title>
 </head>
 <body>
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    
     <h1>Movie List</h1>
 
     <form method="get" action="/home">
@@ -25,22 +35,21 @@
         </label>
 
         <button type="submit">Filter</button>
-    </form>
 
-    <br>
-
-    <% if (user && user.role === "admin") { %>
+        <% if (user && user.role === "admin") { %>
         <a href="/movies/add">
             <button>Add New Movie</button>
         </a>
-        <br><br>
-    <% } %>
+        <% } %>
+    </form>
+
 
     <% if (movies.length === 0) { %>
+        <hr>
         <p>No movies found.</p>
     <% } else { %>
         <% movies.forEach(movie => { %>
-            <div>
+            <hr>
                 <h3><%= movie.moviename %></h3>
                 <p><strong>Description:</strong> <%= movie.description %></p>
                 <p><strong>Genre:</strong> <%= movie.genre %></p>
@@ -50,7 +59,6 @@
                         <button>Edit</button>
                     </a>
                 <% } %>
-            </div>
         <% }) %>
     <% } %>
 

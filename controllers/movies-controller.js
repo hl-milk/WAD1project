@@ -11,9 +11,6 @@ exports.renderHome = async (req, res) => {
         
         const genres = genreOptions;
         const movies = await Movie.searchAndFilterMovies(search, genre);
-        console.log("Search:", search);
-        console.log("Genre:", genre);
-        console.log("Movies returned:", movies);
         
         res.render("home", {
             movies: movies,
@@ -33,6 +30,7 @@ exports.renderAddMovie = (req, res) => {
     res.render("add-movie", {
         error: null,
         moviename: "",
+        movieid: "",
         description: "",
         genre: "",
         genres: genreOptions,
@@ -55,7 +53,7 @@ exports.addMovie = async (req, res) => {
             genre: genre,
             genres: genreOptions,
             user: req.session.user
-        });
+        }); // REDUNDANT, ALL FIELDS ARE SET TO REQUIRED
     }
 
     try {
@@ -68,8 +66,9 @@ exports.addMovie = async (req, res) => {
                 movieid: movieid,
                 description: description,
                 genre: genre,
+                genres: genreOptions,
                 user: req.session.user
-            });
+            }); // To keep
         }
 
         await Movie.addMovie({
@@ -79,7 +78,7 @@ exports.addMovie = async (req, res) => {
             genre: genre
         });
 
-        res.redirect("/home");
+        res.redirect("/home"); // should render /movies/add instead of redirect
     } catch (error) {
         console.error(error);
         res.send("Error adding movie");

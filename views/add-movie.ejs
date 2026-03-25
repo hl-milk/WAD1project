@@ -4,6 +4,17 @@
     <title>Add Movie</title>
 </head>
 <body>
+
+    <h2>MovReview</h2>
+    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+
+    <a href="/watchlist"><button type="button">My Watchlist</button></a>
+    <a href="/watched"><button type="button">Movies I watched</button></a>
+    <a href="/account-settings"><button type="button">Account Settings</button></a>
+    <a href="/logout"><button type="button">Logout</button></a>
+
+    <hr>
+    
     <h2>Add New Movie</h2>
 
     <% if (error) { %>
