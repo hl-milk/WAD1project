@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+        watched: {
+        type: Array,
+        default: []
+    },
     reviews: {
         type: Map,
         of: Number,

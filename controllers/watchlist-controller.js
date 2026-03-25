@@ -8,15 +8,19 @@ exports.renderWatchlist = async (req, res) => {
         const watchlistIds = user.watchlist || [];
         const movies = await Movie.getMoviesByIds(watchlistIds);
 
+        const msg = req.query.msg || null;
+
         res.render("watchlist", {
             user: req.session.user,
-            movies: movies
+            movies: movies,
+            msg: msg
         });
     } catch (err) {
         console.error(err);
         res.send("Error loading watchlist");
     }
 };
+
 
 exports.addToWatchlist = async (req, res) => {
     try {
@@ -43,9 +47,33 @@ exports.removeFromWatchlist = async (req, res) => {
 
         user.watchlist = user.watchlist.filter(id => id !== movieid);
         await user.save();
-        res.redirect("/home");
+
+        res.redirect("/watchlist?msg=removed");
     } catch (err) {
         console.error(err);
         res.send("Error removing from watchlist");
+    }
+};
+
+exports.markAsWatched = async (req, res) => {
+    try {
+        const movieid = req.query.movieid;
+        const userEmail = req.session.user.email;
+        const user = await User.findUser(userEmail);
+
+        // Remove from watchlist
+        user.watchlist = user.watchlist.filter(id => id !== movieid);
+
+        // Add to watched if not already there
+        if (!user.watched.includes(movieid)) {
+            user.watched.push(movieid);
+        }
+
+        await user.save();
+
+        res.redirect("/watchlist?msg=watched");
+    } catch (err) {
+        console.error(err);
+        res.send("Error marking as watched");
     }
 };

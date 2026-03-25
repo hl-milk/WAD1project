@@ -65,9 +65,15 @@
                         <button type="submit">Delete</button>
                     </form>
                 <% } else { %>
+                    <!-- Watchlist buttons -->
                     <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
                         <button type="submit">Add to Watchlist</button>
                     </form>
+
+                    <!-- NEW: Review/View buttons (match Noah/Cesar routes) -->
+                    <a href="/movies/view?movieid=<%= movie.movieid %>">
+                        <button type="button">View Details & Reviews</button>
+                    </a>
                 <% } %>
             </div>
         <% }) %>
