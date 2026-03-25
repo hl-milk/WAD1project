@@ -3,7 +3,7 @@ exports.isLoggedIn = (req, res, next) => {
         return next();
     }
 
-    return res.redirect("/login");
+    return res.redirect("/login?message=2");
 };
 
 exports.isAdminUser = (req, res, next) => {
