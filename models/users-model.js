@@ -80,6 +80,6 @@ exports.addToWatched = function (_id, movieid){
 exports.massRemoveFromWatched = function (movieid){
     return User.updateMany(
         {},
-        { $pull: { watched: movieid}}
+        { $pull: { watched: movieid, watchlist: movieid }}
     )
 }
