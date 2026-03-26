@@ -47,6 +47,7 @@ exports.registerCheck = async (req, res) => {
     const user = req.body.user;
     const password = req.body.password;
     const cpassword = req.body.cpassword;
+    const role = req.body.role;
     if (!user || !password || !cpassword) {return res.render("register", {e: "All fields are required!"})}
     if (user && password && cpassword) {
         if (password != cpassword) {return res.render("register", {e: "Passwords do not match!"})}
@@ -55,6 +56,7 @@ exports.registerCheck = async (req, res) => {
             let newUser = {
                 email: user,
                 password: await bcrypt.hash(password, 10),
+                role: role
             };
             await User.addUser(newUser);
             res.redirect("/login?message=1")
