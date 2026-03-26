@@ -68,7 +68,9 @@
                 <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
                     <button type="submit">Add to Watchlist</button>
                 </form>
-                <form method="post" action="/watched/add?movieid=<%= movie.movieid%>"></form>
+                <form method="post" action="/watched/add?movieid=<%= movie.movieid%>">
+                    <button type="submit">Add to Watched</button>
+                </form>
         <% }) %>
     <% } %>
 
