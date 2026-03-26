@@ -31,8 +31,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema, 'users');
 
-// Data handling methods for User
-
 exports.findUser = function(email) {
     return User.findOne({email: email});
 }
@@ -55,15 +53,14 @@ exports.addMovieToWatched = function(email, movieId) {
 
 exports.moveToTrash = function(email, movieId) {
     return User.updateOne(
-        { email: email,
-            $pull : {watched : movieId} , $push : {watchedelete : movieId}
-        }
-    )   
+        { email: email }, 
+        { $pull : {watched : movieId} , $push : {markedToDelete : movieId} }
+    );   
 };
 
 exports.emptyTrash = function(email) {
     return User.updateOne(
-        {email : email},
-        {$set : { watcheddelete: []}
-    })
+        { email : email },
+        { $set : { markedToDelete: [] } }
+    );
 }

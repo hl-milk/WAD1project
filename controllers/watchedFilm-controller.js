@@ -6,6 +6,7 @@ exports.getWatchedList = async (req, res) => {
         const currentUser = await User.findUser(req.session.user.email);
         const activeMovies = [];
         const trashMovies = [];
+        
         if (currentUser) {
             if (currentUser.watched && currentUser.watched.length > 0) {
                 const moviesData = await Movie.getFilteredMovies(currentUser.watched);
@@ -22,16 +23,18 @@ exports.getWatchedList = async (req, res) => {
                     });
                 });
             } 
-        if (currentUser.watcheddelete && currentUser.watcheddelete.length > 0) {
-            const trashData = await Movie.getFilteredMovies(currentUser.watcheddelete);
-            trashData.forEach(movie => {
-                trashMovies.push({
-                    movieId : movie.movieid,
-                    movieName : movie.movieName
+            
+            if (currentUser.markedToDelete && currentUser.markedToDelete.length > 0) {
+                const trashData = await Movie.getFilteredMovies(currentUser.markedToDelete);
+                trashData.forEach(movie => {
+                    trashMovies.push({
+                        movieId : movie.movieid,
+                        movieName : movie.moviename
+                    });
                 });
-            });
-        };
-        res.render('watched', {activeMovies : activeMovies, trashMovies : trashMovies})
+            }
+            
+            res.render('watched', {activeMovies : activeMovies, trashMovies : trashMovies});
         }
     } catch (error) {
         console.log(error);
