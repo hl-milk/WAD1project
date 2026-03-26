@@ -69,22 +69,6 @@ exports.updateMovieInfo = async (req, res) => {
     }
         // to catch blank submissions and keep stored data clean
     
-    
-    //UserDB:
-    const user = await User.findUser(email)
-    const userId = user._id
-    if(watchlist == "on"){
-        await User.addToWatchlist(userId,movieid)
-    } else {
-        await User.removeFromWatchlist(userId,movieid)
-    }
-    if(watched == "on"){
-        await User.addToWatched(userId,movieid)
-    } else {
-        await User.removeFromWatched(userId,movieid)
-    }
-    
-    
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
     };
