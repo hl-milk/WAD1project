@@ -11,5 +11,5 @@ exports.isAdminUser = (req, res, next) => {
         return next();
     }
 
-    return res.send("Access denied. Admin only.");
+    return res.send("/home?status=user");
 };

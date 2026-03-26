@@ -84,6 +84,10 @@
             alert("Successfully added movie to your watched!");
             window.history.replaceState(null, null, window.location.pathname);
         }
+        if (urlParams.get('status') === 'user') {
+            alert("Access denied! Administrator access required.");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
     </script>
 </body>
 </html>
