@@ -66,16 +66,39 @@ user =
     <% } else if (reviewCount === 1 && userHasReviewed) { %>
       <p><em>Only you have left a review.</em></p>
     <% } else { %>
-      <ul>
+      <%if(user.isAdmin===true){%>
+        <form action="/deleteReviews" method="post"><ul>
+        <button type="submit">Delete Selected Reviews</button>
+        <input type="hidden" name="movieid" value="<%=movie.selectedMovieid%>">
+      <%}%>
+      
         <% for (let reviewer in reviews) { %>
           <% reviewer1 = reviewer.replace(/_dot_/g, '.') %>
           <% if (reviewer1 === user.email) { %>
-            <li><strong>You</strong> (Your review): <%= reviews[reviewer] %></li>
+            <li>
+              <label>
+              <strong>You</strong> (Your review): <%= reviews[reviewer] %>
+              <%if(user.isAdmin===true){%>
+                <input type="checkbox" name="usersToDeleteReviews" value="<%=reviewer1%>">
+              <%}%></label>
+            </li>
           <% } else { %>
-            <li><strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %></li>
+            <li>
+              <label>
+              <strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %>
+              <%if(user.isAdmin===true){%>
+                <input type="checkbox" name="usersToDeleteReviews" value="<%=reviewer1%>">
+              <%}%></label>
+            </li>
           <% } %>
         <% } %>
       </ul>
+      
+      <%if(user.isAdmin===true){%>
+        </form>
+      <%}%>
+    
+    
     <% } %>
     <%# skips the logged-in user's own review%>
 

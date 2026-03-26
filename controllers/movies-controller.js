@@ -234,3 +234,25 @@ exports.updateMovieInfo = async (req, res) => {
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
     };
+
+
+    exports.deleteReviews = async (req,res) =>{
+        const user = req.session.user
+        if(!user || user.role!="admin"){
+            return res.send('Please click <a href=/login>here</a> to log in using admin account')
+        }
+        const usersToDeleteReviews = req.body.usersToDeleteReviews;
+        console.log(usersToDeleteReviews)
+        const movieid = req.body.movieid
+        if(usersToDeleteReviews){
+            const deleteList = Array.isArray(usersToDeleteReviews) ? usersToDeleteReviews : [usersToDeleteReviews];
+            for(let emailToDelete of deleteList){
+                console.log(emailToDelete)
+                console.log("-----------")
+                await Movie.deleteReview(movieid, emailToDelete);
+            }
+
+        }
+        
+        res.redirect(`/movies/view?movieid=${movieid}`)
+    }
