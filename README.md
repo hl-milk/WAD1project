@@ -54,3 +54,8 @@ Rating: Noah
 Review: Cesar  
 Watched List: Minh  
 Watchlist: Yashvardhan
+
+## AI/LLM Declaration
+1. Primarily used for explaining coding errors and debugging hints with code snippets
+2. Retrieved 100 dataset of movies from a ~39K dataset of real movies from Kaggle.
+3. Randomly generated 7 accounts' watched movies, watchlist, as well as their ratings and reviews for the movies.
