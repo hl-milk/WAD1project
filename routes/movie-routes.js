@@ -21,6 +21,7 @@ router.get("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.viewM
 router.post("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.updateMovieInfo);
 
 router.get('/watched', authMiddleware.isLoggedIn, watchedController.getWatchedList);
+router.post('/watched', authMiddleware.isLoggedIn, watchedController.addToWatchedList)
 router.post('/watched/delete', authMiddleware.isLoggedIn, watchedController.removeFromWatched);
 
 router.get("/watchlist", authMiddleware.isLoggedIn, watchlistController.renderWatchlist);

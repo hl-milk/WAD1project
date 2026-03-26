@@ -68,13 +68,18 @@
                 <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
                     <button type="submit">Add to Watchlist</button>
                 </form>
+                <form method="post" action="/watched/add?movieid=<%= movie.movieid%>"></form>
         <% }) %>
     <% } %>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('status') === 'added') {
+        if (urlParams.get('status') === 'addedwl') {
             alert("Successfully added movie to your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'addedw') {
+            alert("Successfully added movie to your watched!");
             window.history.replaceState(null, null, window.location.pathname);
         }
     </script>

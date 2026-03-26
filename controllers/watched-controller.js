@@ -37,6 +37,19 @@ exports.getWatchedList = async (req, res) => {
     }
 };
 
+exports.addToWatchedList = async (req, res) => {
+    try {
+        const movieid = req.query.movieid;
+
+        await User.addToWatched(req.session.user._id, movieid)
+        res.redirect("/home?status=addedw")
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error adding movie")
+    }
+}
+
 exports.removeFromWatched = async (req, res) => {
     try {
         const idToRemove = req.body.movieId; 

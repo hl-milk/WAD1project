@@ -22,7 +22,7 @@ exports.renderWatchlist = async (req, res) => {
 exports.addToWatchlist = async (req, res) => {
     try {
         await User.addToWatchlist(req.session.user._id, req.query.movieid)
-        res.redirect("/home?status=added");
+        res.redirect("/home?status=addedwl");
     } catch (err) {
         console.error(err);
         res.send("Error adding to watchlist");

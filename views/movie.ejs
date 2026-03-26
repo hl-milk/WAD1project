@@ -20,8 +20,6 @@
   
     <%#Movie info (for the specific user):-------------------------------------%>
     <form action="/movies/view" method="post">
-      <label>Watched <input type="checkbox" name="watched" <%=user.isWatched ? 'checked' : ''%>></label> <br>
-      <label>In My Watchlist <input type="checkbox" name="watchlist" <%=user.inWatchlist ? 'checked' : ''%>></label> <br><br>
       <label>My Rating (1-5): <input type="number" name="rating" min="1" max="5" value="<%= user.rating || ''%>"></label> <br>
       <label>My Review:<br>
         <textarea name="review" rows="5" cols="30" placeholder="What did you think?"><%=user.review||''%></textarea>
