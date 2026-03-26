@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    markedToDelete : {
+        type : Array,
+        default : []
+    } ,
     role: {
         type: String,
         required: [true, 'A user is either an admin or user'],
@@ -49,6 +53,17 @@ exports.addMovieToWatched = function(email, movieId) {
     return User.updateOne({ email: email }, { $push: { watched: movieId } });
 }
 
-exports.removeMovieFromWatched = function(email, movieId) {
-    return User.updateOne({ email: email }, { $pull: { watched: movieId } });
+exports.moveToTrash = function(email, movieId) {
+    return User.updateOne(
+        { email: email,
+            $pull : {watched : movieId} , $push : {watchedelete : movieId}
+        }
+    )   
+};
+
+exports.emptyTrash = function(email) {
+    return User.updateOne(
+        {email : email},
+        {$set : { watcheddelete: []}
+    })
 }

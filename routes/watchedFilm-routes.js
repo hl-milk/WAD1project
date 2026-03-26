@@ -3,6 +3,7 @@ const watchedController = require('../controllers/watchedFilm-controller');
 const router = express.Router();
 
 router.get('/watched', watchedController.getWatchedList);
-router.post('/watched/delete', watchedController.removeFromWatched);
+router.post('/trash', watchedController.moveToTrash);
+router.post('/empty-trash', watchedController.emptyTrash)
 
 module.exports = router;

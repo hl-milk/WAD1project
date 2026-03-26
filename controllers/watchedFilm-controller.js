@@ -3,41 +3,62 @@ const Movie = require('../models/movies-model');
 
 exports.getWatchedList = async (req, res) => {
     try {
-        const moviesList = [];
-        
-        if (req.session.user.watched.length > 0) {
-            const moviesData = await Movie.getFilteredMovies(req.session.user.watched);
-            moviesData.forEach(movie => {
-                let userRating = 0;
-                if (movie.ratings && movie.ratings[req.session.user.email]) {
-                    userRating = movie.ratings[req.session.user.email];
-                }
+        const currentUser = await User.findUser(req.session.user.email);
+        const activeMovies = [];
+        const trashMovies = [];
+        if (currentUser) {
+            if (currentUser.watched && currentUser.watched.length > 0) {
+                const moviesData = await Movie.getFilteredMovies(currentUser.watched);
+                moviesData.forEach(movie => {
+                    let userRating = 0;
+                    if (movie.ratings && movie.ratings[currentUser.email]) {
+                        userRating = movie.ratings[currentUser.email];
+                    }
 
-                moviesList.push({
-                    movieId: movie.movieid,       
-                    movieName: movie.moviename, 
-                    rating: userRating 
+                    activeMovies.push({
+                        movieId: movie.movieid,       
+                        movieName: movie.moviename, 
+                        rating: userRating 
+                    });
+                });
+            } 
+        if (currentUser.watcheddelete && currentUser.watcheddelete.length > 0) {
+            const trashData = await Movie.getFilteredMovies(currentUser.watcheddelete);
+            trashData.forEach(movie => {
+                trashMovies.push({
+                    movieId : movie.movieid,
+                    movieName : movie.movieName
                 });
             });
+        };
+        res.render('watched', {activeMovies : activeMovies, trashMovies : trashMovies})
         }
-        res.render('watched', { moviesList: moviesList });
-
     } catch (error) {
         console.log(error);
         res.status(500).send("Server Error");
     }
 };
 
-exports.removeFromWatched = async (req, res) => {
+exports.moveToTrash = async (req, res) => {
     try {
         const idToRemove = req.body.movieId; 
 
-        console.log(await User.removeMovieFromWatched(req.session.user.email, idToRemove));
+        console.log(await User.moveToTrash(req.session.user.email, idToRemove));
 
-        res.redirect("/watched?status=deleted")
+        res.redirect("/watched");
 
     } catch (error) {
         console.log(error);
-        res.status(500).send("Error deleting movie");
+        res.status(500).send("Error moving to deleted movie");
     }
 };
+
+exports.emptyTrash = async (req, res) => {
+    try {
+        console.log(await User.emptyTrash(req.session.user.email));
+        res.redirect('/watched');
+    } catch (error)  {
+        console.log(error);
+        res.status(500).send("Error emptying deleted movie list")
+    }
+}
