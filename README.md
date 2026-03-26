@@ -34,6 +34,7 @@ nodemon server.js
 ```
 
 Open browser and visit http://localhost:8000/
+
 ## Sample Users and Passwords
 __Admin__
 ```
@@ -45,3 +46,11 @@ __User1__
 email: user1@gmail.com
 password: 12345
 ```
+
+## Contributions
+Register & Login (Accounts): Hong Liang  
+Home (Movie List): Dikshaa  
+Rating: Noah  
+Review: Cesar  
+Watched List: Minh  
+Watchlist: Yashvardhan
