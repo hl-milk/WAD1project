@@ -22,10 +22,12 @@ router.post("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.upda
 
 router.get('/watched', authMiddleware.isLoggedIn, watchedController.getWatchedList);
 router.post('/watched/add', authMiddleware.isLoggedIn, watchedController.addToWatchedList)
-router.post('/watched/delete', authMiddleware.isLoggedIn, watchedController.removeFromWatched);
+router.post('/watched/markdelete', authMiddleware.isLoggedIn, watchedController.markForDelete);
+router.post('/watched/delete', authMiddleware.isLoggedIn, watchedController.confirmDelete)
 
 router.get("/watchlist", authMiddleware.isLoggedIn, watchlistController.renderWatchlist);
 router.post("/watchlist/add", authMiddleware.isLoggedIn, watchlistController.addToWatchlist);
+router.post("/watchlist/mark", authMiddleware.isLoggedIn, watchlistController.markForDelete);
 router.post("/watchlist/remove", authMiddleware.isLoggedIn, watchlistController.removeFromWatchlist);
 
 module.exports = router;

@@ -31,16 +31,35 @@
           <p><strong>Description:</strong> <%= movie.description %></p>
           <p><strong>Genre:</strong> <%= movie.genre %></p>
 
-          <form method="post" action="/watchlist/remove?movieid=<%= movie.movieid %>">
-            <button type="submit">Remove from Watchlist</button>
+          <form method="post" action="/watchlist/mark?movieid=<%= movie.movieid %>">
+            <button type="submit">Mark for Removal</button>
           </form>
       <% }) %>
     <% } %>
-
+    <hr>
+    <h1>Pending Deletion</h1>
+    <% if (markedDeletion.length === 0) { %>
+        <hr>
+        <p>You do not have any movies pending removal.</p>
+    <% } else { %>
+        <hr>
+        <ul>
+        <% markedDeletion.forEach(function(movie) { %>
+            <li><%= movie.moviename %></li>
+        <% }) %>
+        </ul>
+        <form action ="/watchlist/remove" method="POST">
+            <button type="submit">Confirm Remove All</button>
+        </form>
+    <% } %>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('status') === 'removed') {
-            alert("Successfully removed movie from your watchlist!");
+            alert("Successfully removed movies from your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'marked') {
+            alert("Successfully marked movie for removal from your watchlist!");
             window.history.replaceState(null, null, window.location.pathname);
         }
     </script>

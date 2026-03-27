@@ -40,17 +40,36 @@
                 <p><strong>Your Review:</strong> Not yet reviewed </p>
             <% } %> 
                     
-            <form action="/watched/delete" method="POST">
+            <form action="/watched/markdelete" method="POST">
                 <input type="hidden" name="movieId" value="<%= movie.movieId %>">
-                <button type="submit">Remove From Watched</button>
+                <button type="submit">Mark for Removal</button>
             </form>
             <% }); %>
     <% } %>
-
+    <hr>
+    <h1>Pending Deletion</h1>
+    <% if (markedDeletion.length === 0) { %>
+        <hr>
+        <p>You do not have any movies pending removal.</p>
+    <% } else { %>
+        <hr>
+        <ul>
+        <% markedDeletion.forEach(function(movie) { %>
+            <li><%= movie.movieName %></li>
+        <% }) %>
+        </ul>
+        <form action ="/watched/delete" method="POST">
+            <button type="submit">Confirm Remove All</button>
+        </form>
+    <% } %>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('status') === 'deleted') {
-            alert("Successfully removed movie from your watched list!");
+            alert("Successfully removed movies from watched list!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'marked') {
+            alert("Successfully marked movie for removal from watched!");
             window.history.replaceState(null, null, window.location.pathname);
         }
     </script>

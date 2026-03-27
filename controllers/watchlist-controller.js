@@ -7,11 +7,14 @@ exports.renderWatchlist = async (req, res) => {
         const userEmail = req.session.user.email;
         const user = await User.findUser(userEmail);
         const watchlistIds = user.watchlist || [];
+        const pendingDelete = user.watchDelete || [];
         const movies = await Movie.getMoviesByIds(watchlistIds);
+        const markedDeletion = await Movie.getMoviesByIds(pendingDelete)
 
         res.render("watchlist", {
             user: req.session.user,
-            movies: movies
+            movies: movies,
+            markedDeletion: markedDeletion
         });
     } catch (err) {
         console.error(err);
@@ -28,6 +31,17 @@ exports.addToWatchlist = async (req, res) => {
         res.send("Error adding to watchlist");
     }
 };
+
+exports.markForDelete = async (req, res) => {
+    try {
+        const idToMark = req.query.movieid;
+        await User.markWatchDelete(req.session.user._id, idToMark)
+        res.redirect("/watchlist?status=marked")
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Error marking the movie for deletion")
+    }
+}
 
 exports.removeFromWatchlist = async (req, res) => {
     try {

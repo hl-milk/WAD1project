@@ -14,7 +14,15 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    watchDelete: {
+        type: Array,
+        default: []
+    },
     watched: {
+        type: Array,
+        default: []
+    },
+    watchedDelete: {
         type: Array,
         default: []
     },
@@ -46,13 +54,6 @@ exports.deleteUser = function(_id) {
 
 
 // Watchlist
-exports.removeFromWatchlist = function (_id, movieid){
-    return User.updateOne(
-        { _id: _id }, 
-        { $pull: { watchlist: movieid } } 
-    );
-};
-
 exports.addToWatchlist = function (_id, movieid){
     return User.updateOne(
         { _id: _id }, 
@@ -60,15 +61,22 @@ exports.addToWatchlist = function (_id, movieid){
     );
 };
 
-
-// Watched
-exports.removeFromWatched = function (_id, movieid){
+exports.markWatchDelete = function (_id, movieid){
     return User.updateOne(
         { _id: _id }, 
-        { $pull: { watched: movieid } } 
+        { $pull: { watchlist: movieid }, $push : { watchDelete: movieid } } 
     );
 };
 
+exports.removeFromWatchlist = function (_id){
+    return User.updateOne(
+        { _id: _id},
+        { $set: { watchDelete: [] }}
+    )
+}
+
+
+// Watched
 exports.addToWatched = function (_id, movieid){
     return User.updateOne(
         { _id: _id }, 
@@ -76,9 +84,23 @@ exports.addToWatched = function (_id, movieid){
     );
 };
 
+exports.markWatchedDelete = function (_id, movieid){
+    return User.updateOne(
+        { _id: _id }, 
+        { $pull: { watched: movieid }, $push : { watchedDelete: movieid } } 
+    );
+};
+
+exports.emptymarkWatchedDelete = function (_id){
+    return User.updateOne(
+        { _id: _id},
+        { $set: { watchedDelete: [] }}
+    )
+}
+
 exports.massRemove = function (movieid){
     return User.updateMany(
         {},
-        { $pull: { watched: movieid, watchlist: movieid }}
+        { $pull: { watched: movieid, watchlist: movieid, watchedDelete: movieid }}
     )
 }
