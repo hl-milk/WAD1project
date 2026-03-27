@@ -15,7 +15,7 @@ router.post("/movies/add", authMiddleware.isLoggedIn, authMiddleware.isAdminUser
 router.get("/movies/edit", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.renderEditMovie);
 router.post("/movies/edit", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.updateMovie);
 
-router.post("/movies/delete", authMiddleware.isLoggedIn,authMiddleware.isAdminUser,moviesController.deleteMovie);
+router.post("/movies/delete", authMiddleware.isLoggedIn, authMiddleware.isAdminUser,moviesController.deleteMovie);
 
 router.get("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.viewMovieInfo);
 router.post("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.updateMovieInfo);
@@ -29,5 +29,7 @@ router.get("/watchlist", authMiddleware.isLoggedIn, watchlistController.renderWa
 router.post("/watchlist/add", authMiddleware.isLoggedIn, watchlistController.addToWatchlist);
 router.post("/watchlist/mark", authMiddleware.isLoggedIn, watchlistController.markForDelete);
 router.post("/watchlist/remove", authMiddleware.isLoggedIn, watchlistController.removeFromWatchlist);
+
+router.post("/deleteReviews", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.deleteReviews)
 
 module.exports = router;

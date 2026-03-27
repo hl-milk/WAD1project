@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Movie</title>
+    <title>Edit Movie - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>MovReview</h2>
-    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-    <a href="/watchlist"><button type="button">My Watchlist</button></a>
-    <a href="/watched"><button type="button">Movies I watched</button></a>
-    <a href="/account-settings"><button type="button">Account Settings</button></a>
-    <a href="/logout"><button type="button">Logout</button></a>
+    <div class="container">
+        <div class="card">
+            <h1>Edit Movie</h1>
 
-    <hr>
+            <% if (error) { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
 
-    <h2>Edit Movie</h2>
+            <% if (success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
 
-    <% if (error) { %>
-        <p style="color:red"><%= error %></p>
-    <% } %>
+            <form method="post" action="/movies/edit">
+                <input type="hidden" name="movieid" value="<%= movie.movieid %>">
 
-    <% if (success) { %>
-        <p style="color:green;"><%= success %></p>
-    <% } %>
+                <div class="form-group">
+                    <label for="moviename">Movie Name</label>
+                    <input type="text" id="moviename" name="moviename" value="<%= movie.moviename %>" required>
+                </div>
 
-    <form method="post" action="/movies/edit">
-        <input type="hidden" name="movieid" value="<%= movie.movieid %>">
+                <div class="form-group">
+                    <label for="movieid_display">Movie ID (Immutable)</label>
+                    <input type="text" id="movieid_display" value="<%= movie.movieid %>" disabled>
+                </div>
 
-        <label>
-            Movie Name:
-            <input type="text" name="moviename" value="<%= movie.moviename %>" required>
-        </label>
-        <br><br>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="5" required><%= movie.description %></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <select id="genre" name="genre" required>
+                        <% genres.forEach(g => { %>
+                            <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                                <%= g %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
 
-        <label>
-            Movie ID:
-            <input type="text" value="<%= movie.movieid %>" disabled>
-        </label>
-        <br><br>
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Update Movie</button>
+                    <a href="/home" class="btn btn-outline">Back to Home</a>
+                </div>
+            </form>
+        </div>
 
-        <label>
-            Description:<br>
-            <textarea name="description" cols='50' rows='5' required><%= movie.description %></textarea>
-        </label>
-        <br><br>
-        
-        Genre:
-        <label>
-            Genre:
-            <select name="genre" required>
-                <% genres.forEach(g => { %>
-                    <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
-                        <%= g %>
-                    </option>
-                <% }) %>
-            </select><br><br>
-        </label>
-
-        <button type="submit">Update Movie</button>
-    </form>
-    <br>
-    <a href="/home"><button type="button">Back to Home</button></a><br><br>
-
-    <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
-        Click if you wish to delete this movie.
-        <p style="color:red">NOTE: This action is irreversible!</p>
-        <button type="submit" style="color:red">Delete Movie</button>
-    </form>
+        <div class="card" style="border-top: 5px solid var(--danger-color);">
+            <h3 style="color: var(--danger-color);">Danger Zone</h3>
+            <p>Delete this movie from the database.</p>
+            <div class="alert alert-danger">
+                <strong>NOTE:</strong> This action is irreversible!
+            </div>
+            <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
+                <button type="submit" class="btn btn-danger">Delete Movie</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

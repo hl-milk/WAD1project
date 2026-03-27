@@ -214,3 +214,19 @@ exports.deleteMovie = async (req, res) => {
         res.send("Error deleting movie");
     }
 };
+
+exports.deleteReviews = async (req,res) =>{
+    const user = req.session.user
+
+    const usersToDeleteReviews = req.body.usersToDeleteReviews;
+    const movieid = req.body.movieid
+    if(usersToDeleteReviews){
+        const deleteList = Array.isArray(usersToDeleteReviews) ? usersToDeleteReviews : [usersToDeleteReviews];
+        for(let emailToDelete of deleteList){
+                await Movie.deleteReview(movieid, emailToDelete);
+            }
+
+        }
+        
+        res.redirect(`/movies/view?movieid=${movieid}`)
+    }

@@ -49,8 +49,6 @@ exports.viewMovieInfo = async (req, res) => {
 exports.updateMovieInfo = async (req, res) => {
     const email = req.session.user.email;
     const movieid = req.body.movieid;
-    const watched = req.body.watched;
-    const watchlist = req.body.watchlist;
     const myRating = req.body.rating;
     const myReview = req.body.review;
         

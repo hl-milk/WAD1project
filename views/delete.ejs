@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Account Deletion</title>
-    </head>
-    <body>
+<head>
+    <title>Account Deletion - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/home" class="btn btn-outline">Home</a>
+                <a href="/watchlist" class="btn btn-outline">Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-        <h2>MovReview</h2>
-        <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+    <div class="container">
+        <div class="card" style="border-top: 5px solid var(--danger-color);">
+            <h1 style="color: var(--danger-color);">Account Deletion</h1>
 
-        <a href="/watchlist"><button type="button">My Watchlist</button></a>
-        <a href="/watched"><button type="button">Movies I watched</button></a>
-        <a href="/account-settings"><button type="button">Account Settings</button></a>
-        <a href="/logout"><button type="button">Logout</button></a>
+            <div class="alert alert-danger">
+                <strong>Hi <%=user.email%>!</strong> Click the Confirm button if you wish to delete your account.
+                <p style="margin-top: 10px;"><strong>NOTE:</strong> This action is irreversible!</p>
+            </div>
 
-        <hr>
-
-        <h1>Account Deletion</h1>
-
-        <form method="post" action="/delete-account">
-            Hi <%=user.email%>! Click the Confirm button if you wish to delete your account.
-            <p style="color:red">NOTE: This action is irreversible!</p>
-            <button type="submit" style="color:red">Confirm</button>
-        </form>
-    </body>
+            <form method="post" action="/delete-account">
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-danger">Confirm Deletion</button>
+                    <a href="/account-settings" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
 </html>

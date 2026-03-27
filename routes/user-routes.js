@@ -11,10 +11,10 @@ router.get("/register", usersController.renderRegister)
 router.post("/register", usersController.registerCheck)
 
 router.get("/account-settings", authMiddleware.isLoggedIn, usersController.renderSettings)
-router.post("/account-settings", usersController.updatePass)
+router.post("/account-settings", authMiddleware.isLoggedIn, usersController.updatePass)
 
 router.get("/delete-account", authMiddleware.isLoggedIn, usersController.renderDelete)
-router.post("/delete-account", usersController.deleteAccount)
+router.post("/delete-account", authMiddleware.isLoggedIn, usersController.deleteAccount)
 
 router.get("/logout", usersController.logout)
 

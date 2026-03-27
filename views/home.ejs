@@ -2,77 +2,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Home - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h2>MovReview</h2>
-    <p>Logged in as: <%= user.email %> (<%= user.role %>)</p>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-    <a href="/watchlist"><button type="button">My Watchlist</button></a>
-    <a href="/watched"><button type="button">Movies I watched</button></a>
-    <a href="/account-settings"><button type="button">Account Settings</button></a>
-    <a href="/logout"><button type="button">Logout</button></a>
+    <div class="container">
+        <div class="flex justify-between items-center mb-20">
+            <div>
+                <p>Logged in as: <strong><%= user.email %></strong> <span class="badge"><%= user.role %></span></p>
+            </div>
+        </div>
 
-    <hr>
-    
-    <h1>Movie List</h1>
-
-    <% if (success) { %>
-        <p style="color:green;"><%= success %></p>
-    <% } %>
-
-    <form method="get" action="/home">
-        <label>
-            Search:
-            <input type="text" name="search" value="<%= search || '' %>">
-        </label>
-
-        <label>
-            Genre:
-            <select name="genre">
-                <option value="all">All</option>
-                <% genres.forEach(g => { %>
-                    <option value="<%= g %>" <%= (selectedGenre === g) ? "selected" : "" %>>
-                        <%= g %>
-                    </option>
-                <% }) %>
-            </select>
-        </label>
-
-        <button type="submit">Filter</button>
-
-        <% if (user && user.role === "admin") { %>
-        <a href="/movies/add">
-            <button type="button">Add New Movie</button>
-        </a>
+        <% if (success) { %>
+            <div class="alert alert-success"><%= success %></div>
         <% } %>
-    </form>
 
+        <section class="filter-bar">
+            <form method="get" action="/home" class="flex flex-wrap gap-10 items-center w-100">
+                <div class="form-group mb-0" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                    <label>Search</label>
+                    <input type="text" name="search" value="<%= search || '' %>" placeholder="Search movies...">
+                </div>
 
-    <% if (movies.length === 0) { %>
-        <hr>
-        <p>No movies found.</p>
-    <% } else { %>
-        <% movies.forEach(movie => { %>
-            <hr>
-                <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
+                <div class="form-group mb-0" style="width: 150px; margin-bottom: 0;">
+                    <label>Genre</label>
+                    <select name="genre">
+                        <option value="all">All Genres</option>
+                        <% genres.forEach(g => { %>
+                            <option value="<%= g %>" <%= (selectedGenre === g) ? "selected" : "" %>>
+                                <%= g %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
 
-                <p><strong>Description:</strong> <%= movie.description %></p>
-                <p><strong>Genre:</strong> <%= movie.genre %></p>
+                <button type="submit" class="btn btn-primary" style="margin-top: auto;">Filter</button>
 
                 <% if (user && user.role === "admin") { %>
-                    <a href="/movies/edit?movieid=<%= movie.movieid %>">
-                        <button>Edit</button>
-                    </a>
+                <a href="/movies/add" class="btn btn-success" style="margin-top: auto; margin-left: auto;">
+                    Add New Movie
+                </a>
                 <% } %>
-                <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>">
-                    <button type="submit">Add to Watchlist</button>
-                </form>
-                <form method="post" action="/watched/add?movieid=<%= movie.movieid%>">
-                    <button type="submit">Add to Watched</button>
-                </form>
-        <% }) %>
-    <% } %>
+            </form>
+        </section>
+
+        <h1>Movie List</h1>
+
+        <% if (movies.length === 0) { %>
+            <div class="card">
+                <p>No movies found.</p>
+            </div>
+        <% } else { %>
+            <div class="movie-grid">
+                <% movies.forEach(movie => { %>
+                    <div class="card movie-card">
+                        <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
+                        <p><span class="badge"><%= movie.genre %></span></p>
+                        <p><strong>Description:</strong> <%= movie.description.substring(0, 100) %><%= movie.description.length > 100 ? '...' : '' %></p>
+                        
+                        <div class="flex flex-wrap gap-10 mt-20">
+                            <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>" style="flex: 1;">
+                                <button type="submit" class="btn btn-outline w-100">Watchlist</button>
+                            </form>
+                            <form method="post" action="/watched/add?movieid=<%= movie.movieid%>" style="flex: 1;">
+                                <button type="submit" class="btn btn-primary w-100">Watched</button>
+                            </form>
+                            <% if (user && user.role === "admin") { %>
+                                <div style="flex: 1;">
+                                    <a href="/movies/edit?movieid=<%= movie.movieid %>" class="btn btn-success w-100">
+                                        Edit
+                                    </a>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);

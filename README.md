@@ -59,3 +59,4 @@ Watchlist: Yashvardhan
 1. Primarily used for explaining coding errors and debugging hints with code snippets
 2. Retrieved 100 dataset of movies from a ~39K dataset of real movies from Kaggle.
 3. Randomly generated 7 accounts' watched movies, watchlist, as well as their ratings and reviews for the movies.
+4. Helped with making the front-end look better and cleaner.
