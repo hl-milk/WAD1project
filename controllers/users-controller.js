@@ -58,7 +58,11 @@ exports.registerCheck = async (req, res) => {
                 password: await bcrypt.hash(password, 10),
                 role: role
             };
-            if (await User.addUser(newUser)) {res.redirect("/login?message=1")} else {return res.render("register", {e: "An account under this email already exists!"})};
+            if (await User.findUser(user)) {return res.render("register", {e: "An account under this email already exist!"})} 
+            else {
+                await User.addUser(newUser)
+                return res.redirect("/login?message=1")
+            };
         } catch (e) {
             console.error(e)
             res.send("Error reading database")
