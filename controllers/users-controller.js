@@ -40,17 +40,20 @@ exports.loginCheck = async (req, res) => {
 }
 
 exports.renderRegister = (req, res) => {
-    res.render("register", {e: null})
+    res.render("register", {e: null, user: "", role: ""})
 }
 
 exports.registerCheck = async (req, res) => {
-    const user = req.body.user;
+    const user = req.body.user || "";
     const password = req.body.password;
     const cpassword = req.body.cpassword;
-    const role = req.body.role;
-    if (!user || !password || !cpassword) {return res.render("register", {e: "All fields are required!"})}
+    const role = req.body.role || "";
+    if (!role)  {return res.render("register", {e: "Please select a role!", user: user, role: role})}
+    if (!user || !password || !cpassword) {return res.render("register", {e: "All fields are required!", user: user, role: role})}
+    const userExists = await findUser(user)
+    if (userExists) {return res.render("register", {e: "An account under this email is already exists!", user: user, role: role})}
     if (user && password && cpassword) {
-        if (password != cpassword) {return res.render("register", {e: "Passwords do not match!"})}
+        if (password != cpassword) {return res.render("register", {e: "Passwords do not match!", user: user, role: role})}
 
         try {
             let newUser = {
