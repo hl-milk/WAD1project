@@ -228,5 +228,6 @@ exports.deleteReviews = async (req,res) =>{
 
         }
         
+
         res.redirect(`/movies/view?movieid=${movieid}`)
     }

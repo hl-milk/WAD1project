@@ -58,14 +58,49 @@
             const reviewCount = reviewKeys.length;
             %>
 
-            <% if (reviewCount === 0) { %>
-                <p><em>No reviews yet.</em></p>
-            <% } else { %>
-                <% if (user.isAdmin) { %>
-                    <form action="/deleteReviews" method="post">
-                        <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
-                        <button type="submit" class="btn btn-danger mb-20">Delete Selected Reviews</button>
-                <% } %>
+
+    <h4>What people are saying</h4>
+    <% if (reviewCount === 0) { %>
+      <p><em>No reviews yet.</em></p>
+    <% } else if (reviewCount === 1 && userHasReviewed) { %>
+      <p><em>Only you have left a review.</em></p>
+    <% } else { %>
+      <%if(user.isAdmin===true){%>
+        <form action="/deleteReviews" method="post"><ul>
+        <button type="submit">Delete Selected Reviews</button>
+        <input type="hidden" name="movieid" value="<%=movie.selectedMovieid%>">
+      <%}%>
+      
+        <% for (let reviewer in reviews) { %>
+          <% reviewer1 = reviewer.replace(/_dot_/g, '.') %>
+          <% if (reviewer1 === user.email) { %>
+            <li>
+              <label>
+              <strong>You</strong> (Your review): <%= reviews[reviewer] %>
+              <%if(user.isAdmin===true){%>
+                <input type="checkbox" name="usersToDeleteReviews" value="<%=reviewer1%>">
+              <%}%></label>
+            </li>
+          <% } else { %>
+            <li>
+              <label>
+              <strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %>
+              <%if(user.isAdmin===true){%>
+                <input type="checkbox" name="usersToDeleteReviews" value="<%=reviewer1%>">
+              <%}%></label>
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+      
+      <%if(user.isAdmin===true){%>
+        </form>
+      <%}%>
+    
+    
+    <% } %>
+    <%# skips the logged-in user's own review%>
+
 
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     <% for (let reviewer in reviews) { %>
