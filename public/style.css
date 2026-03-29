@@ -269,3 +269,34 @@ hr {
   color: var(--text-color);
   border: 1px solid var(--border-color);
 }
+
+/* 1. Make the card a relative container */
+.movie-card {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Optional: Add a hover effect so users know it's clickable */
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 2. The magic "Stretched Link" */
+.stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: "";
+}
+
+/* 3. Ensure buttons and badges stay on top of the link */
+.movie-card .btn,
+.movie-card .badge,
+.movie-card form {
+  position: relative;
+  z-index: 2;
+}

@@ -68,7 +68,7 @@
             <div class="movie-grid">
                 <% movies.forEach(movie => { %>
                     <div class="card movie-card">
-                        <a href="/movies/view?movieid=<%=movie.movieid%>"><h3><%= movie.moviename %></h3></a>
+                        <a href="/movies/view?movieid=<%=movie.movieid%>" class="stretched-link"><h3><%= movie.moviename %></h3></a>
                         <p><span class="badge"><%= movie.genre %></span></p>
                         <p><strong>Description:</strong> <%= movie.description.substring(0, 100) %><%= movie.description.length > 100 ? '...' : '' %></p>
                         
