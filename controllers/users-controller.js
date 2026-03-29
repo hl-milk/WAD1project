@@ -48,8 +48,8 @@ exports.registerCheck = async (req, res) => {
     const password = req.body.password;
     const cpassword = req.body.cpassword;
     const role = req.body.role;
-    if (!user || !password || !cpassword) {return res.render("register", {e: "All fields are required!"})}
-    if (user && password && cpassword) {
+    if (!user || !password || !cpassword || !role) {return res.render("register", {e: "All fields are required!"})}
+    if (user && password && cpassword && role) {
         if (password != cpassword) {return res.render("register", {e: "Passwords do not match!"})}
 
         try {
@@ -58,8 +58,7 @@ exports.registerCheck = async (req, res) => {
                 password: await bcrypt.hash(password, 10),
                 role: role
             };
-            await User.addUser(newUser);
-            res.redirect("/login?message=1")
+            if (await User.addUser(newUser)) {res.redirect("/login?message=1")} else {return res.render("register", {e: "An account under this email already exists!"})};
         } catch (e) {
             console.error(e)
             res.send("Error reading database")
