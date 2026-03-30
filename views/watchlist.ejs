@@ -36,7 +36,10 @@
                                 <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: var(--border-radius); display: flex; justify-content: space-between; align-items: center;">
                                     <div>
                                         <a href="/movies/view?movieid=<%=movie.movieid%>"><h4 style="margin: 0;"><%= movie.moviename %></h4></a>
-                                        <span class="badge"><%= movie.genre %></span>
+                                        <div style="margin-top: 5px;">
+                                            <span class="badge"><%= movie.genre %></span>
+                                            <small style="color: var(--text-muted); margin-left: 10px;">Added on: <%= new Date(movie.dateAdded).toDateString() %></small>
+                                        </div>
                                     </div>
                                     <form method="post" action="/watchlist/mark?movieid=<%= movie.movieid %>" style="margin: 0;">
                                         <button type="submit" class="btn btn-danger">Mark for Removal</button>

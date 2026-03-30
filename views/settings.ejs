@@ -30,9 +30,27 @@
             <% if (e === 1) { %>
                 <div class="alert alert-success">Successfully updated password!</div>
             <% } %>
+            <% if (e === 2) { %>
+                <div class="alert alert-success">Successfully updated bio!</div>
+            <% } %>
+
+            <h3>Edit Bio</h3>
+            <form method="post" action="/account-settings">
+                <input type="hidden" name="type" value="bio">
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="4" style="width: 100%; border-radius: 5px; border: 1px solid var(--border-color); padding: 10px; background: var(--card-bg); color: var(--text-color);"><%= user.bio %></textarea>
+                </div>
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Update bio</button>
+                </div>
+            </form>
+
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--border-color);">
 
             <h3>Change Password</h3>
             <form method="post" action="/account-settings">
+                <input type="hidden" name="type" value="password">
                 <div class="form-group">
                     <label for="password">New Password</label>
                     <input type="password" id="password" name="password">

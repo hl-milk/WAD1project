@@ -26,6 +26,7 @@
 
         <div class="card">
             <h1><%=movie.title%></h1>
+            <p><strong>Produced by:</strong> <%=movie.productionCompany%></p>
             <p><strong>Rating:</strong> <span class="badge"><%=movie.avgRating%>/5</span> (<%=movie.ratingCount%> ratings)</p>
             <p><strong>Description:</strong></p>
             <p><%=movie.description%></p>
@@ -53,9 +54,8 @@
         <div class="card">
             <h4>What people are saying</h4>
             <%
-            const reviews = movie.reviews || {};
-            const reviewKeys = Object.keys(reviews);
-            const reviewCount = reviewKeys.length;
+            const reviews = movie.reviews || [];
+            const reviewCount = reviews.length;
             %>
 
             <% if (reviewCount === 0) { %>
@@ -68,20 +68,30 @@
                 <% } %>
 
                 <div style="display: flex; flex-direction: column; gap: 15px;">
-                    <% for (let reviewer in reviews) { %>
-                        <% let reviewer1 = reviewer.replace(/_dot_/g, '.') %>
+                    <% reviews.forEach(rev => { %>
+                        <% let reviewerEmail = rev.email.replace(/_dot_/g, '.') %>
+                        <% 
+                           let displayDate = "N/A";
+                           if (rev.reviewDate) {
+                               const dateObj = new Date(rev.reviewDate);
+                               displayDate = dateObj.toLocaleDateString(); 
+                           }
+                        %>
                         <div style="padding-bottom: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start;">
                             <div style="flex: 1;">
-                                <strong><%= reviewer1 === user.email ? 'You' : reviewer1 %></strong>
-                                <p style="margin-top: 5px;"><%= reviews[reviewer] %></p>
+                                <div class="flex justify-between items-center">
+                                    <strong><%= reviewerEmail === user.email ? 'You' : reviewerEmail %></strong>
+                                    <span class="text-muted" style="font-size: 0.85em;"><%= displayDate %></span>
+                                </div>
+                                <p style="margin-top: 5px;"><%= rev.review %></p>
                             </div>
                             <% if (user.isAdmin) { %>
                                 <div style="margin-left: 15px; padding-top: 5px;">
-                                    <input type="checkbox" name="usersToDeleteReviews" value="<%= reviewer1 %>" title="Select review by <%= reviewer1 %> to delete">
+                                    <input type="checkbox" name="usersToDeleteReviews" value="<%= reviewerEmail %>" title="Select review by <%= reviewerEmail %> to delete">
                                 </div>
                             <% } %>
                         </div>
-                    <% } %>
+                    <% }) %>
                 </div>
 
                 <% if (user.isAdmin) { %>

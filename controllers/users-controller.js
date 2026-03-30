@@ -56,7 +56,8 @@ exports.registerCheck = async (req, res) => {
             let newUser = {
                 email: user,
                 password: await bcrypt.hash(password, 10),
-                role: role
+                role: role,
+                bio: ""
             };
             if (await User.findUser(user)) {return res.render("register", {e: "An account under this email already exist!"})} 
             else {
@@ -71,24 +72,38 @@ exports.registerCheck = async (req, res) => {
 }
 
 exports.renderSettings = async (req, res) => {
-    res.render("settings", {e: null, user: req.session.user})
+    try {
+        const user = await User.findUserById(req.session.user._id);
+        res.render("settings", {e: null, user: user})
+    } catch (e) {
+        console.error(e)
+        res.send("Error reading database")
+    }
 }
 
 
-exports.updatePass = async (req, res) => {
-    const password = req.body.password;
-    const cpassword = req.body.cpassword;
-    if (!password || !cpassword) {return res.render("settings", {e: "All fields are required!", user: req.session.user})}
-    if (password && cpassword) {
-        if (password != cpassword) {return res.render("settings", {e: "Passwords do not match!", user: req.session.user})}
+exports.updateSettings = async (req, res) => {
+    const type = req.body.type;
+    const user = await User.findUserById(req.session.user._id);
 
-        try {
+    try {
+        if (type === "password") {
+            const password = req.body.password;
+            const cpassword = req.body.cpassword;
+            if (!password || !cpassword) {return res.render("settings", {e: "All fields are required!", user: user})}
+            if (password != cpassword) {return res.render("settings", {e: "Passwords do not match!", user: user})}
+            
             await User.updateUserPass(req.session.user._id, await bcrypt.hash(password, 10))
-            return res.render("settings", {e: 1, user: req.session.user})
-        } catch (e) {
-            console.error(e)
-            res.send("Error reading database")
+            return res.render("settings", {e: 1, user: user})
+        } else if (type === "bio") {
+            const bio = req.body.bio;
+            await User.updateUserBio(req.session.user._id, bio);
+            const updatedUser = await User.findUserById(req.session.user._id);
+            return res.render("settings", {e: 2, user: updatedUser})
         }
+    } catch (e) {
+        console.error(e)
+        res.send("Error reading database")
     }
 }
 

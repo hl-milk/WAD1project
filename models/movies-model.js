@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const Rating = require("./ratings");
+const Review = require("./reviews");
+const Watched = require("./watched");
+const Watchlist = require("./watchlist");
 
 const movieSchema = new mongoose.Schema({
     moviename: {
@@ -18,15 +22,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, "A movie must have a genre"]
     },
-    ratings: {
-        type: Map,
-        of: Number,
-        default: {}
-    },
-    reviews: {
-        type: Map,
-        of: String,
-        default: {},
+    productionCompany: {
+        type: String,
+        required: [true, "A movie is always produced by a company"]
     }
 });
 
@@ -77,47 +75,19 @@ exports.updateMovieData = function (movieObject) {
             $set: {
                 moviename: movieObject.moviename,
                 description: movieObject.description,
-                genre: movieObject.genre
+                genre: movieObject.genre,
+                productionCompany: movieObject.productionCompany
             }
         }
     );
 };
 
-exports.deleteMovieData = function (movieid) {
+exports.deleteMovieData = async function (movieid) {
+    await Rating.deleteAllForMovie(movieid);
+    await Review.deleteAllForMovie(movieid);
+    await Watched.deleteAllForMovie(movieid);
+    await Watchlist.deleteAllForMovie(movieid);
     return Movie.deleteOne({ movieid: movieid });
-};
-
-exports.updateRating = function(movieid,email,rating) {
-    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
-    return Movie.updateOne(
-        { movieid: movieid }, 
-        { $set: { [`ratings.${safeEmail}`]: rating } }
-    );
-};
-
-exports.deleteRating = function (movieid,email) {
-    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
-    return Movie.updateOne(
-        { movieid: movieid }, 
-        { $unset: { [`ratings.${safeEmail}`] : ""} } 
-    );
-};
-
-
-exports.updateReview = function(movieid, email, review){
-    const safeEmail = email.replace(/\./g, '_dot_')
-    return Movie.updateOne(
-        { movieid: movieid },
-        { $set: {[`reviews.${safeEmail}`]: review } }
-    )
-};
-
-exports.deleteReview = function(movieid, email) {
-    const safeEmail = email.replace(/\./g, '_dot_')
-    return Movie.updateOne(
-        { movieid: movieid },
-        { $unset: { [  `reviews.${safeEmail}`]: "" } }
-    )
 };
 
 exports.getFilteredMovies = function(movieArr) {

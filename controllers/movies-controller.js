@@ -1,7 +1,7 @@
 // Dikshaa
 
 const Movie = require("./../models/movies-model");
-const User = require("./../models/users-model");
+const Review = require("./../models/reviews");
 
 const genreOptions = ["Action", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi"];
 
@@ -34,6 +34,7 @@ exports.renderAddMovie = (req, res) => {
         movieid: "",
         description: "",
         genre: "",
+        productionCompany: "",
         genres: genreOptions,
         user: req.session.user
     });
@@ -44,8 +45,9 @@ exports.addMovie = async (req, res) => {
     const movieid = req.body.movieid ? req.body.movieid.trim() : "";
     const description = req.body.description ? req.body.description.trim() : "";
     const genre = req.body.genre ? req.body.genre.trim() : "";
+    const productionCompany = req.body.productionCompany ? req.body.productionCompany.trim() : "";
 
-    if (!moviename || !movieid || !description || !genre) {
+    if (!moviename || !movieid || !description || !genre || !productionCompany) {
         return res.render("add-movie", {
             error: "All fields are required!",
             success: null,
@@ -53,6 +55,7 @@ exports.addMovie = async (req, res) => {
             movieid: movieid,
             description: description,
             genre: genre,
+            productionCompany: productionCompany,
             genres: genreOptions,
             user: req.session.user
         });
@@ -69,6 +72,7 @@ exports.addMovie = async (req, res) => {
                 movieid: movieid,
                 description: description,
                 genre: genre,
+                productionCompany: productionCompany,
                 genres: genreOptions,
                 user: req.session.user
             });
@@ -78,7 +82,8 @@ exports.addMovie = async (req, res) => {
             moviename: moviename,
             movieid: movieid,
             description: description,
-            genre: genre
+            genre: genre,
+            productionCompany: productionCompany
         });
 
         return res.render("add-movie", {
@@ -88,6 +93,7 @@ exports.addMovie = async (req, res) => {
             movieid: "",
             description: "",
             genre: "",
+            productionCompany: "",
             genres: genreOptions,
             user: req.session.user
         });
@@ -129,12 +135,13 @@ exports.updateMovie = async (req, res) => {
     const moviename = req.body.moviename ? req.body.moviename.trim() : "";
     const description = req.body.description ? req.body.description.trim() : "";
     const genre = req.body.genre ? req.body.genre.trim() : "";
+    const productionCompany = req.body.productionCompany ? req.body.productionCompany.trim() : "";
 
     if (!movieid) {
         return res.send("Movie ID is required");
     }
 
-    if (!moviename || !description || !genre) {
+    if (!moviename || !description || !genre || !productionCompany) {
         try {
             const movie = await Movie.getMovieById(movieid);
 
@@ -162,7 +169,8 @@ exports.updateMovie = async (req, res) => {
             movieid: movieid,
             moviename: moviename,
             description: description,
-            genre: genre
+            genre: genre,
+            productionCompany: productionCompany
         });
 
         if (!result || result.matchedCount === 0) {
@@ -202,7 +210,6 @@ exports.deleteMovie = async (req, res) => {
         const deletedMovieId = movie.movieid;
 
         await Movie.deleteMovieData(movieid);
-        await User.massRemove(movieid);
 
         res.render("delete-movie", {
             moviename: deletedMovieName,
@@ -223,7 +230,7 @@ exports.deleteReviews = async (req,res) =>{
     if(usersToDeleteReviews){
         const deleteList = Array.isArray(usersToDeleteReviews) ? usersToDeleteReviews : [usersToDeleteReviews];
         for(let emailToDelete of deleteList){
-                await Movie.deleteReview(movieid, emailToDelete);
+                await Review.deleteReview(movieid, emailToDelete);
             }
 
         }

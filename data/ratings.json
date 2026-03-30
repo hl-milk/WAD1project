@@ -1,0 +1,1402 @@
+[
+  {
+    "movieid": "tt0114709",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114709",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114709",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113228",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113228",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113228",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113228",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114885",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114885",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114885",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113041",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113041",
+    "email": "admin@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113041",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113277",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113277",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113277",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114319",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114319",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114319",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112302",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112302",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112302",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114576",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114576",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114576",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113189",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113189",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113189",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112346",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112346",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112346",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112896",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112896",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112896",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113987",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113987",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113987",
+    "email": "user6@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112760",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112760",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112760",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112641",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112641",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112641",
+    "email": "user6@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114388",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114388",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114388",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113101",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113101",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113101",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112281",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112281",
+    "email": "user2@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112281",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113845",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113845",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113845",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113161",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113161",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113161",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112722",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112722",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112722",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112401",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112401",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114168",
+    "email": "user2@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114168",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114168",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113627",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113627",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114057",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114057",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114057",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114011",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114011",
+    "email": "admin@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114117",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114117",
+    "email": "user5@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114117",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112682",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112682",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115012",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115012",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112792",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114746",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114952",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114952",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114952",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112818",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112286",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113442",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113442",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112697",
+    "email": "user2@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112749",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112749",
+    "email": "user5@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112749",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114279",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114279",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114279",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112819",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112819",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113855",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113855",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113855",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114681",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114148",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114148",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114916",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114814",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114814",
+    "email": "user1@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114814",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113819",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113819",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0110299",
+    "email": "user1@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112499",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113158",
+    "email": "user5@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113158",
+    "email": "user1@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113158",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113321",
+    "email": "user5@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0110877",
+    "email": "user6@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112714",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116260",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116260",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116260",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113862",
+    "email": "admin@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113862",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0118002",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0118002",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0118002",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114753",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113149",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113149",
+    "email": "user3@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113118",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113118",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113118",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116367",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116367",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113010",
+    "email": "user5@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113010",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113537",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113537",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113537",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115644",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115644",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115676",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114367",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116731",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114660",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112379",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112379",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114039",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112365",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112365",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116151",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116151",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0116151",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115697",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113972",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113490",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0117002",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0117002",
+    "email": "user5@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0114825",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115639",
+    "email": "user6@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115759",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113403",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0113247",
+    "email": "admin@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0111173",
+    "email": "user3@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0111173",
+    "email": "user4@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115907",
+    "email": "user6@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115734",
+    "email": "admin@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115734",
+    "email": "user2@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0115734",
+    "email": "user4@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0117102",
+    "email": "user4@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0117102",
+    "email": "user3@gmail.com",
+    "rating": 3,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0117102",
+    "email": "user6@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0118040",
+    "email": "user2@gmail.com",
+    "rating": 4,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112579",
+    "email": "user6@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  },
+  {
+    "movieid": "tt0112573",
+    "email": "user5@gmail.com",
+    "rating": 5,
+    "ratingDate": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    }
+  }
+]

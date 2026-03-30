@@ -36,7 +36,12 @@
                             <% moviesList.forEach(function(movie) { %>
                                 <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: var(--border-radius);">
                                     <div class="flex justify-between items-center mb-20">
-                                        <a href="/movies/view?movieid=<%=movie.movieId%>"><h4 style="margin: 0;"><%= movie.movieName %></h4></a>
+                                        <div>
+                                            <a href="/movies/view?movieid=<%=movie.movieId%>"><h4 style="margin: 0;"><%= movie.movieName %></h4></a>
+                                            <% if (movie.dateAdded) { %>
+                                                <span class="text-muted" style="font-size: 0.8em;">Added on: <%= new Date(movie.dateAdded).toLocaleDateString() %></span>
+                                            <% } %>
+                                        </div>
                                         <form action="/watched/markdelete" method="POST" style="margin: 0;">
                                             <input type="hidden" name="movieId" value="<%= movie.movieId %>">
                                             <button type="submit" class="btn btn-danger">Mark for Removal</button>
