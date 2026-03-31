@@ -44,8 +44,20 @@
                     <textarea id="review" name="review" rows="5" placeholder="What did you think?"><%=user.review||''%></textarea>
                 </div>
                 <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
+                <% if (query && query.error) { %>
+                    <p style="color: red;"><%= query.error %></p>
+                <% } %>
                 <div class="flex gap-10">
-                    <button type="submit" class="btn btn-primary">Update Review</button>
+                    <button type="submit" class="btn btn-primary">
+                        <% if (user.rating || user.review) { %>
+                            Update Review
+                        <% } else { %>
+                            Leave Review
+                        <% } %>
+                    </button>
+                    <% if (user.rating || user.review) { %>
+                        <button type="submit" name="deleteAll" value="true" class="btn btn-danger">Delete Review</button>
+                    <% } %>
                     <a href="/home" class="btn btn-outline">Back to Home</a>
                 </div>
             </form>
