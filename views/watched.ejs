@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Watched Movies - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="flex justify-between items-center mb-20">
+            <h1>My Watched Movies</h1>
+            <a href="/home" class="btn btn-outline">Back to Home</a>
+        </div>
+        
+        <div class="flex gap-10" style="align-items: flex-start;">
+            <!-- Left Side: Main Watched List -->
+            <div style="flex: 2;">
+                <div class="card">
+                    <h3>History</h3>
+                    <% if (moviesList.length === 0) { %>
+                        <p>You haven't watched any movies yet.</p>
+                    <% } else { %>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <% moviesList.forEach(function(movie) { %>
+                                <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: var(--border-radius);">
+                                    <div class="flex justify-between items-center mb-20">
+                                        <div>
+                                            <a href="/movies/view?movieid=<%=movie.movieId%>"><h4 style="margin: 0;"><%= movie.movieName %></h4></a>
+                                            <% if (movie.dateAdded) { %>
+                                                <span class="text-muted" style="font-size: 0.8em;">Added on: <%= new Date(movie.dateAdded).toLocaleDateString() %></span>
+                                            <% } %>
+                                        </div>
+                                        <form action="/watched/markdelete" method="POST" style="margin: 0;">
+                                            <input type="hidden" name="movieId" value="<%= movie.movieId %>">
+                                            <button type="submit" class="btn btn-danger">Mark for Removal</button>
+                                        </form>
+                                    </div>
+                                    <p style="margin: 5px 0;"><strong>Your Rating:</strong> 
+                                        <% if (movie.rating === 0) { %>
+                                            <span class="badge">Not yet rated</span>
+                                        <% } else { %>
+                                            <span class="badge"><%= movie.rating %> / 5 Stars</span>
+                                        <% } %>
+                                    </p>
+                                    <% if (movie.review) { %>
+                                        <p style="margin: 5px 0; font-size: 0.9rem;"><em>"<%= movie.review %>"</em></p>
+                                    <% } %>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Right Side: Pending Deletion -->
+            <div style="flex: 1;">
+                <div class="card" style="border-top: 5px solid var(--danger-color);">
+                    <h3>Pending Deletion</h3>
+                    <% if (markedDeletion.length === 0) { %>
+                        <p>No movies pending removal.</p>
+                    <% } else { %>
+                        <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <% markedDeletion.forEach(function(movie) { %>
+                            <li><%= movie.movieName %></li>
+                        <% }) %>
+                        </ul>
+                        <form action ="/watched/delete" method="POST">
+                            <button type="submit" class="btn btn-danger w-100">Confirm Remove All</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'deleted') {
+            alert("Successfully removed movies from watched list!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'marked') {
+            alert("Successfully marked movie for removal from watched!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
+</body>
+</html>

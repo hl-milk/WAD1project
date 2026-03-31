@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Account Settings</title>
-    </head>
-    <body>
-        <h2><%= user.email %>'s setting</h2>
+<head>
+    <title>Account Settings - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="flex justify-between items-center mb-20">
+            <h1>Account Settings</h1>
+            <a href="/home" class="btn btn-outline">Back to Home</a>
+        </div>
+
+        <div class="card">
             <% if (typeof(e) === typeof("a")) { %>
-                <p style="color: red"><%=e%></p>
+                <div class="alert alert-danger"><%=e%></div>
             <% } %>
             <% if (e === 1) { %>
-                <p style="color: green">Successfully updated password!</p>
+                <div class="alert alert-success">Successfully updated password!</div>
             <% } %>
-        <form method="post" action="/account-settings">
-            <table>
-                <tr>
-                <label>
-                    <td>New Password:</td>
-                    <td><input type="password" name="password"></td>
-                </label>
-                </tr>
-                <tr>
-                <label>
-                    <td>Confirm Password:</td>
-                    <td><input type="password" name="cpassword"></td>
-                </label>
-                </tr>
-                <tr>
-                    <td><button type="submit">Change password</button></td>
-                </tr>
-            </table>
-        </form><br>
-        <% if (user.role != 'admin') { %>
-            <a href="/delete-account"><button type="button">Delete account</button></a><br>
-        <% } %>
-        <a href="/logout"><button type="button">Logout</button></a>
-    </body>
+            <% if (e === 2) { %>
+                <div class="alert alert-success">Successfully updated bio!</div>
+            <% } %>
+
+            <h3>Edit Bio</h3>
+            <form method="post" action="/account-settings">
+                <input type="hidden" name="type" value="bio">
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="4" style="width: 100%; border-radius: 5px; border: 1px solid var(--border-color); padding: 10px; background: var(--card-bg); color: var(--text-color);"><%= user.bio %></textarea>
+                </div>
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Update bio</button>
+                </div>
+            </form>
+
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--border-color);">
+
+            <h3>Change Password</h3>
+            <form method="post" action="/account-settings">
+                <input type="hidden" name="type" value="password">
+                <div class="form-group">
+                    <label for="password">New Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" id="cpassword" name="cpassword">
+                </div>
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Change password</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card" style="border-top: 5px solid var(--danger-color);">
+            <h3 style="color: var(--danger-color);">Account Management</h3>
+            <p>Once you delete your account, there is no going back. Please be certain.</p>
+            <div class="flex gap-10 mt-20">
+                <a href="/delete-account" class="btn btn-danger">Delete account</a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

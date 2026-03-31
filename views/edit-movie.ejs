@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Movie - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h1>Edit Movie</h1>
+
+            <% if (error) { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <% if (success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
+
+            <form method="post" action="/movies/edit">
+                <input type="hidden" name="movieid" value="<%= movie.movieid %>">
+
+                <div class="form-group">
+                    <label for="moviename">Movie Name</label>
+                    <input type="text" id="moviename" name="moviename" value="<%= movie.moviename %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="movieid_display">Movie ID (Immutable)</label>
+                    <input type="text" id="movieid_display" value="<%= movie.movieid %>" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="5" required><%= movie.description %></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <select id="genre" name="genre" required>
+                        <% genres.forEach(g => { %>
+                            <option value="<%= g %>" <%= movie.genre === g ? "selected" : "" %>>
+                                <%= g %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productionCompany">Production Company</label>
+                    <input type="text" id="productionCompany" name="productionCompany" value="<%= movie.productionCompany %>" required>
+                </div>
+
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Update Movie</button>
+                    <a href="/home" class="btn btn-outline">Back to Home</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card" style="border-top: 5px solid var(--danger-color);">
+            <h3 style="color: var(--danger-color);">Danger Zone</h3>
+            <p>Delete this movie from the database.</p>
+            <div class="alert alert-danger">
+                <strong>NOTE:</strong> This action is irreversible!
+            </div>
+            <form method="post" action="/movies/delete?movieid=<%= movie.movieid %>">
+                <button type="submit" class="btn btn-danger">Delete Movie</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

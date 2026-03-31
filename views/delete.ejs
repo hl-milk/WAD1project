@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Account Deletion</title>
-    </head>
-    <body>
-        <form method="post" action="/delete-account">
-            Hi <%=user.email%>! Click the Confirm button if you wish to delete your account.
-            <p style="color:red">NOTE: This action is irreversible!</p>
-            <button type="submit">Confirm</button>
-        </form>
-    </body>
+<head>
+    <title>Account Deletion - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/home" class="btn btn-outline">Home</a>
+                <a href="/watchlist" class="btn btn-outline">Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card" style="border-top: 5px solid var(--danger-color);">
+            <h1 style="color: var(--danger-color);">Account Deletion</h1>
+
+            <div class="alert alert-danger">
+                <strong>Hi <%=user.email%>!</strong> Click the Confirm button if you wish to delete your account.
+                <p style="margin-top: 10px;"><strong>NOTE:</strong> This action is irreversible!</p>
+            </div>
+
+            <form method="post" action="/delete-account">
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-danger">Confirm Deletion</button>
+                    <a href="/account-settings" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
 </html>

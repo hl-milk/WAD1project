@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const Rating = require("./ratings");
+const Review = require("./reviews");
+const Watched = require("./watched");
+const Watchlist = require("./watchlist");
 
 const movieSchema = new mongoose.Schema({
     moviename: {
@@ -18,15 +22,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, "A movie must have a genre"]
     },
-    ratings: {
-        type: Map,
-        of: Number,
-        default: {}
-    },
-    reviews: {
-        type: Map,
-        of: String,
-        default: {},
+    productionCompany: {
+        type: String,
+        required: [true, "A movie is always produced by a company"]
     }
 });
 
@@ -34,6 +32,10 @@ const Movie = mongoose.model("Movie", movieSchema, "movies");
 
 exports.getAllMovies = function () {
     return Movie.find().sort({ moviename: 1 });
+};
+
+exports.getMoviesByIds = function (movieIds) {
+    return Movie.find({ movieid: { $in: movieIds } }).sort({ moviename: 1 });
 };
 
 exports.getMovieById = function (movieid) {
@@ -46,72 +48,48 @@ exports.searchAndFilterMovies = async function (search, genre) {
     if (search) {
         const lowerSearch = search.toLowerCase();
         movies = movies.filter(movie =>
+            movie.moviename &&
             movie.moviename.toLowerCase().includes(lowerSearch)
         );
     }
 
     if (genre && genre !== "all") {
+        const lowerGenre = genre.toLowerCase();
         movies = movies.filter(movie =>
-            movie.genre === genre
+            movie.genre &&
+            movie.genre.toLowerCase() === lowerGenre
         );
     }
 
     return movies;
 };
 
-exports.getDistinctGenres = function () {
-    return Movie.distinct("genre");
-};
-
-exports.addMovie = function (newMovie) {
+exports.addMovieData = function (newMovie) {
     return Movie.create(newMovie);
 };
 
-exports.updateMovie = async function (movieid, updatedMovie) {
-    const movie = await Movie.findOne({ movieid: movieid });
-
-    if (!movie) return null;
-
-    movie.moviename = updatedMovie.moviename;
-    movie.description = updatedMovie.description;
-    movie.genre = updatedMovie.genre;
-
-    return movie.save();
+exports.updateMovieData = function (movieObject) {
+    return Movie.updateOne(
+        { movieid: movieObject.movieid },
+        {
+            $set: {
+                moviename: movieObject.moviename,
+                description: movieObject.description,
+                genre: movieObject.genre,
+                productionCompany: movieObject.productionCompany
+            }
+        }
+    );
 };
 
-exports.deleteMovie = function (movieid) {
+exports.deleteMovieData = async function (movieid) {
+    await Rating.deleteAllForMovie(movieid);
+    await Review.deleteAllForMovie(movieid);
+    await Watched.deleteAllForMovie(movieid);
+    await Watchlist.deleteAllForMovie(movieid);
     return Movie.deleteOne({ movieid: movieid });
 };
 
-exports.updateRating = function(movieid,email,rating) {
-    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
-    return Movie.updateOne(
-        { movieid: movieid }, 
-        { $set: { [`ratings.${safeEmail}`]: rating } }
-    );
-};
-
-exports.deleteRating = function (movieid,email) {
-    const safeEmail = email.replace(/\./g, '_dot_'); // user1@gmail_dot_com
-    return Movie.updateOne(
-        { movieid: movieid }, 
-        { $unset: { [`ratings.${safeEmail}`] : ""} } 
-    );
-};
-
-
-exports.updateReview = function(movieid, email, review){
-    const safeEmail = email.replace(/\./g, '_dot_')
-    return Movie.updateOne(
-        { movieid: movieid },
-        { $set: {[`reviews.${safeEmail}`]: review } }
-    )
-};
-
-exports.deleteReview = function(movieid, email) {
-    const safeEmail = email.replace(/\./g, '_dot_')
-    return Movie.updateOne(
-        { movieid: movieid },
-        { $unset: { [  `reviews.${safeEmail}`]: "" } }
-    )
-};
+exports.getFilteredMovies = function(movieArr) {
+    return Movie.find({movieid: {$in: movieArr}}).lean()
+}

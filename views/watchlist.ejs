@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Watchlist - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="flex justify-between items-center mb-20">
+            <h1>My Watchlist</h1>
+            <a href="/home" class="btn btn-outline">Back to Home</a>
+        </div>
+
+        <div class="flex gap-10" style="align-items: flex-start;">
+            <!-- Left Side: Main Watchlist -->
+            <div style="flex: 2;">
+                <div class="card">
+                    <h3>Current Watchlist</h3>
+                    <% if (!movies || movies.length === 0) { %>
+                        <p>Your watchlist is empty.</p>
+                    <% } else { %>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <% movies.forEach(movie => { %>
+                                <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: var(--border-radius); display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <a href="/movies/view?movieid=<%=movie.movieid%>"><h4 style="margin: 0;"><%= movie.moviename %></h4></a>
+                                        <div style="margin-top: 5px;">
+                                            <span class="badge"><%= movie.genre %></span>
+                                            <small style="color: var(--text-muted); margin-left: 10px;">Added on: <%= new Date(movie.dateAdded).toDateString() %></small>
+                                        </div>
+                                    </div>
+                                    <form method="post" action="/watchlist/mark?movieid=<%= movie.movieid %>" style="margin: 0;">
+                                        <button type="submit" class="btn btn-danger">Mark for Removal</button>
+                                    </form>
+                                </div>
+                            <% }) %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Right Side: Pending Deletion -->
+            <div style="flex: 1;">
+                <div class="card" style="border-top: 5px solid var(--danger-color);">
+                    <h3>Pending Deletion</h3>
+                    <% if (markedDeletion.length === 0) { %>
+                        <p>No movies pending removal.</p>
+                    <% } else { %>
+                        <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <% markedDeletion.forEach(function(movie) { %>
+                            <li><%= movie.moviename %></li>
+                        <% }) %>
+                        </ul>
+                        <form action ="/watchlist/remove" method="POST">
+                            <button type="submit" class="btn btn-danger w-100">Confirm Remove All</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'removed') {
+            alert("Successfully removed movies from your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'marked') {
+            alert("Successfully marked movie for removal from your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
+</body>
+</html>

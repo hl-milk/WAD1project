@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h1>Add New Movie</h1>
+
+            <% if (error) { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <% if (success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
+
+            <form method="post" action="/movies/add">
+                <div class="form-group">
+                    <label for="moviename">Movie Name</label>
+                    <input type="text" id="moviename" name="moviename" value="<%= moviename || '' %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="movieid">Movie ID</label>
+                    <input type="text" id="movieid" name="movieid" value="<%= movieid || '' %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="5" required><%= description || '' %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <select id="genre" name="genre" required>
+                        <option value="">Select Genre</option>
+                        <% genres.forEach(g => { %>
+                            <option value="<%= g %>" <%= genre === g ? "selected" : "" %>>
+                                <%= g %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productionCompany">Production Company</label>
+                    <input type="text" id="productionCompany" name="productionCompany" value="<%= productionCompany || '' %>" required>
+                </div>
+
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Add Movie</button>
+                    <a href="/home" class="btn btn-outline">Back to Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

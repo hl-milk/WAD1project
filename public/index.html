@@ -2,10 +2,16 @@
 <html>
     <head>
         <title>MovReview</title>
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h2>Welcome to MovReview</h2>
-        <a href="/register"><button type="button">Register for a new account</button></a>
-        <a href="/login"><button type="button">Login with an existing account</button></a>
+        <div class="auth-container" style="text-align: center;">
+            <h2>Welcome to MovReview</h2>
+            <p>Your personal movie review and tracking platform.</p>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px;">
+                <a href="/login" class="btn btn-primary w-100">Login with an existing account</a>
+                <a href="/register" class="btn btn-outline w-100">Register for a new account</a>
+            </div>
+        </div>
     </body>
 </html>

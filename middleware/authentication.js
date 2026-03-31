@@ -1,6 +1,15 @@
 exports.isLoggedIn = (req, res, next) => {
-    if (!req.session. user) {
-        return res.redirect("/login?message=2")
+    if (req.session.user) {
+        return next();
     }
-    next();
-}
+
+    return res.redirect("/login?message=2");
+};
+
+exports.isAdminUser = (req, res, next) => {
+    if (req.session.user && req.session.user.role === "admin") {
+        return next();
+    }
+
+    return res.send("/home?status=user");
+};

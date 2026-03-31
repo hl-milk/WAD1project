@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Login - MovReview</title>
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h2>Welcome to MovReview</h2>
+        <div class="auth-container">
+            <h2 style="text-align: center;">Welcome to MovReview</h2>
+            
             <% if (typeof(e) === typeof("a")) { %>
-                <p style="color: red"><%=e%></p>
+                <div class="alert alert-danger"><%=e%></div>
             <% } %>
             <% if (e === 1) { %>
-                <p style="color: green">Successfully registered! Please login.</p>
+                <div class="alert alert-success">Successfully registered! Please login.</div>
             <% } %>
             <% if (e === 2) {%>
-                <p style="color: red">Please login with an account!</p>
+                <div class="alert alert-danger">Please login with an account!</div>
             <% } %>
             <% if (e === 3) {%>
-                <p style="color: green">Account successfully deleted!</p>
+                <div class="alert alert-success">Account successfully deleted!</div>
             <% } %>
-        <form method="post" action="/login">
-            <label>
-                Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <input type="text" name="user">
-            </label><br>
-            <label>
-                Password:
-                <input type="password" name="password">
-            </label><br><br>
-            <button type="submit">Login</button>
-        </form>
 
-        <a href="/register"><button type="button">Register for a new account</button></a>
+            <form method="post" action="/login">
+                <div class="form-group">
+                    <label for="user">Email</label>
+                    <input type="text" id="user" name="user">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Don't have an account?</p>
+                <a href="/register" class="btn btn-outline w-100">Register for a new account</a>
+            </div>
+        </div>
     </body>
 </html>

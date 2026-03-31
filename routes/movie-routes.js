@@ -2,24 +2,34 @@ const express = require("express");
 const router = express.Router();
 
 const moviesController = require("../controllers/movies-controller");
+const moviesInfoController = require("../controllers/moviesinfo-controller");
+const watchedController = require("../controllers/watched-controller");
+const watchlistController = require("../controllers/watchlist-controller")
 const authMiddleware = require("../middleware/authentication");
 
-// Home page (list + search + filter)
 router.get("/home", authMiddleware.isLoggedIn, moviesController.renderHome);
 
-// Add movie
-router.get("/movies/add", authMiddleware.isLoggedIn, moviesController.renderAddMovie);
-router.post("/movies/add", authMiddleware.isLoggedIn, moviesController.addMovie);
+router.get("/movies/add", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.renderAddMovie);
+router.post("/movies/add", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.addMovie);
 
-// Edit movie
-router.get("/movies/edit", authMiddleware.isLoggedIn, moviesController.renderEditMovie);
-router.post("/movies/edit", authMiddleware.isLoggedIn, moviesController.updateMovie);
+router.get("/movies/edit", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.renderEditMovie);
+router.post("/movies/edit", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.updateMovie);
 
-// Delete movie
-router.post("/movies/delete", authMiddleware.isLoggedIn, moviesController.deleteMovie);
+router.post("/movies/delete", authMiddleware.isLoggedIn, authMiddleware.isAdminUser,moviesController.deleteMovie);
 
-//View Movie Info
-router.get("/movies/view", authMiddleware.isLoggedIn, moviesController.viewMovieInfo);
-router.post("/movies/view", authMiddleware.isLoggedIn, moviesController.updateMovieInfo);
+router.get("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.viewMovieInfo);
+router.post("/movies/view", authMiddleware.isLoggedIn, moviesInfoController.updateMovieInfo);
+
+router.get('/watched', authMiddleware.isLoggedIn, watchedController.getWatchedList);
+router.post('/watched/add', authMiddleware.isLoggedIn, watchedController.addToWatchedList)
+router.post('/watched/markdelete', authMiddleware.isLoggedIn, watchedController.markForDelete);
+router.post('/watched/delete', authMiddleware.isLoggedIn, watchedController.confirmDelete)
+
+router.get("/watchlist", authMiddleware.isLoggedIn, watchlistController.renderWatchlist);
+router.post("/watchlist/add", authMiddleware.isLoggedIn, watchlistController.addToWatchlist);
+router.post("/watchlist/mark", authMiddleware.isLoggedIn, watchlistController.markForDelete);
+router.post("/watchlist/remove", authMiddleware.isLoggedIn, watchlistController.removeFromWatchlist);
+
+router.post("/deleteReviews", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.deleteReviews)
 
 module.exports = router;

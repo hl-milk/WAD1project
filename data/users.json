@@ -1,42 +1,86 @@
-[{
-  "_id": {
-    "$oid": "69bf9d02aaeb0a837c986eaf"
+[
+  {
+    "_id": {
+      "$oid": "69bf9d02aaeb0a837c986eaf"
+    },
+    "email": "admin@gmail.com",
+    "password": "$2b$10$iubnjfp/cCiaLe5n3gTUqeUHy9YMFmZ4NwMAgcd6FiKYp5Z2XVDni",
+    "role": "admin",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
   },
-  "email": "admin@gmail.com",
-  "password": "$2b$10$iubnjfp/cCiaLe5n3gTUqeUHy9YMFmZ4NwMAgcd6FiKYp5Z2XVDni",
-  "watchlist": [],
-  "role": "admin",
-  "__v": 0,
-  "watched": [
-    "movie1"
-  ]
-},
-{
-  "_id": {
-    "$oid": "69bf9d19aaeb0a837c986eb1"
+  {
+    "_id": {
+      "$oid": "69bf9d19aaeb0a837c986eb1"
+    },
+    "email": "user1@gmail.com",
+    "password": "$2b$10$ST1PA5WY929KJNZo1PndB.RMjbviu9CzhGVyIMz1VkTiMuzAbvQRG",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
   },
-  "email": "user1@gmail.com",
-  "password": "$2b$10$ST1PA5WY929KJNZo1PndB.RMjbviu9CzhGVyIMz1VkTiMuzAbvQRG",
-  "watchlist": [
-    "movie3"
-  ],
-  "role": "user",
-  "__v": 0,
-  "watched": [
-    "movie1",
-    "movie2"
-  ]
-},
-{
-  "_id": {
-    "$oid": "69c26b9dd6d5491ed5f1b74e"
+  {
+    "_id": {
+      "$oid": "69c26b9dd6d5491ed5f1b74e"
+    },
+    "email": "user2@gmail.com",
+    "password": "$2b$10$8bKVKR5kVNQDGjuVCSzrTec/jfaQfFkwlDIe9d089jvaP.3ZKpv1O",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
   },
-  "email": "user2@gmail.com",
-  "password": "$2b$10$8bKVKR5kVNQDGjuVCSzrTec/jfaQfFkwlDIe9d089jvaP.3ZKpv1O",
-  "watchlist": [],
-  "role": "user",
-  "__v": 0,
-  "watched": [
-    "movie1"
-  ]
-}]
+  {
+    "_id": {
+      "$oid": "69c4beaf758eca988e76c15c"
+    },
+    "email": "user3@gmail.com",
+    "password": "$2b$10$OaQMpVJeY3jIkgLDi6qE2u02EpFaopEAwH4cj7g8cJq1aYDctvzJ6",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
+  },
+  {
+    "_id": {
+      "$oid": "69c4bed4758eca988e76c15e"
+    },
+    "email": "user4@gmail.com",
+    "password": "$2b$10$bCuALS9pPC9r6W8QQZ1rZ.VXuRIfkk7Vs2bP0dXjhgydqMT1EIfuK",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
+  },
+  {
+    "_id": {
+      "$oid": "69c4bef4758eca988e76c160"
+    },
+    "email": "user5@gmail.com",
+    "password": "$2b$10$tdx34XjuxXLAjq2sys6BjexFg9XnR7xg.kDb0ZqO35Dmdsnj6cI9.",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
+  },
+  {
+    "_id": {
+      "$oid": "69c4bf09758eca988e76c162"
+    },
+    "email": "user6@gmail.com",
+    "password": "$2b$10$gaAuYCXOifgAWHQ/wjwHjuCfrkwLnFm28dEcZPY4bcN/1HvAHVA22",
+    "role": "user",
+    "dateJoined": {
+      "$date": "2026-03-30T14:49:14.488Z"
+    },
+    "bio": ""
+  }
+]

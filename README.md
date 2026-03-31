@@ -34,6 +34,7 @@ nodemon server.js
 ```
 
 Open browser and visit http://localhost:8000/
+
 ## Sample Users and Passwords
 __Admin__
 ```
@@ -45,3 +46,17 @@ __User1__
 email: user1@gmail.com
 password: 12345
 ```
+
+## Contributions
+Register & Login (Accounts): Hong Liang  
+Home (Movie List): Dikshaa  
+Rating: Noah  
+Review: Cesar  
+Watched List: Minh  
+Watchlist: Yashvardhan
+
+## AI/LLM Declaration
+1. Primarily used for explaining coding errors and debugging hints with code snippets
+2. Retrieved 100 dataset of movies from a ~39K dataset of real movies from Kaggle.
+3. Randomly generated 7 accounts' watched movies, watchlist, as well as their ratings and reviews for the movies.
+4. Helped with making the front-end look better and cleaner.

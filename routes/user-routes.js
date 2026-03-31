@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const usersController = require("../controllers/users-controller")
 const authMiddleware = require('../middleware/authentication');
 
@@ -10,10 +11,10 @@ router.get("/register", usersController.renderRegister)
 router.post("/register", usersController.registerCheck)
 
 router.get("/account-settings", authMiddleware.isLoggedIn, usersController.renderSettings)
-router.post("/account-settings", usersController.updatePass)
+router.post("/account-settings", authMiddleware.isLoggedIn, usersController.updateSettings)
 
 router.get("/delete-account", authMiddleware.isLoggedIn, usersController.renderDelete)
-router.post("/delete-account", usersController.deleteAccount)
+router.post("/delete-account", authMiddleware.isLoggedIn, usersController.deleteAccount)
 
 router.get("/logout", usersController.logout)
 

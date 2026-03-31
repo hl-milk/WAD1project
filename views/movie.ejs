@@ -1,83 +1,104 @@
-<%#
-movie = 
-{
-  selectedMovieid : 'movie1'
-  title : 'xxx'
-  description: 'xxx xxxx xxx x xxx xxxx xxx.'
-  avgRating: 00
-  ratingCount: 00
-  reviews: {user1: 'xxx xxxx xxx x xxx xxxx xxx.', user2:'xxx xxxx xxx x xxx xxxx xxx.'}
-}
-
-user = 
-{
-  email: xxx@gmail.com
-  isAdmin: False
-  inWatchlist : False
-  isWatched : False
-  rating : 00
-  review : 'xxx xxxx xxx x xxx xxxx xxx.'
-}
-%>
-
+<!DOCTYPE html>
 <html>
-  <head>
-    <title><%=movie.title%></title>
-  </head>
-  <body>
-    <%#Display user info + isAdmin?-------------------------------------%>
-    <a href="/account-settings"><%=user.email%></a>'s account
-    <% if(user.isAdmin==true){%>
-      <strong>(Admin)</strong>
-    <%}%>
-    <br><br>
+<head>
+    <title><%=movie["title"]%> - MovReview</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-logo">MovReview</div>
+            <div class="nav-links">
+                <a href="/watchlist" class="btn btn-outline">My Watchlist</a>
+                <a href="/watched" class="btn btn-outline">Watched</a>
+                <a href="/account-settings" class="btn btn-outline">Settings</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </nav>
+    </header>
 
-    <%#Back to home:-------------------------------------%>
-    <form action="/home" method="get">
-      <button type="submit">Back to Home</button>
-    </form>
-    
-    <%#Movie info (general):-------------------------------------%>
-    <h3><%=movie.title%></h3>
-    <strong>Rating:</strong> <%=movie.avgRating%>/5 (<%=movie.ratingCount%> ratings)<br>
-    <strong>Description:</strong> &nbsp;&nbsp; <%=movie.description%><br>
-  
-    <%#Movie info (for the specific user):-------------------------------------%>
-    <form action="/movies/view" method="post">
-      <label>Watched <input type="checkbox" name="watched" <%=user.isWatched ? 'checked' : ''%>></label> <br>
-      <label>In My Watchlist <input type="checkbox" name="watchlist" <%=user.inWatchlist ? 'checked' : ''%>></label> <br>
-      <label>My Rating (1-5): <input type="number" name="rating" min="1" max="5" value="<%= user.rating || ''%>"></label> <br>
-      <label>My review: <textarea name="review" rows="5" cols="30" placeholder="What did you think?"><%=user.review||''%></textarea></label>
-      <button type="submit">Update</button>
-      <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
-    </form>
+    <div class="container">
+        <div class="flex justify-between items-center mb-20">
+            <div>
+                <p>Logged in as: <strong><%= user.email %></strong> <span class="badge"><%= user.role %></span></p>
+            </div>
+        </div>
 
-    <%#Movie reviews by other users?:-------------------------------------%>
+        <div class="card">
+            <h1><%=movie.title%></h1>
+            <p><strong>Produced by:</strong> <%=movie.productionCompany%></p>
+            <p><strong>Rating:</strong> <span class="badge"><%=movie.avgRating%>/5</span> (<%=movie.ratingCount%> ratings)</p>
+            <p><strong>Description:</strong></p>
+            <p><%=movie.description%></p>
+        </div>
+      
+        <div class="card">
+            <h3>Rate & Review</h3>
+            <form action="/movies/view" method="post">
+                <div class="form-group">
+                    <label for="rating">My Rating (1-5)</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" value="<%= user.rating || ''%>">
+                </div>
+                <div class="form-group">
+                    <label for="review">My Review</label>
+                    <textarea id="review" name="review" rows="5" placeholder="What did you think?"><%=user.review||''%></textarea>
+                </div>
+                <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
+                <div class="flex gap-10">
+                    <button type="submit" class="btn btn-primary">Update Review</button>
+                    <a href="/home" class="btn btn-outline">Back to Home</a>
+                </div>
+            </form>
+        </div>
 
-    <%
-      const reviews = movie.reviews || {};
-      const reviewKeys = Object.keys(reviews);
-      const reviewCount = reviewKeys.length;
-      const userHasReviewed = reviews.hasOwnProperty(user.email);%>
+        <div class="card">
+            <h4>What people are saying</h4>
+            <%
+            const reviews = movie.reviews || [];
+            const reviewCount = reviews.length;
+            %>
 
-    <h4>What people are saying</h4>
-    <% if (reviewCount === 0) { %>
-      <p><em>No reviews yet.</em></p>
-    <% } else if (reviewCount === 1 && userHasReviewed) { %>
-      <p><em>Only you have left a review.</em></p>
-    <% } else { %>
-      <ul>
-        <% for (let reviewer in reviews) { %>
-          <% reviewer1 = reviewer.replace(/_dot_/g, '.') %>
-          <% if (reviewer1 === user.email) { %>
-            <li><strong>You</strong> (Your review): <%= reviews[reviewer] %></li>
-          <% } else { %>
-            <li><strong><%= reviewer1 %></strong>: <%= reviews[reviewer] %></li>
-          <% } %>
-        <% } %>
-      </ul>
-    <% } %>
-    <%# skips the logged-in user's own review%>
+            <% if (reviewCount === 0) { %>
+                <p><em>No reviews yet.</em></p>
+            <% } else { %>
+                <% if (user.isAdmin) { %>
+                    <form action="/deleteReviews" method="post">
+                        <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
+                        <button type="submit" class="btn btn-danger mb-20">Delete Selected Reviews</button>
+                <% } %>
 
-  </body>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <% reviews.forEach(rev => { %>
+                        <% let reviewerEmail = rev.email.replace(/_dot_/g, '.') %>
+                        <% 
+                           let displayDate = "N/A";
+                           if (rev.reviewDate) {
+                               const dateObj = new Date(rev.reviewDate);
+                               displayDate = dateObj.toLocaleDateString(); 
+                           }
+                        %>
+                        <div style="padding-bottom: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <div class="flex justify-between items-center">
+                                    <strong><%= reviewerEmail === user.email ? 'You' : reviewerEmail %></strong>
+                                    <span class="text-muted" style="font-size: 0.85em;"><%= displayDate %></span>
+                                </div>
+                                <p style="margin-top: 5px;"><%= rev.review %></p>
+                            </div>
+                            <% if (user.isAdmin) { %>
+                                <div style="margin-left: 15px; padding-top: 5px;">
+                                    <input type="checkbox" name="usersToDeleteReviews" value="<%= reviewerEmail %>" title="Select review by <%= reviewerEmail %> to delete">
+                                </div>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <% if (user.isAdmin) { %>
+                    </form>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</body>
 </html>
