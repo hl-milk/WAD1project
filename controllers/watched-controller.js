@@ -54,6 +54,11 @@ exports.addToWatchedList = async (req, res) => {
         const movieid = req.query.movieid;
         const email = req.session.user.email;
 
+        const existing = await Watched.getWatchedEntry(movieid, email);
+        if (existing && !existing.markDelete) {
+            return res.redirect("/home?status=exists_watched");
+        }
+
         await Watched.addToWatched(movieid, email)
         res.redirect("/home?status=addedw")
 

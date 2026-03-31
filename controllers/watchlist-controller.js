@@ -42,6 +42,12 @@ exports.addToWatchlist = async (req, res) => {
     try {
         const email = req.session.user.email;
         const movieid = req.query.movieid;
+
+        const existing = await Watchlist.getWatchlistEntry(movieid, email);
+        if (existing && !existing.markDelete) {
+            return res.redirect("/home?status=exists_watchlist");
+        }
+
         await Watchlist.addToWatchlist(movieid, email)
         res.redirect("/home?status=addedwl");
     } catch (err) {

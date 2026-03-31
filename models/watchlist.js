@@ -22,13 +22,11 @@ const watchlistsSchema = new mongoose.Schema({
 const Watchlist = mongoose.model('Watchlist', watchlistsSchema, 'watchlists');
 
 exports.addToWatchlist = (movieid, email) => {
-    return Watchlist.insertOne({
-        movieid: movieid,
-        email: email,
-        dateAdded: Date.now(),
-        markDelete: false
-    });
-};
+    return Watchlist.updateOne(
+        {movieid: movieid, email: email}, 
+        {dateAdded: Date.now(), markDelete: false},
+        {upsert: true}
+)};
 
 exports.markWatchDelete = (movieid, email) => {
     return Watchlist.updateOne(
