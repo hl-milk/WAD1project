@@ -30,6 +30,6 @@ router.post("/watchlist/add", authMiddleware.isLoggedIn, watchlistController.add
 router.post("/watchlist/mark", authMiddleware.isLoggedIn, watchlistController.markForDelete);
 router.post("/watchlist/remove", authMiddleware.isLoggedIn, watchlistController.removeFromWatchlist);
 
-router.post("/deleteReviews", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesController.deleteReviews)
+router.post("/deleteReviews", authMiddleware.isLoggedIn, authMiddleware.isAdminUser, moviesInfoController.deleteReviews)
 
 module.exports = router;
