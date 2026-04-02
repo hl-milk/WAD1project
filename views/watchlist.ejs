@@ -82,6 +82,10 @@
             alert("Successfully marked movie for removal from your watchlist!");
             window.history.replaceState(null, null, window.location.pathname);
         }
+        if (urlParams.get('status') === 'databaseerror') {
+            alert("Error updating database!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
     </script>
 </body>
 </html>

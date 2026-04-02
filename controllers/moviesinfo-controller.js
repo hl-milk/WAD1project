@@ -63,7 +63,6 @@ exports.viewMovieInfo = async (req, res) => {
         }
         res.render("movie", {movie:selectedMovie, user:currentUser, query: req.query});
     } catch (error) {
-        console.error(error);
         res.status(500).send("Error loading movie page.");
     }
 };

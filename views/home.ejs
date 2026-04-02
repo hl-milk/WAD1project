@@ -118,6 +118,22 @@
             alert("Access denied! Administrator access required.");
             window.history.replaceState(null, null, window.location.pathname);
         }
+        if (urlParams.get('status') === 'databaseerror') {
+            alert("Error retrieving movies!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'invalidid') {
+            alert("MovieID is required!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'noid') {
+            alert("MovieID does not exist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'databaseerror2') {
+            alert("Error retrieving user!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
     </script>
 </body>
 </html>

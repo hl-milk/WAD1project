@@ -95,6 +95,10 @@
             alert("Successfully marked movie for removal from watched!");
             window.history.replaceState(null, null, window.location.pathname);
         }
+        if (urlParams.get('status') === 'databaseerror') {
+            alert("Error reading database!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
     </script>
 </body>
 </html>

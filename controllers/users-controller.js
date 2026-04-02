@@ -34,7 +34,7 @@ exports.loginCheck = async (req, res) => {
             return res.redirect("/home");
         } catch (e) {
             console.error(e)
-            res.send("Error reading database")
+            res.redirect("/login?status=databaseerror")
         }
     }
 }
@@ -66,7 +66,7 @@ exports.registerCheck = async (req, res) => {
             };
         } catch (e) {
             console.error(e)
-            res.send("Error reading database")
+            res.redirect("/register?status=databaseerror")
         }
     }
 }
@@ -77,7 +77,7 @@ exports.renderSettings = async (req, res) => {
         res.render("settings", {e: null, user: user})
     } catch (e) {
         console.error(e)
-        res.send("Error reading database")
+        res.send("/home?status=databaseerror2")
     }
 }
 
@@ -103,7 +103,7 @@ exports.updateSettings = async (req, res) => {
         }
     } catch (e) {
         console.error(e)
-        res.send("Error reading database")
+        res.redirect("/home?status=databaseerror2")
     }
 }
 
@@ -121,7 +121,7 @@ exports.deleteAccount = async (req, res) => {
         }
     } catch (e) {
         console.error(e)
-        res.send("Error reading database")
+        res.redirect("/account-settings?status=databaseerror")
     }
 }
 
