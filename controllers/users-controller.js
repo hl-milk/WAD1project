@@ -40,11 +40,11 @@ exports.loginCheck = async (req, res) => {
 }
 
 exports.renderRegister = (req, res) => {
-    res.render("register", {e: null})
+    res.render("register", {e: null, user: "", role: ""})
 }
 
 exports.registerCheck = async (req, res) => {
-    const user = req.body.user;
+    const user = req.body.user || "";
     const password = req.body.password;
     const cpassword = req.body.cpassword;
     const role = req.body.role;

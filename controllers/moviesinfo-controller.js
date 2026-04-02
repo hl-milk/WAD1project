@@ -75,30 +75,47 @@ exports.updateMovieInfo = async (req, res) => {
     const deleteAll = req.body.deleteAll;
     
     // If delete button was clicked, skip validation and delete both
-    if (deleteAll === "true") {
-        await Rating.deleteRating(movieid, email);
-        await Review.deleteReview(movieid, email);
-        return res.redirect(`/movies/view?movieid=${movieid}`);
+    try{
+        if (deleteAll === "true") {
+            await Rating.deleteRating(movieid, email);
+            await Review.deleteReview(movieid, email);
+            return res.redirect(`/movies/view?movieid=${movieid}`);
+        }
+    }catch{
+        console.error(error);
+        res.status(500).send("Error deleting rating and review.");
     }
 
     // At least one of rating or review must be filled
     if ((!myRating || myRating === "") && (!myReview || myReview.trim() === "")) {
         return res.redirect(`/movies/view?movieid=${movieid}&error=Please enter at least a rating or a review.`);
-    }
+    }    
         
-    //MovieDB:
-    if (!myRating|| myRating == ""){
-        await Rating.deleteRating(movieid,email) 
-    } else {
-        await Rating.updateRating(movieid,email,parseInt(myRating))
+    //RatingDB:
+    try{
+        if (!myRating|| myRating == ""){
+            await Rating.deleteRating(movieid,email) 
+        } else {
+            await Rating.updateRating(movieid,email,parseInt(myRating))
+        }
+    }catch{
+        console.error(error);
+        res.status(500).send("Error updating rating.");
     }
+    
         
     //ReviewDB:
-    if (!myReview || myReview.trim() === ""){
-        await Review.deleteReview(movieid, email);
-    } else {
-        await Review.updateReview(movieid, email, myReview.trim());
+    try{
+        if (!myReview || myReview.trim() === ""){
+            await Review.deleteReview(movieid, email);
+        } else {
+            await Review.updateReview(movieid, email, myReview.trim());
+        }
+    }catch{
+        console.error(error);
+        res.status(500).send("Error updating review.");
     }
+    
     
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
