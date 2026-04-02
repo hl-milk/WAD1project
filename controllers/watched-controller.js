@@ -1,7 +1,6 @@
 // Minh
 
 const Movie = require("./../models/movies-model");
-const User = require("./../models/users-model");
 const Watched = require("./../models/watched");
 const Rating = require("./../models/ratings");
 const Review = require("./../models/reviews");
@@ -45,7 +44,7 @@ exports.getWatchedList = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send("Server Error");
+        res.redirect("/watched?status=databaseerror");
     }
 };
 
@@ -64,7 +63,7 @@ exports.addToWatchedList = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send("Error adding movie")
+        res.redirect("/watched?status=databaseerror")
     }
 }
 
@@ -76,7 +75,7 @@ exports.markForDelete = async (req, res) => {
         res.redirect("/watched?status=marked")
     } catch (error) {
         console.error(error)
-        res.status(500).send("Error marking the movie for deletion")
+        res.redirect("/watched?status=databaseerror")
     }
 }
 
@@ -88,6 +87,6 @@ exports.confirmDelete = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send("Error deleting movies");
+        res.redirect("/watched?status=databaseerror")
     }
 };

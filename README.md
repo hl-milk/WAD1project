@@ -10,20 +10,13 @@ Use the package manager to install all the required packages.
 npm install
 ```
 
-Import all .json files into a database of your choosing and setup config.env with the following:
+Import all .json files into a database of your choosing. Ensure each .json file being uploaded is to their respective collection name.  
+Example: movies.json => movies (collection name)  
+  
+Setup config.env with the following:
 ```
-DB= (insert DB key here)
-SECRET= (generate a random secure key)
-```
-
-__Powershell Secret Key Generator__
-```bash
--join ((65..90) + (97..122) + (48..57) | Get-Random -Count 64 | % {[char]$_})
-```
-
-__MacOS/Linux Secret Key Generator__
-```bash
-openssl rand -base64 64 | tr -d '+/' | head -c 64; echo
+DB= mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTERADDRESS>/<DBNAME>?retryWrites=true&w=majority
+SECRET= kewjfiwhwfjjweeg243r2435wfvq
 ```
 
 ## Usage

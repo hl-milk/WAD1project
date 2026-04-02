@@ -1,7 +1,6 @@
 // Dikshaa
 
 const Movie = require("./../models/movies-model");
-const Review = require("./../models/reviews");
 
 const genreOptions = ["Action", "Comedy", "Drama", "Horror", "Romance", "Sci-Fi"];
 
@@ -22,7 +21,7 @@ exports.renderHome = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.send("Error loading home page");
+        res.redirect("/home?status=databaseerror")
     }
 };
 
@@ -99,7 +98,7 @@ exports.addMovie = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.send("Error adding movie");
+        res.redirect("/movies/add?status=databaseerror")
     }
 };
 
@@ -107,14 +106,14 @@ exports.renderEditMovie = async (req, res) => {
     const movieid = req.query.movieid;
 
     if (!movieid) {
-        return res.send("Movie ID is required");
+        return res.redirect("/movies?status=invalidid");
     }
 
     try {
         const movie = await Movie.getMovieById(movieid);
 
         if (!movie) {
-            return res.send("Movie not found");
+            return res.redirect("/movies?status=noid");
         }
 
         res.render("edit-movie", {
@@ -126,7 +125,7 @@ exports.renderEditMovie = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.send("Error reading movie database");
+        res.redirect(`/movies/edit?movieid=${movieid}?status=databaseerror`);
     }
 };
 
@@ -138,7 +137,7 @@ exports.updateMovie = async (req, res) => {
     const productionCompany = req.body.productionCompany ? req.body.productionCompany.trim() : "";
 
     if (!movieid) {
-        return res.send("Movie ID is required");
+        return res.redirect("/movies?status=invalidid");
     }
 
     if (!moviename || !description || !genre || !productionCompany) {
@@ -154,7 +153,7 @@ exports.updateMovie = async (req, res) => {
             });
         } catch (error) {
             console.error(error);
-            return res.send("Error reading movie database");
+            res.redirect(`/movies/edit?movieid=${movieid}?status=databaseerror`);
         }
     }
 
@@ -162,7 +161,7 @@ exports.updateMovie = async (req, res) => {
         const existingMovie = await Movie.getMovieById(movieid);
 
         if (!existingMovie) {
-            return res.send("Movie not found");
+            return res.redirect("/home?status=noid");
         }
 
         const result = await Movie.updateMovieData({
@@ -174,7 +173,7 @@ exports.updateMovie = async (req, res) => {
         });
 
         if (!result || result.matchedCount === 0) {
-            return res.send("Movie not found");
+            return res.redirect("/home?status=noid");
         }
 
         const updatedMovie = await Movie.getMovieById(movieid);
@@ -188,7 +187,7 @@ exports.updateMovie = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.send("Error updating movie");
+        res.redirect(`/movies/edit?movieid=${movieid}?status=databaseerror`);
     }
 };
 
@@ -196,14 +195,14 @@ exports.deleteMovie = async (req, res) => {
     const movieid = req.query.movieid;
 
     if (!movieid) {
-        return res.send("Movie ID is required");
+        return res.redirect("/home?status=invalidid");
     }
 
     try {
         const movie = await Movie.getMovieById(movieid);
 
         if (!movie) {
-            return res.send("Movie not found");
+            return res.redirect("/home?status=noid");
         }
 
         const deletedMovieName = movie.moviename;
@@ -218,22 +217,6 @@ exports.deleteMovie = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.send("Error deleting movie");
+        res.redirect(`/movies/edit?movieid=${movieid}?status=databaseerror2`);
     }
 };
-
-exports.deleteReviews = async (req,res) =>{
-    const user = req.session.user
-
-    const usersToDeleteReviews = req.body.usersToDeleteReviews;
-    const movieid = req.body.movieid
-    if(usersToDeleteReviews){
-        const deleteList = Array.isArray(usersToDeleteReviews) ? usersToDeleteReviews : [usersToDeleteReviews];
-        for(let emailToDelete of deleteList){
-                await Review.deleteReview(movieid, emailToDelete);
-            }
-
-        }
-        
-        res.redirect(`/movies/view?movieid=${movieid}`)
-    }

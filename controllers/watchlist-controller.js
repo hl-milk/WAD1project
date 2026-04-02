@@ -1,5 +1,5 @@
 // Yashvardhan
-const User = require('./../models/users-model');
+
 const Movie = require('./../models/movies-model');
 const Watchlist = require('./../models/watchlist');
 
@@ -34,7 +34,7 @@ exports.renderWatchlist = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.send("Error loading watchlist");
+        res.redirect("/watchlist?status=databaseerror")
     }
 };
 
@@ -52,7 +52,7 @@ exports.addToWatchlist = async (req, res) => {
         res.redirect("/home?status=addedwl");
     } catch (err) {
         console.error(err);
-        res.send("Error adding to watchlist");
+        res.redirect("/watchlist?status=databaseerror")
     }
 };
 
@@ -64,7 +64,7 @@ exports.markForDelete = async (req, res) => {
         res.redirect("/watchlist?status=marked")
     } catch (error) {
         console.error(error)
-        res.status(500).send("Error marking the movie for deletion")
+        res.redirect("/watchlist?status=databaseerror")
     }
 }
 
@@ -75,6 +75,6 @@ exports.removeFromWatchlist = async (req, res) => {
         res.redirect("/watchlist?status=removed");
     } catch (err) {
         console.error(err);
-        res.send("Error removing from watchlist");
+        res.redirect("/watchlist?status=databaseerror")
     }
 };

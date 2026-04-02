@@ -73,5 +73,11 @@
             </div>
         </div>
     </div>
+    <script>
+        if (urlParams.get('status') === 'databaseerror') {
+            alert("Error retrieving user!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>
 </body>
 </html>

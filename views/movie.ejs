@@ -78,7 +78,7 @@
                         <input type="hidden" name="movieid" value="<%= movie.selectedMovieid %>">
                         <button type="submit" class="btn btn-danger mb-20">Delete Selected Reviews</button>
                 <% } %>
-
+                
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     <% reviews.forEach(rev => { %>
                         <% let reviewerEmail = rev.email.replace(/_dot_/g, '.') %>
@@ -112,5 +112,12 @@
             <% } %>
         </div>
     </div>
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'databaseerror') {
+        alert("Error reading database!");
+        window.history.replaceState(null, null, window.location.pathname);
+    }
+    </script>
 </body>
 </html>

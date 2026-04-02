@@ -81,5 +81,16 @@
             </form>
         </div>
     </div>
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'databaseerror') {
+        alert("Error getting movie!");
+        window.history.replaceState(null, null, window.location.pathname);
+    }
+    if (urlParams.get('status') === 'databaseerror2') {
+        alert("Error deleting movie!");
+        window.history.replaceState(null, null, window.location.pathname);
+    }
+    </script>
 </body>
 </html>

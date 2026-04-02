@@ -63,8 +63,7 @@ exports.viewMovieInfo = async (req, res) => {
         }
         res.render("movie", {movie:selectedMovie, user:currentUser, query: req.query});
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Error loading movie page.");
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
 };
 
@@ -76,10 +75,15 @@ exports.updateMovieInfo = async (req, res) => {
     const deleteAll = req.body.deleteAll;
     
     // If delete button was clicked, skip validation and delete both
-    if (deleteAll === "true") {
-        await Rating.deleteRating(movieid, email);
-        await Review.deleteReview(movieid, email);
-        return res.redirect(`/movies/view?movieid=${movieid}`);
+    try{
+        if (deleteAll === "true") {
+            await Rating.deleteRating(movieid, email);
+            await Review.deleteReview(movieid, email);
+            return res.redirect(`/movies/view?movieid=${movieid}`);
+        }
+    }catch{
+        console.error(error);
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
 
     // At least one of rating or review must be filled
@@ -98,20 +102,48 @@ exports.updateMovieInfo = async (req, res) => {
         return res.redirect(`/movies/view?movieid=${movieid}&error=Please update at least your rating or your review.`);
     }
         
-    //MovieDB:
-    if (!myRating|| myRating == ""){
-        await Rating.deleteRating(movieid,email) 
-    } else {
-        await Rating.updateRating(movieid,email,parseInt(myRating))
+    //RatingDB:
+    try{
+        if (!myRating|| myRating == ""){
+            await Rating.deleteRating(movieid,email) 
+        } else {
+            await Rating.updateRating(movieid,email,parseInt(myRating))
+        }
+    }catch{
+        console.error(error);
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
+    
         
     //ReviewDB:
-    if (!myReview || myReview.trim() === ""){
-        await Review.deleteReview(movieid, email);
-    } else {
-        await Review.updateReview(movieid, email, myReview.trim());
+    try{
+        if (!myReview || myReview.trim() === ""){
+            await Review.deleteReview(movieid, email);
+        } else {
+            await Review.updateReview(movieid, email, myReview.trim());
+        }
+    }catch{
+        console.error(error);
+        res.status(500).send("Error updating review.");
     }
+    
     
     //after updating the database, refresh the page
     res.redirect(`/movies/view?movieid=${movieid}`);
-    };
+};
+
+exports.deleteReviews = async (req,res) =>{
+    const user = req.session.user
+
+    const usersToDeleteReviews = req.body.usersToDeleteReviews;
+    const movieid = req.body.movieid
+    if(usersToDeleteReviews){
+        const deleteList = Array.isArray(usersToDeleteReviews) ? usersToDeleteReviews : [usersToDeleteReviews];
+        for(let emailToDelete of deleteList){
+                await Review.deleteReview(movieid, emailToDelete);
+            }
+
+        }
+        
+        res.redirect(`/movies/view?movieid=${movieid}`)
+    }

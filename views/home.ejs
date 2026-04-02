@@ -68,13 +68,14 @@
             <div class="movie-grid">
                 <% movies.forEach(movie => { %>
                     <div class="card movie-card">
+
                         <a href="/movies/view?movieid=<%=movie.movieid%>" style="text-decoration: none; color: inherit; display: block;">
                             <h3><%= movie.moviename %></h3>
                             <p><span class="badge"><%= movie.genre %></span></p>
                             <p><strong>Studio:</strong> <%= movie.productionCompany %></p>
                             <p><strong>Description:</strong> <%= movie.description.substring(0, 100) %><%= movie.description.length > 100 ? '...' : '' %></p>
                         </a>
-                        
+
                         <div class="flex flex-wrap gap-10 mt-20">
                             <form method="post" action="/watchlist/add?movieid=<%= movie.movieid %>" style="flex: 1;">
                                 <button type="submit" class="btn btn-outline w-100">Watchlist</button>
@@ -116,6 +117,22 @@
         }
         if (urlParams.get('status') === 'user') {
             alert("Access denied! Administrator access required.");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'databaseerror') {
+            alert("Error retrieving movies!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'invalidid') {
+            alert("MovieID is required!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'noid') {
+            alert("MovieID does not exist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'databaseerror2') {
+            alert("Error retrieving user!");
             window.history.replaceState(null, null, window.location.pathname);
         }
     </script>
