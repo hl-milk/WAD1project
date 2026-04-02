@@ -63,7 +63,7 @@ exports.viewMovieInfo = async (req, res) => {
         }
         res.render("movie", {movie:selectedMovie, user:currentUser, query: req.query});
     } catch (error) {
-        res.status(500).send("Error loading movie page.");
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
 };
 
@@ -83,7 +83,7 @@ exports.updateMovieInfo = async (req, res) => {
         }
     }catch{
         console.error(error);
-        res.status(500).send("Error deleting rating and review.");
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
 
     // At least one of rating or review must be filled
@@ -100,7 +100,7 @@ exports.updateMovieInfo = async (req, res) => {
         }
     }catch{
         console.error(error);
-        res.status(500).send("Error updating rating.");
+        res.redirect(`/movies/view?movieid=${selectedMovieid}?status=databaseerror`);
     }
     
         
