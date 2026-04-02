@@ -103,8 +103,16 @@
             alert("Successfully added movie to your watchlist!");
             window.history.replaceState(null, null, window.location.pathname);
         }
+        if (urlParams.get('status') === 'exists_watchlist') {
+            alert("This movie is already in your watchlist!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
         if (urlParams.get('status') === 'addedw') {
             alert("Successfully added movie to your watched!");
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+        if (urlParams.get('status') === 'exists_watched') {
+            alert("This movie is already in your watched list!");
             window.history.replaceState(null, null, window.location.pathname);
         }
         if (urlParams.get('status') === 'user') {

@@ -22,13 +22,11 @@ const watchedSchema = new mongoose.Schema({
 const Watched = mongoose.model('Watched', watchedSchema, 'watched');
 
 exports.addToWatched = (movieid, email) => {
-    return Watched.insertOne({
-        movieid: movieid,
-        email: email,
-        dateAdded: Date.now(),
-        markDelete: false
-    });
-};
+    return Watched.updateOne(
+        {movieid: movieid, email: email},
+        {dateAdded: Date.now(), markDelete: false}, 
+        {upsert: true}
+)};
 
 exports.markWatchedDelete = (movieid, email) => {
     return Watched.updateOne(
