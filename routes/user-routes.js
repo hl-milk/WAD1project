@@ -4,18 +4,18 @@ const router = express.Router();
 const usersController = require("../controllers/users-controller")
 const authMiddleware = require('../middleware/authentication');
 
-router.get("/login", usersController.renderLogin)
-router.post("/login", usersController.loginCheck)
+router.get("/login", usersController.renderLogin);
+router.post("/login", usersController.loginCheck);
 
-router.get("/register", usersController.renderRegister)
-router.post("/register", usersController.registerCheck)
+router.get("/register", usersController.renderRegister);
+router.post("/register", usersController.registerCheck);
 
-router.get("/account-settings", authMiddleware.isLoggedIn, usersController.renderSettings)
-router.post("/account-settings", authMiddleware.isLoggedIn, usersController.updateSettings)
+router.get("/account-settings", authMiddleware.isLoggedIn, usersController.renderSettings);
+router.post("/account-settings", authMiddleware.isLoggedIn, usersController.updateSettings);
 
-router.get("/delete-account", authMiddleware.isLoggedIn, usersController.renderDelete)
-router.post("/delete-account", authMiddleware.isLoggedIn, usersController.deleteAccount)
+router.get("/delete-account", authMiddleware.isLoggedIn, usersController.renderDelete);
+router.post("/delete-account", authMiddleware.isLoggedIn, usersController.deleteAccount);
 
-router.get("/logout", usersController.logout)
+router.get("/logout", usersController.logout);
 
 module.exports = router;
