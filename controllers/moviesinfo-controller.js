@@ -89,7 +89,18 @@ exports.updateMovieInfo = async (req, res) => {
     // At least one of rating or review must be filled
     if ((!myRating || myRating === "") && (!myReview || myReview.trim() === "")) {
         return res.redirect(`/movies/view?movieid=${movieid}&error=Please enter at least a rating or a review.`);
-    }    
+    }
+
+    // Checks if there is a change in rating or review
+    const existingRatingEntry = await Rating.getRating(movieid, email);
+    const existingReviewEntry = await Review.getReview(movieid, email);
+
+    const existingRating = existingRatingEntry ? String(existingRatingEntry.rating) : "";
+    const existingReview = existingReviewEntry ? existingReviewEntry.review : "";
+
+    if (myRating === existingRating && myReview.trim() === existingReview.trim()){
+        return res.redirect(`/movies/view?movieid=${movieid}&error=Please update at least your rating or your review.`);
+    }
         
     //RatingDB:
     try{
